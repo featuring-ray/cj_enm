@@ -1,0 +1,295 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// =====================
+// 인증 & 사용자
+// =====================
+
+enum UserRole {
+  ADMIN
+  PARTNER
+  CREATOR
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String
+  password      String
+  role          UserRole
+  image         String?
+  companyName   String?   // 파트너 전용
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts        Account[]
+  sessions        Session[]
+  creatorProfile  CreatorProfile?
+  campaigns       Campaign[]        @relation("CampaignCreator")
+  sentMessages    Message[]         @relation("MessageSender")
+  notifications   Notification[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+// =====================
+// 크리에이터
+// =====================
+
+model CreatorProfile {
+  id                String   @id @default(cuid())
+  userId            String?  @unique
+  username          String   @unique
+  displayName       String
+  profileImage      String?
+  platform          String   @default("instagram")
+  followerCount     Int      @default(0)
+  averageLikes      Float    @default(0)
+  averageComments   Float    @default(0)
+  averageShares     Float    @default(0)
+  averageViews      Float    @default(0)
+  engagementRate    Float    @default(0)
+  score             Float    @default(0)
+  tier              String   @default("C")
+  isCommerceAccount Boolean  @default(false)
+  isOfficialAccount Boolean  @default(false)
+  isCelebrity       Boolean  @default(false)
+  avgUnitPrice      Float?
+  categories        String[] @default([])
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  user              User?              @relation(fields: [userId], references: [id])
+  brands            CreatorBrand[]
+  campaignCreators  CampaignCreator[]
+  trackingData      TrackingData[]
+
+  @@map("creator_profiles")
+}
+
+model CreatorBrand {
+  id            String  @id @default(cuid())
+  creatorId     String
+  brandId       String
+  brandName     String
+  campaignCount Int     @default(0)
+  isPrimary     Boolean @default(false)
+
+  creator CreatorProfile @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  brand   Brand          @relation(fields: [brandId], references: [id])
+
+  @@unique([creatorId, brandId])
+  @@map("creator_brands")
+}
+
+// =====================
+// 브랜드 & 캠페인
+// =====================
+
+model Brand {
+  id           String   @id @default(cuid())
+  name         String   @unique
+  category     String
+  tierGroup    String?
+  logoUrl      String?
+  createdAt    DateTime @default(now())
+
+  campaigns    Campaign[]
+  creators     CreatorBrand[]
+
+  @@map("brands")
+}
+
+enum CampaignStatus {
+  DRAFT
+  PROPOSED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Campaign {
+  id          String         @id @default(cuid())
+  title       String
+  description String
+  brandId     String
+  category    String
+  status      CampaignStatus @default(DRAFT)
+  budget      Float          @default(0)
+  unitPrice   Float          @default(0)
+  startDate   DateTime
+  endDate     DateTime
+  createdBy   String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // Relations
+  brand     Brand             @relation(fields: [brandId], references: [id])
+  owner     User              @relation("CampaignCreator", fields: [createdBy], references: [id])
+  creators  CampaignCreator[]
+  metrics   CampaignMetric[]
+  tracking  TrackingData[]
+
+  @@map("campaigns")
+}
+
+enum CreatorCampaignStatus {
+  INVITED
+  ACCEPTED
+  DECLINED
+  COMPLETED
+}
+
+model CampaignCreator {
+  id          String                @id @default(cuid())
+  campaignId  String
+  creatorId   String
+  status      CreatorCampaignStatus @default(INVITED)
+  proposedAt  DateTime              @default(now())
+  respondedAt DateTime?
+
+  campaign Campaign       @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  creator  CreatorProfile @relation(fields: [creatorId], references: [id])
+
+  @@unique([campaignId, creatorId])
+  @@map("campaign_creators")
+}
+
+// =====================
+// 성과 트래킹
+// =====================
+
+model CampaignMetric {
+  id               String   @id @default(cuid())
+  campaignId       String
+  views            Int      @default(0)
+  likes            Int      @default(0)
+  comments         Int      @default(0)
+  shares           Int      @default(0)
+  saves            Int      @default(0)
+  estimatedOrders  Int      @default(0)
+  estimatedRevenue Float    @default(0)
+  conversionRate   Float    @default(0)
+  collectedAt      DateTime @default(now())
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@map("campaign_metrics")
+}
+
+model TrackingData {
+  id          String   @id @default(cuid())
+  campaignId  String
+  creatorId   String
+  postUrl     String
+  contentType String   @default("feed")
+  views       Int      @default(0)
+  likes       Int      @default(0)
+  comments    Int      @default(0)
+  shares      Int      @default(0)
+  saves       Int      @default(0)
+  keywordData Json?
+  collectedAt DateTime @default(now())
+
+  campaign Campaign       @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  creator  CreatorProfile @relation(fields: [creatorId], references: [id])
+
+  @@map("tracking_data")
+}
+
+// =====================
+// 메시징 & 알림
+// =====================
+
+enum MessageChannel {
+  SYSTEM
+  DM
+  EMAIL
+}
+
+model Message {
+  id          String         @id @default(cuid())
+  senderId    String
+  recipientId String?
+  channel     MessageChannel @default(SYSTEM)
+  subject     String?
+  content     String
+  metadata    Json?
+  sentAt      DateTime       @default(now())
+
+  sender User @relation("MessageSender", fields: [senderId], references: [id])
+
+  @@map("messages")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  type      String   @default("info")
+  isRead    Boolean  @default(false)
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+// =====================
+// DM 발송 계정 관리
+// =====================
+
+model SendingAccount {
+  id          String  @id @default(cuid())
+  username    String
+  platform    String  @default("instagram")
+  dailyLimit  Int     @default(50)
+  dailySent   Int     @default(0)
+  isActive    Boolean @default(true)
+  credentials Json?
+  lastResetAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  @@map("sending_accounts")
+}

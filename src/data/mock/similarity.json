@@ -1,0 +1,44 @@
+[
+  {
+    "creatorA": "creator-1",
+    "creatorB": "creator-3",
+    "matchRate": 34.2,
+    "analyzedAt": "2026-03-08T02:00:00Z",
+    "validUntil": "2026-09-08T02:00:00Z"
+  },
+  {
+    "creatorA": "creator-1",
+    "creatorB": "creator-6",
+    "matchRate": 22.8,
+    "analyzedAt": "2026-03-08T02:00:00Z",
+    "validUntil": "2026-09-08T02:00:00Z"
+  },
+  {
+    "creatorA": "creator-2",
+    "creatorB": "creator-6",
+    "matchRate": 41.5,
+    "analyzedAt": "2026-03-08T02:00:00Z",
+    "validUntil": "2026-09-08T02:00:00Z"
+  },
+  {
+    "creatorA": "creator-3",
+    "creatorB": "creator-5",
+    "matchRate": 18.7,
+    "analyzedAt": "2026-03-08T02:00:00Z",
+    "validUntil": "2026-09-08T02:00:00Z"
+  },
+  {
+    "creatorA": "creator-1",
+    "creatorB": "creator-7",
+    "matchRate": 28.3,
+    "analyzedAt": "2026-03-08T02:00:00Z",
+    "validUntil": "2026-09-08T02:00:00Z"
+  },
+  {
+    "creatorA": "creator-2",
+    "creatorB": "creator-5",
+    "matchRate": 15.4,
+    "analyzedAt": "2026-03-08T02:00:00Z",
+    "validUntil": "2026-09-08T02:00:00Z"
+  }
+]

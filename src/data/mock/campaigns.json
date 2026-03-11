@@ -1,0 +1,93 @@
+[
+  {
+    "id": "campaign-1",
+    "name": "올리브영 봄 신상 공구",
+    "brand": "올리브영",
+    "brandCategory": "뷰티",
+    "status": "진행중",
+    "startDate": "2026-02-15",
+    "endDate": "2026-03-15",
+    "reward": "판매 수수료 8% + 고정 100만원",
+    "description": "올리브영 2026 봄 신상품 공동구매 캠페인. 스킨케어/메이크업 신제품 10종 홍보.",
+    "contentCount": 12,
+    "creators": ["creator-1", "creator-3"]
+  },
+  {
+    "id": "campaign-2",
+    "name": "CJ제일제당 비비고 봄 캠페인",
+    "brand": "CJ제일제당",
+    "brandCategory": "푸드",
+    "status": "진행중",
+    "startDate": "2026-02-20",
+    "endDate": "2026-03-20",
+    "reward": "판매 수수료 5% + 고정 150만원",
+    "description": "비비고 신메뉴 출시 기념 공동구매. 만두/국물요리 신제품 홍보.",
+    "contentCount": 8,
+    "creators": ["creator-1", "creator-2"]
+  },
+  {
+    "id": "campaign-3",
+    "name": "무신사 봄 컬렉션 공구",
+    "brand": "무신사",
+    "brandCategory": "패션",
+    "status": "모집중",
+    "startDate": "2026-03-10",
+    "endDate": "2026-04-10",
+    "reward": "판매 수수료 10%",
+    "description": "무신사 S/S 컬렉션 크리에이터 공동구매 모집. 패션/스타일 크리에이터 우대.",
+    "contentCount": 0,
+    "creators": ["creator-3", "creator-5"]
+  },
+  {
+    "id": "campaign-4",
+    "name": "이니스프리 그린티 라인 완료",
+    "brand": "이니스프리",
+    "brandCategory": "뷰티",
+    "status": "완료",
+    "startDate": "2026-01-01",
+    "endDate": "2026-02-01",
+    "reward": "판매 수수료 7% + 고정 80만원",
+    "description": "이니스프리 그린티 시드 세럼 리뉴얼 공동구매 캠페인 (완료).",
+    "contentCount": 15,
+    "creators": ["creator-1"]
+  },
+  {
+    "id": "campaign-5",
+    "name": "CJ 더마켓 식품 기획전",
+    "brand": "CJ더마켓",
+    "brandCategory": "푸드",
+    "status": "모집중",
+    "startDate": "2026-03-15",
+    "endDate": "2026-04-15",
+    "reward": "판매 수수료 6% + 고정 120만원",
+    "description": "CJ더마켓 봄맞이 식품 기획전. 간편식/건강식 전문 크리에이터 모집.",
+    "contentCount": 0,
+    "creators": ["creator-2", "creator-6"]
+  },
+  {
+    "id": "campaign-6",
+    "name": "LG전자 스타일러 캠페인",
+    "brand": "LG전자",
+    "brandCategory": "테크",
+    "status": "제안",
+    "startDate": "2026-04-01",
+    "endDate": "2026-05-01",
+    "reward": "고정 300만원",
+    "description": "LG 스타일러 신모델 리뷰 및 공동구매 제안.",
+    "contentCount": 0,
+    "creators": ["creator-4"]
+  },
+  {
+    "id": "campaign-7",
+    "name": "에뛰드 2026 봄 컬러 캠페인",
+    "brand": "에뛰드",
+    "brandCategory": "뷰티",
+    "status": "완료",
+    "startDate": "2025-12-01",
+    "endDate": "2026-01-15",
+    "reward": "판매 수수료 9%",
+    "description": "에뛰드 봄 신상 컬러 컬렉션 공동구매 (완료).",
+    "contentCount": 10,
+    "creators": ["creator-6"]
+  }
+]

@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  distDir: "/tmp/featuring_cjenm_next",
 };
 
 export default nextConfig;
