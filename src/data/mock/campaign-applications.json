@@ -1,0 +1,52 @@
+[
+  {
+    "id": "app-1",
+    "campaignId": "campaign-3",
+    "creatorId": "creator-1",
+    "status": "대기",
+    "appliedAt": "2026-03-08T10:00:00Z",
+    "message": "안녕하세요, 무신사 봄 컬렉션 캠페인에 참여 신청합니다. 패션 콘텐츠 전문 크리에이터로서 최고의 성과를 낼 자신이 있습니다."
+  },
+  {
+    "id": "app-2",
+    "campaignId": "campaign-5",
+    "creatorId": "creator-1",
+    "status": "수락",
+    "appliedAt": "2026-03-01T09:00:00Z",
+    "respondedAt": "2026-03-03T14:00:00Z",
+    "message": "CJ더마켓 식품 기획전 참여 신청합니다."
+  },
+  {
+    "id": "app-3",
+    "campaignId": "campaign-2",
+    "creatorId": "creator-2",
+    "status": "대기",
+    "appliedAt": "2026-03-10T11:00:00Z",
+    "message": "비비고 봄 캠페인 참여 신청드립니다."
+  },
+  {
+    "id": "app-4",
+    "campaignId": "campaign-3",
+    "creatorId": "creator-5",
+    "status": "거절",
+    "appliedAt": "2026-03-07T15:00:00Z",
+    "respondedAt": "2026-03-09T10:00:00Z"
+  },
+  {
+    "id": "app-5",
+    "campaignId": "campaign-5",
+    "creatorId": "creator-3",
+    "status": "대기",
+    "appliedAt": "2026-03-11T09:30:00Z",
+    "message": "식품 콘텐츠 전문 크리에이터입니다. 잘 부탁드립니다."
+  },
+  {
+    "id": "app-6",
+    "campaignId": "campaign-1",
+    "creatorId": "creator-4",
+    "status": "수락",
+    "appliedAt": "2026-02-20T14:00:00Z",
+    "respondedAt": "2026-02-22T10:00:00Z",
+    "message": "올리브영 봄 신상 공구 참여 신청합니다."
+  }
+]

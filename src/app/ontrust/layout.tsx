@@ -30,6 +30,7 @@ const navGroups: NavGroup[] = [
     items: [
       { label: "캠페인 등록", href: "/ontrust/campaign/new", icon: Megaphone },
       { label: "제안 관리", href: "/ontrust/campaign", icon: Megaphone },
+      { label: "협업 관리", href: "/ontrust/campaign/collaboration", icon: Users },
     ],
   },
   {

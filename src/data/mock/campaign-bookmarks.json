@@ -1,0 +1,27 @@
+[
+  {
+    "creatorId": "creator-1",
+    "campaignId": "campaign-3",
+    "savedAt": "2026-03-08T10:30:00Z"
+  },
+  {
+    "creatorId": "creator-1",
+    "campaignId": "campaign-5",
+    "savedAt": "2026-03-09T14:00:00Z"
+  },
+  {
+    "creatorId": "creator-1",
+    "campaignId": "campaign-6",
+    "savedAt": "2026-03-10T11:00:00Z"
+  },
+  {
+    "creatorId": "creator-2",
+    "campaignId": "campaign-1",
+    "savedAt": "2026-03-07T09:00:00Z"
+  },
+  {
+    "creatorId": "creator-3",
+    "campaignId": "campaign-2",
+    "savedAt": "2026-03-06T15:00:00Z"
+  }
+]

@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import Link from "next/link";
 import {
   PlayCircle,
   FileCheck,
   Send,
   CheckCircle2,
   Bell,
-  TrendingUp,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { StatsCard } from "@/components/dashboard/stats-card";
@@ -19,6 +21,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   LineChart,
   Line,
@@ -28,6 +31,30 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import mockCampaignsJson from "@/data/mock/campaigns.json";
+import mockRecommendationsJson from "@/data/mock/recommendations.json";
+
+/* 현재 로그인 크리에이터 (Mock) */
+const CURRENT_CREATOR_ID = "creator-1";
+
+const REASON_LABELS: Record<string, string> = {
+  성과유사: "성과 유사 브랜드",
+  구매기반: "구매 고객 기반",
+  카테고리유사: "유사 크리에이터",
+};
+
+const REASON_COLORS: Record<string, string> = {
+  성과유사: "bg-blue-50 text-blue-700 border-blue-200",
+  구매기반: "bg-green-50 text-green-700 border-green-200",
+  카테고리유사: "bg-purple-50 text-purple-700 border-purple-200",
+};
+
+const STATUS_COLORS: Record<string, string> = {
+  모집중: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  진행중: "bg-blue-50 text-blue-700 border-blue-200",
+  완료: "bg-gray-50 text-gray-600 border-gray-200",
+  제안: "bg-amber-50 text-amber-700 border-amber-200",
+};
 
 /* ── CJ 내부 자체 개발 범위 — 목업 레이아웃만 구현 ── */
 
@@ -101,6 +128,32 @@ const mockNotifications = [
 
 export default function CreatorDashboardPage() {
   const [selectedLine, setSelectedLine] = useState<"views" | "likes" | "comments">("views");
+
+  /* 현재 크리에이터에게 추천된 캠페인 계산 */
+  const { recommendedCampaigns, recUpdatedAt } = useMemo(() => {
+    const recs: { campaign: (typeof mockCampaignsJson)[0]; score: number; reason: string }[] = [];
+    let latestUpdate = "";
+
+    for (const rec of mockRecommendationsJson) {
+      const match = rec.creators.find((c) => c.creatorId === CURRENT_CREATOR_ID);
+      if (match) {
+        const campaign = mockCampaignsJson.find((c) => c.id === rec.campaignId);
+        if (campaign && campaign.status !== "완료") {
+          recs.push({ campaign, score: match.score, reason: match.reason });
+        }
+        if (!latestUpdate || rec.updatedAt > latestUpdate) {
+          latestUpdate = rec.updatedAt;
+        }
+      }
+    }
+
+    return {
+      recommendedCampaigns: recs.sort((a, b) => b.score - a.score).slice(0, 3),
+      recUpdatedAt: latestUpdate
+        ? new Date(latestUpdate).toLocaleDateString("ko-KR", { month: "2-digit", day: "2-digit" })
+        : "",
+    };
+  }, []);
 
   return (
     <>
@@ -205,6 +258,68 @@ export default function CreatorDashboardPage() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
+
+        {/* Recommended Campaigns */}
+        {recommendedCampaigns.length > 0 && (
+          <Card>
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-base flex items-center gap-1.5">
+                    <Sparkles className="h-4 w-4 text-violet-500" />
+                    나에게 추천된 캠페인
+                  </CardTitle>
+                  {recUpdatedAt && (
+                    <CardDescription className="mt-0.5">
+                      배치 업데이트: {recUpdatedAt}
+                    </CardDescription>
+                  )}
+                </div>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="/ontner/campaign/explore" className="flex items-center gap-1 text-xs">
+                    더보기 <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {recommendedCampaigns.map(({ campaign, score, reason }) => (
+                  <Link
+                    key={campaign.id}
+                    href={`/ontner/campaign/${campaign.id}`}
+                    className="block"
+                  >
+                    <div className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
+                          <span
+                            className={`text-[10px] px-1.5 py-0.5 rounded border font-medium ${STATUS_COLORS[campaign.status] ?? ""}`}
+                          >
+                            {campaign.status}
+                          </span>
+                          <span
+                            className={`text-[10px] px-1.5 py-0.5 rounded border font-medium ${REASON_COLORS[reason] ?? ""}`}
+                          >
+                            {REASON_LABELS[reason] ?? reason}
+                          </span>
+                        </div>
+                        <p className="text-sm font-medium truncate">{campaign.name}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          {campaign.brand} · {campaign.reward}
+                        </p>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <p className="text-xs text-muted-foreground">추천 점수</p>
+                        <p className="text-base font-bold text-violet-600">{score}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Active Campaign Engagement Averages */}

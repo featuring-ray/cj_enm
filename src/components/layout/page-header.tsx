@@ -11,7 +11,7 @@ interface PageHeaderProps {
 export function PageHeader({ title, description, actions, action }: PageHeaderProps) {
   const rightContent = actions ?? action;
   return (
-    <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
+    <header data-slot="page-header" className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
       <SidebarTrigger className="-ml-1" />
       <Separator orientation="vertical" className="h-4" />
       <div className="flex flex-1 items-center gap-2 min-w-0">

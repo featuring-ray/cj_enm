@@ -1,59 +1,48 @@
 "use client";
 
-import {
-  LayoutDashboard,
-  Compass,
-  BarChart2,
-  User,
-  FileText,
-  Users,
-  ArrowRightLeft,
-  LineChart,
-  Sparkles,
-  Link2,
-} from "lucide-react";
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import { PortalSidebar, type NavGroup } from "@/components/layout/portal-sidebar";
+import { User, CalendarDays, Wallet } from "lucide-react";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { OntnerSidebar, type OntnerNavGroup } from "@/components/layout/ontner-sidebar";
 import type { SessionUser } from "@/types/user";
 
-const navGroups: NavGroup[] = [
+const navGroups: OntnerNavGroup[] = [
   {
+    label: "마이페이지",
+    icon: User,
+    defaultOpen: true,
     items: [
-      { label: "홈", href: "/ontner/dashboard", icon: LayoutDashboard },
+      { label: "계정 및 계좌 관리", href: "/ontner/mypage/account" },
+      { label: "약관/계약 관리", href: "/ontner/mypage/terms" },
+      { label: "크리에이터 페이지", href: "/ontner/mypage" },
     ],
   },
   {
+    label: "캠페인 탐색/관리",
+    icon: CalendarDays,
     items: [
-      { label: "마이페이지", href: "/ontner/mypage", icon: User },
+      { label: "탐색/추천", href: "/ontner/campaign/explore" },
+      { label: "저장한 캠페인", href: "/ontner/campaign/saved" },
+      { label: "협업 관리", href: "/ontner/campaign/collaboration" },
+      { label: "역제안", href: "/ontner/campaign/counter-proposal" },
+      { label: "크루찾기", href: "/ontner/crew-finder" },
+      { label: "콘텐츠", href: "/ontner/content" },
     ],
   },
   {
-    label: "캠페인",
+    label: "정산 관리",
+    icon: Wallet,
     items: [
-      { label: "탐색/추천", href: "/ontner/campaign/explore", icon: Compass },
-      { label: "역제안", href: "/ontner/campaign/counter-proposal", icon: ArrowRightLeft },
-      { label: "크루찾기", href: "/ontner/crew-finder", icon: Users },
-    ],
-  },
-  {
-    items: [
-      { label: "콘텐츠", href: "/ontner/content", icon: FileText },
-    ],
-  },
-  {
-    label: "성과",
-    items: [
-      { label: "성과조회", href: "/ontner/performance", icon: LineChart },
-      { label: "인사이트 리포트", href: "/ontner/insight/campaign", icon: Sparkles },
-      { label: "제휴 인사이트", href: "/ontner/insight/affiliate", icon: Link2 },
+      { label: "성과조회", href: "/ontner/performance" },
+      { label: "인사이트 리포트", href: "/ontner/insight/campaign" },
+      { label: "제휴 인사이트", href: "/ontner/insight/affiliate" },
     ],
   },
 ];
 
 const mockUser: SessionUser = {
   id: "creator-1",
-  email: "creator@test.com",
-  name: "크리에이터",
+  email: "tomato422@naver.com",
+  name: "tomato422",
   role: "CREATOR",
 };
 
@@ -63,16 +52,11 @@ export default function CreatorLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
-      <PortalSidebar
-        portalName="온트너"
-        portalBadge="크리에이터 포털"
-        navGroups={navGroups}
-        user={mockUser}
-      />
-      <SidebarInset className="flex flex-col min-h-screen">
+    <SidebarProvider className="ontner-portal !bg-gray-50">
+      <OntnerSidebar navGroups={navGroups} user={mockUser} />
+      <main className="flex-1 min-h-screen bg-white overflow-y-auto">
         {children}
-      </SidebarInset>
+      </main>
     </SidebarProvider>
   );
 }

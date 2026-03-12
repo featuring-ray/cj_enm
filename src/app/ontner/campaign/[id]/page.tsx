@@ -10,7 +10,10 @@ import {
   Heart,
   MessageCircle,
   Bookmark,
+  BookmarkCheck,
   ChevronRight,
+  CheckCircle2,
+  XCircle,
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import {
@@ -23,8 +26,21 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { featuringApi } from "@/lib/featuring-api";
 import type { Content } from "@/types/content";
+import mockBookmarksJson from "@/data/mock/campaign-bookmarks.json";
+import mockProposalsJson from "@/data/mock/campaign-proposals.json";
+
+/* 현재 로그인 크리에이터 (Mock) */
+const CURRENT_CREATOR_ID = "creator-1";
 
 type CampaignJson = {
   id: string;
@@ -49,6 +65,27 @@ export default function CampaignDetailPage() {
   const [relatedContents, setRelatedContents] = useState<Content[]>([]);
   const [applied, setApplied] = useState(false);
 
+  /* 찜하기 상태 */
+  const [bookmarked, setBookmarked] = useState(
+    mockBookmarksJson.some(
+      (b) => b.creatorId === CURRENT_CREATOR_ID && b.campaignId === campaignId
+    )
+  );
+
+  /* 이 캠페인에 대한 MD 제안 (대기 상태) */
+  const pendingProposal = mockProposalsJson.find(
+    (p) =>
+      p.campaignId === campaignId &&
+      p.creatorId === CURRENT_CREATOR_ID &&
+      p.status === "대기"
+  );
+  const [proposalStatus, setProposalStatus] = useState<"대기" | "수락" | "거절" | null>(
+    pendingProposal ? "대기" : null
+  );
+
+  /* 제안 수락 확인 다이얼로그 */
+  const [acceptDialogOpen, setAcceptDialogOpen] = useState(false);
+
   useEffect(() => {
     async function load() {
       const campaigns = await featuringApi.getNewCampaigns();
@@ -61,10 +98,7 @@ export default function CampaignDetailPage() {
           sortBy: "engagementScore",
           limit: 6,
         });
-        // Filter out contents from same campaign
-        setRelatedContents(
-          contents.filter((c) => c.campaignId !== campaignId)
-        );
+        setRelatedContents(contents.filter((c) => c.campaignId !== campaignId));
       }
     }
     load();
@@ -84,10 +118,10 @@ export default function CampaignDetailPage() {
   }
 
   const STATUS_VARIANTS: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
-    "진행중": "default",
-    "모집중": "default",
-    "완료": "secondary",
-    "제안": "outline",
+    진행중: "default",
+    모집중: "default",
+    완료: "secondary",
+    제안: "outline",
   };
 
   return (
@@ -96,17 +130,91 @@ export default function CampaignDetailPage() {
         title={campaign.name}
         description={`${campaign.brand} · ${campaign.brandCategory}`}
         actions={
-          <Button
-            size="sm"
-            disabled={applied || campaign.status === "완료"}
-            onClick={() => setApplied(true)}
-          >
-            {applied ? "신청 완료" : "참여 신청"}
-          </Button>
+          <div className="flex items-center gap-2">
+            {/* 찜하기 버튼 */}
+            <Button
+              variant="outline"
+              size="sm"
+              className={bookmarked ? "text-violet-600 border-violet-300 bg-violet-50" : ""}
+              onClick={() => setBookmarked((v) => !v)}
+            >
+              {bookmarked ? (
+                <>
+                  <BookmarkCheck className="h-4 w-4 mr-1" />
+                  저장됨
+                </>
+              ) : (
+                <>
+                  <Bookmark className="h-4 w-4 mr-1" />
+                  저장
+                </>
+              )}
+            </Button>
+
+            {/* 참여 신청 버튼 */}
+            <Button
+              size="sm"
+              disabled={applied || campaign.status === "완료"}
+              onClick={() => setApplied(true)}
+            >
+              {applied ? "신청 완료" : "참여 신청"}
+            </Button>
+          </div>
         }
       />
 
       <main className="flex-1 p-4 md:p-6 space-y-6">
+        {/* MD 제안 배너 */}
+        {proposalStatus && (
+          <Card className={`border-2 ${proposalStatus === "대기" ? "border-violet-200 bg-violet-50/50" : proposalStatus === "수락" ? "border-emerald-200 bg-emerald-50/50" : "border-gray-200"}`}>
+            <CardContent className="p-4">
+              {proposalStatus === "대기" && (
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-semibold text-violet-800 mb-0.5">
+                      이 캠페인에 참여 제안이 왔어요!
+                    </p>
+                    <p className="text-xs text-violet-600">
+                      {pendingProposal?.message ?? "MD로부터 이 캠페인에 참여 제안이 도착했습니다."}
+                    </p>
+                  </div>
+                  <div className="flex gap-2 shrink-0">
+                    <Button
+                      size="sm"
+                      className="bg-violet-600 hover:bg-violet-700 h-8"
+                      onClick={() => setAcceptDialogOpen(true)}
+                    >
+                      <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
+                      수락
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 text-red-600 border-red-200 hover:bg-red-50"
+                      onClick={() => setProposalStatus("거절")}
+                    >
+                      <XCircle className="h-3.5 w-3.5 mr-1" />
+                      거절
+                    </Button>
+                  </div>
+                </div>
+              )}
+              {proposalStatus === "수락" && (
+                <div className="flex items-center gap-2 text-emerald-700">
+                  <CheckCircle2 className="h-4 w-4" />
+                  <p className="text-sm font-medium">제안을 수락했습니다. 캠페인이 진행됩니다.</p>
+                </div>
+              )}
+              {proposalStatus === "거절" && (
+                <div className="flex items-center gap-2 text-gray-500">
+                  <XCircle className="h-4 w-4" />
+                  <p className="text-sm">제안을 거절했습니다.</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
         {/* Campaign Basic Info */}
         <Card>
           <CardHeader>
@@ -146,9 +254,7 @@ export default function CampaignDetailPage() {
                 <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
                 <div>
                   <p className="text-xs text-muted-foreground">콘텐츠</p>
-                  <p className="text-sm font-medium">
-                    {campaign.contentCount}건
-                  </p>
+                  <p className="text-sm font-medium">{campaign.contentCount}건</p>
                 </div>
               </div>
             </div>
@@ -165,10 +271,10 @@ export default function CampaignDetailPage() {
         </Card>
 
         {/* Apply Button (prominent) */}
-        <div className="flex justify-center">
+        <div className="flex gap-3 justify-center">
           <Button
             size="lg"
-            className="w-full max-w-md"
+            className="flex-1 max-w-sm"
             disabled={applied || campaign.status === "완료"}
             onClick={() => setApplied(true)}
           >
@@ -177,6 +283,18 @@ export default function CampaignDetailPage() {
               : campaign.status === "완료"
                 ? "종료된 캠페인"
                 : "이 캠페인에 참여 신청하기"}
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            className={`shrink-0 ${bookmarked ? "text-violet-600 border-violet-300 bg-violet-50" : ""}`}
+            onClick={() => setBookmarked((v) => !v)}
+          >
+            {bookmarked ? (
+              <BookmarkCheck className="h-5 w-5" />
+            ) : (
+              <Bookmark className="h-5 w-5" />
+            )}
           </Button>
         </div>
 
@@ -242,6 +360,32 @@ export default function CampaignDetailPage() {
           </Card>
         )}
       </main>
+
+      {/* 제안 수락 확인 다이얼로그 */}
+      <Dialog open={acceptDialogOpen} onOpenChange={setAcceptDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>제안을 수락하시겠어요?</DialogTitle>
+            <DialogDescription>
+              &ldquo;{campaign?.name}&rdquo; 캠페인 참여 제안을 수락합니다.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setAcceptDialogOpen(false)}>
+              취소
+            </Button>
+            <Button
+              className="bg-violet-600 hover:bg-violet-700"
+              onClick={() => {
+                setProposalStatus("수락");
+                setAcceptDialogOpen(false);
+              }}
+            >
+              수락하기
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
