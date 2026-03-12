@@ -66,7 +66,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
+    <SidebarProvider className="ontrust-portal">
       <PortalSidebar
         portalName="온트러스트"
         portalBadge="관리자 포털"
