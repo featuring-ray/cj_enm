@@ -1,0 +1,64 @@
+[
+  {
+    "creatorId": "creator-1",
+    "period": "2025-10-01~2026-03-15",
+    "campaignRetention": [
+      { "fromCampaignId": "campaign-1", "toCampaignId": "campaign-2", "retentionRate": 18.5 },
+      { "fromCampaignId": "campaign-1", "toCampaignId": "campaign-4", "retentionRate": 12.3 },
+      { "fromCampaignId": "campaign-2", "toCampaignId": "campaign-4", "retentionRate": 22.1 },
+      { "fromCampaignId": "campaign-4", "toCampaignId": "campaign-1", "retentionRate": 15.8 }
+    ],
+    "topRepurchaseBrands": [
+      { "brand": "올리브영", "repurchaseRate": 34.2 },
+      { "brand": "이니스프리", "repurchaseRate": 28.7 },
+      { "brand": "CJ제일제당", "repurchaseRate": 22.1 },
+      { "brand": "무신사", "repurchaseRate": 15.4 },
+      { "brand": "닥터자르트", "repurchaseRate": 12.8 }
+    ],
+    "repurchaseCycle": [
+      { "productCategory": "스킨케어", "avgDays": 42 },
+      { "productCategory": "클렌저", "avgDays": 56 },
+      { "productCategory": "선케어", "avgDays": 38 },
+      { "productCategory": "식품(냉동)", "avgDays": 28 },
+      { "productCategory": "메이크업", "avgDays": 65 }
+    ]
+  },
+  {
+    "creatorId": "creator-2",
+    "period": "2025-10-01~2026-03-15",
+    "campaignRetention": [
+      { "fromCampaignId": "campaign-2", "toCampaignId": "campaign-5", "retentionRate": 25.3 },
+      { "fromCampaignId": "campaign-5", "toCampaignId": "campaign-2", "retentionRate": 19.7 }
+    ],
+    "topRepurchaseBrands": [
+      { "brand": "CJ제일제당", "repurchaseRate": 42.1 },
+      { "brand": "풀무원", "repurchaseRate": 28.4 },
+      { "brand": "오뚜기", "repurchaseRate": 21.6 },
+      { "brand": "동원", "repurchaseRate": 15.2 }
+    ],
+    "repurchaseCycle": [
+      { "productCategory": "냉동식품", "avgDays": 21 },
+      { "productCategory": "간편식", "avgDays": 14 },
+      { "productCategory": "소스/양념", "avgDays": 45 },
+      { "productCategory": "건강식품", "avgDays": 35 }
+    ]
+  },
+  {
+    "creatorId": "creator-3",
+    "period": "2025-10-01~2026-03-15",
+    "campaignRetention": [
+      { "fromCampaignId": "campaign-1", "toCampaignId": "campaign-4", "retentionRate": 31.2 },
+      { "fromCampaignId": "campaign-4", "toCampaignId": "campaign-1", "retentionRate": 26.8 }
+    ],
+    "topRepurchaseBrands": [
+      { "brand": "이니스프리", "repurchaseRate": 38.5 },
+      { "brand": "올리브영", "repurchaseRate": 32.1 },
+      { "brand": "에스티로더", "repurchaseRate": 18.9 }
+    ],
+    "repurchaseCycle": [
+      { "productCategory": "스킨케어", "avgDays": 35 },
+      { "productCategory": "메이크업", "avgDays": 52 },
+      { "productCategory": "바디케어", "avgDays": 48 }
+    ]
+  }
+]

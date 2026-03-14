@@ -1,0 +1,42 @@
+[
+  {
+    "id": "group-1",
+    "name": "뷰티/패션 주력 크리에이터",
+    "ownerId": "md-001",
+    "creatorIds": ["creator-1", "creator-3", "creator-7"],
+    "createdAt": "2025-12-10",
+    "updatedAt": "2026-02-15"
+  },
+  {
+    "id": "group-2",
+    "name": "푸드/리빙 크리에이터",
+    "ownerId": "md-001",
+    "creatorIds": ["creator-2", "creator-6", "creator-8"],
+    "createdAt": "2025-12-15",
+    "updatedAt": "2026-01-20"
+  },
+  {
+    "id": "group-3",
+    "name": "테크/가전 전문 크리에이터",
+    "ownerId": "md-001",
+    "creatorIds": ["creator-4", "creator-9"],
+    "createdAt": "2026-01-05",
+    "updatedAt": "2026-02-28"
+  },
+  {
+    "id": "group-4",
+    "name": "신규 발굴 후보",
+    "ownerId": "md-002",
+    "creatorIds": ["creator-10", "creator-11", "creator-12", "creator-13"],
+    "createdAt": "2026-02-01",
+    "updatedAt": "2026-03-10"
+  },
+  {
+    "id": "group-5",
+    "name": "봄 시즌 캠페인 타겟",
+    "ownerId": "md-001",
+    "creatorIds": ["creator-1", "creator-2", "creator-3", "creator-5", "creator-7"],
+    "createdAt": "2026-02-20",
+    "updatedAt": "2026-03-12"
+  }
+]

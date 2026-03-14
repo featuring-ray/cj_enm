@@ -1,9 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Lightbulb, RefreshCcw, ArrowRight } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { CampaignRecommendModule } from "@/components/ontner/campaign-recommend-module";
+import { Progress } from "@/components/ui/progress";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import mockRetentionJson from "@/data/mock/retention.json";
 import {
   Card,
   CardContent,
@@ -407,6 +417,111 @@ export default function CampaignInsightPage() {
             </CardContent>
           </Card>
         </div>
+
+        {/* 고객 리텐션 (재구매 분석) */}
+        {(() => {
+          const retention = mockRetentionJson.find((r) => r.creatorId === "creator-1");
+          if (!retention) return null;
+          return (
+            <>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base flex items-center gap-2">
+                    <RefreshCcw className="h-4 w-4 text-blue-500" />
+                    고객 리텐션 (재구매 분석)
+                  </CardTitle>
+                  <CardDescription>
+                    내 캠페인 구매 고객의 다른 캠페인/리워드 링크 재구매 비율
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-md border p-3 bg-blue-50/50 text-sm text-blue-800 flex items-start gap-2">
+                    <Lightbulb className="h-4 w-4 mt-0.5 shrink-0" />
+                    <span>[활용 TIP] 리텐션이 높은 캠페인 간 연계 프로모션을 기획하면 전환율을 높일 수 있습니다</span>
+                  </div>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>출발 캠페인</TableHead>
+                        <TableHead><ArrowRight className="h-3.5 w-3.5 inline" /></TableHead>
+                        <TableHead>도착 캠페인</TableHead>
+                        <TableHead className="text-right">리텐션율</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {retention.campaignRetention.map((cr, i) => {
+                        const fromName = CAMPAIGNS.find((c) => c.id === cr.fromCampaignId)?.name || cr.fromCampaignId;
+                        const toName = CAMPAIGNS.find((c) => c.id === cr.toCampaignId)?.name || cr.toCampaignId;
+                        return (
+                          <TableRow key={i}>
+                            <TableCell className="text-sm">{fromName}</TableCell>
+                            <TableCell><ArrowRight className="h-3 w-3 text-muted-foreground" /></TableCell>
+                            <TableCell className="text-sm">{toName}</TableCell>
+                            <TableCell className="text-right font-medium text-sm">{cr.retentionRate}%</TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+
+                  <div className="mt-4">
+                    <p className="text-sm font-medium mb-3">재구매 상위 브랜드</p>
+                    <div className="space-y-2">
+                      {retention.topRepurchaseBrands.map((b) => (
+                        <div key={b.brand} className="space-y-1">
+                          <div className="flex justify-between text-sm">
+                            <span>{b.brand}</span>
+                            <span className="font-medium">{b.repurchaseRate}%</span>
+                          </div>
+                          <Progress value={b.repurchaseRate} className="h-2" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* 반복구매 주기 */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">반복구매 주기</CardTitle>
+                  <CardDescription>
+                    최근 캠페인 판매 상위 상품 기준 반복구매 주기 분석
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-md border p-3 bg-amber-50/50 text-sm text-amber-800 flex items-start gap-2">
+                    <Lightbulb className="h-4 w-4 mt-0.5 shrink-0" />
+                    <span>[활용 TIP] 반복구매 주기에 맞춰 리워드 링크를 노출하면 전환율이 높아집니다</span>
+                  </div>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>상품 카테고리</TableHead>
+                        <TableHead className="text-right">평균 재구매 주기</TableHead>
+                        <TableHead className="w-48">시각화</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {retention.repurchaseCycle.map((rc) => (
+                        <TableRow key={rc.productCategory}>
+                          <TableCell className="text-sm font-medium">{rc.productCategory}</TableCell>
+                          <TableCell className="text-right text-sm">{rc.avgDays}일</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <Progress value={Math.min((rc.avgDays / 70) * 100, 100)} className="h-2 flex-1" />
+                              <span className="text-xs text-muted-foreground w-10">{rc.avgDays}일</span>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </>
+          );
+        })()}
 
         {/* O-C-06: 리포트 하단 추천 모듈 */}
         <div className="rounded-lg border bg-card p-5">

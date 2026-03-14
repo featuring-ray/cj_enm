@@ -1,0 +1,207 @@
+[
+  {
+    "campaignId": "campaign-1",
+    "creatorId": "creator-1",
+    "summary": {
+      "totalRevenue": 44800000,
+      "confirmedRevenue": 41200000,
+      "totalOrders": 1280,
+      "contentCount": 5,
+      "conversionRate": 4.8
+    },
+    "hourlyOrders": [
+      { "hour": "09:00", "orders": 45, "revenue": 1575000 },
+      { "hour": "10:00", "orders": 78, "revenue": 2730000 },
+      { "hour": "11:00", "orders": 112, "revenue": 3920000 },
+      { "hour": "12:00", "orders": 156, "revenue": 5460000 },
+      { "hour": "13:00", "orders": 134, "revenue": 4690000 },
+      { "hour": "14:00", "orders": 98, "revenue": 3430000 },
+      { "hour": "15:00", "orders": 87, "revenue": 3045000 },
+      { "hour": "16:00", "orders": 76, "revenue": 2660000 },
+      { "hour": "17:00", "orders": 65, "revenue": 2275000 },
+      { "hour": "18:00", "orders": 89, "revenue": 3115000 },
+      { "hour": "19:00", "orders": 120, "revenue": 4200000 },
+      { "hour": "20:00", "orders": 145, "revenue": 5075000 },
+      { "hour": "21:00", "orders": 132, "revenue": 4620000 },
+      { "hour": "22:00", "orders": 43, "revenue": 1505000 }
+    ],
+    "customerSegment": {
+      "ageGroups": [
+        { "range": "10대", "count": 52 },
+        { "range": "20대", "count": 448 },
+        { "range": "30대", "count": 512 },
+        { "range": "40대", "count": 198 },
+        { "range": "50대+", "count": 70 }
+      ],
+      "gender": { "male": 192, "female": 1088 }
+    },
+    "topProducts": [
+      { "productId": "prod-1", "name": "그린티 시드 세럼 80ml", "orders": 342 },
+      { "productId": "prod-2", "name": "비타C 토너패드 70매", "orders": 256 },
+      { "productId": "prod-3", "name": "히알루론 크림 50ml", "orders": 198 },
+      { "productId": "prod-4", "name": "클렌징 오일 200ml", "orders": 167 },
+      { "productId": "prod-5", "name": "선스크린 SPF50 60ml", "orders": 143 },
+      { "productId": "prod-6", "name": "토닝 앰플 30ml", "orders": 89 },
+      { "productId": "prod-7", "name": "리페어 마스크팩 10매", "orders": 56 },
+      { "productId": "prod-8", "name": "립 세럼 15ml", "orders": 29 }
+    ],
+    "cancelReturnRate": 8.2,
+    "cancelReasons": [
+      { "reason": "단순 변심", "count": 62 },
+      { "reason": "배송 지연", "count": 21 },
+      { "reason": "상품 불량", "count": 12 },
+      { "reason": "오배송", "count": 5 },
+      { "reason": "기타", "count": 5 }
+    ]
+  },
+  {
+    "campaignId": "campaign-2",
+    "creatorId": "creator-1",
+    "summary": {
+      "totalRevenue": 33250000,
+      "confirmedRevenue": 30800000,
+      "totalOrders": 950,
+      "contentCount": 3,
+      "conversionRate": 3.9
+    },
+    "hourlyOrders": [
+      { "hour": "09:00", "orders": 32, "revenue": 1120000 },
+      { "hour": "10:00", "orders": 56, "revenue": 1960000 },
+      { "hour": "11:00", "orders": 89, "revenue": 3115000 },
+      { "hour": "12:00", "orders": 124, "revenue": 4340000 },
+      { "hour": "13:00", "orders": 98, "revenue": 3430000 },
+      { "hour": "14:00", "orders": 67, "revenue": 2345000 },
+      { "hour": "15:00", "orders": 54, "revenue": 1890000 },
+      { "hour": "16:00", "orders": 48, "revenue": 1680000 },
+      { "hour": "17:00", "orders": 56, "revenue": 1960000 },
+      { "hour": "18:00", "orders": 78, "revenue": 2730000 },
+      { "hour": "19:00", "orders": 98, "revenue": 3430000 },
+      { "hour": "20:00", "orders": 112, "revenue": 3920000 },
+      { "hour": "21:00", "orders": 38, "revenue": 1330000 }
+    ],
+    "customerSegment": {
+      "ageGroups": [
+        { "range": "10대", "count": 28 },
+        { "range": "20대", "count": 190 },
+        { "range": "30대", "count": 380 },
+        { "range": "40대", "count": 256 },
+        { "range": "50대+", "count": 96 }
+      ],
+      "gender": { "male": 342, "female": 608 }
+    },
+    "topProducts": [
+      { "productId": "prod-10", "name": "비비고 왕교자 1kg", "orders": 312 },
+      { "productId": "prod-11", "name": "비비고 갈비탕 500g", "orders": 198 },
+      { "productId": "prod-12", "name": "비비고 김치찌개 450g", "orders": 156 },
+      { "productId": "prod-13", "name": "비비고 불고기 300g", "orders": 134 },
+      { "productId": "prod-14", "name": "비비고 죽 세트", "orders": 87 },
+      { "productId": "prod-15", "name": "비비고 만두피 500g", "orders": 63 }
+    ],
+    "cancelReturnRate": 5.8,
+    "cancelReasons": [
+      { "reason": "단순 변심", "count": 32 },
+      { "reason": "배송 지연", "count": 14 },
+      { "reason": "상품 불량", "count": 6 },
+      { "reason": "기타", "count": 3 }
+    ]
+  },
+  {
+    "campaignId": "campaign-4",
+    "creatorId": "creator-1",
+    "summary": {
+      "totalRevenue": 53200000,
+      "confirmedRevenue": 53200000,
+      "totalOrders": 1520,
+      "contentCount": 4,
+      "conversionRate": 5.2
+    },
+    "hourlyOrders": [
+      { "hour": "09:00", "orders": 56, "revenue": 1960000 },
+      { "hour": "10:00", "orders": 98, "revenue": 3430000 },
+      { "hour": "11:00", "orders": 145, "revenue": 5075000 },
+      { "hour": "12:00", "orders": 189, "revenue": 6615000 },
+      { "hour": "13:00", "orders": 167, "revenue": 5845000 },
+      { "hour": "14:00", "orders": 123, "revenue": 4305000 },
+      { "hour": "15:00", "orders": 98, "revenue": 3430000 },
+      { "hour": "16:00", "orders": 87, "revenue": 3045000 },
+      { "hour": "17:00", "orders": 76, "revenue": 2660000 },
+      { "hour": "18:00", "orders": 112, "revenue": 3920000 },
+      { "hour": "19:00", "orders": 156, "revenue": 5460000 },
+      { "hour": "20:00", "orders": 134, "revenue": 4690000 },
+      { "hour": "21:00", "orders": 79, "revenue": 2765000 }
+    ],
+    "customerSegment": {
+      "ageGroups": [
+        { "range": "10대", "count": 76 },
+        { "range": "20대", "count": 532 },
+        { "range": "30대", "count": 608 },
+        { "range": "40대", "count": 228 },
+        { "range": "50대+", "count": 76 }
+      ],
+      "gender": { "male": 152, "female": 1368 }
+    },
+    "topProducts": [
+      { "productId": "prod-20", "name": "그린티 씨드 세럼 리뉴", "orders": 423 },
+      { "productId": "prod-21", "name": "그린티 아이크림", "orders": 312 },
+      { "productId": "prod-22", "name": "그린티 클렌저", "orders": 256 },
+      { "productId": "prod-23", "name": "비자 트러블 스팟", "orders": 198 },
+      { "productId": "prod-24", "name": "제주 한란 크림", "orders": 167 },
+      { "productId": "prod-25", "name": "그린티 토너", "orders": 98 },
+      { "productId": "prod-26", "name": "레티놀 시카 앰플", "orders": 66 }
+    ],
+    "cancelReturnRate": 4.5,
+    "cancelReasons": [
+      { "reason": "단순 변심", "count": 42 },
+      { "reason": "배송 지연", "count": 15 },
+      { "reason": "상품 불량", "count": 8 },
+      { "reason": "기타", "count": 3 }
+    ]
+  },
+  {
+    "campaignId": "campaign-3",
+    "creatorId": "creator-5",
+    "summary": {
+      "totalRevenue": 28900000,
+      "confirmedRevenue": null,
+      "totalOrders": 820,
+      "contentCount": 3,
+      "conversionRate": 3.5
+    },
+    "hourlyOrders": [
+      { "hour": "10:00", "orders": 45, "revenue": 1575000 },
+      { "hour": "11:00", "orders": 67, "revenue": 2345000 },
+      { "hour": "12:00", "orders": 98, "revenue": 3430000 },
+      { "hour": "13:00", "orders": 112, "revenue": 3920000 },
+      { "hour": "14:00", "orders": 89, "revenue": 3115000 },
+      { "hour": "15:00", "orders": 76, "revenue": 2660000 },
+      { "hour": "16:00", "orders": 65, "revenue": 2275000 },
+      { "hour": "17:00", "orders": 54, "revenue": 1890000 },
+      { "hour": "18:00", "orders": 78, "revenue": 2730000 },
+      { "hour": "19:00", "orders": 89, "revenue": 3115000 },
+      { "hour": "20:00", "orders": 47, "revenue": 1645000 }
+    ],
+    "customerSegment": {
+      "ageGroups": [
+        { "range": "10대", "count": 98 },
+        { "range": "20대", "count": 312 },
+        { "range": "30대", "count": 246 },
+        { "range": "40대", "count": 123 },
+        { "range": "50대+", "count": 41 }
+      ],
+      "gender": { "male": 492, "female": 328 }
+    },
+    "topProducts": [
+      { "productId": "prod-30", "name": "봄 라이트 재킷", "orders": 234 },
+      { "productId": "prod-31", "name": "와이드 데님 팬츠", "orders": 198 },
+      { "productId": "prod-32", "name": "오버핏 티셔츠 3팩", "orders": 156 },
+      { "productId": "prod-33", "name": "스트릿 스니커즈", "orders": 132 },
+      { "productId": "prod-34", "name": "캔버스 토트백", "orders": 100 }
+    ],
+    "cancelReturnRate": 12.4,
+    "cancelReasons": [
+      { "reason": "사이즈 불일치", "count": 56 },
+      { "reason": "단순 변심", "count": 32 },
+      { "reason": "색상 차이", "count": 14 }
+    ]
+  }
+]

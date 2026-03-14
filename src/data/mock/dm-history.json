@@ -1,0 +1,92 @@
+[
+  {
+    "id": "dm-1",
+    "templateId": "tpl-2",
+    "senderId": "md-001",
+    "recipientCreatorId": "creator-1",
+    "sentAt": "2026-03-01T10:30:00",
+    "status": "읽음",
+    "campaignId": "campaign-1"
+  },
+  {
+    "id": "dm-2",
+    "templateId": "tpl-1",
+    "senderId": "md-001",
+    "recipientCreatorId": "creator-10",
+    "sentAt": "2026-03-02T14:15:00",
+    "status": "발송",
+    "campaignId": null
+  },
+  {
+    "id": "dm-3",
+    "templateId": "tpl-3",
+    "senderId": "md-002",
+    "recipientCreatorId": "creator-11",
+    "sentAt": "2026-03-03T09:00:00",
+    "status": "읽음",
+    "campaignId": "campaign-2"
+  },
+  {
+    "id": "dm-4",
+    "templateId": "tpl-2",
+    "senderId": "md-001",
+    "recipientCreatorId": "creator-5",
+    "sentAt": "2026-03-05T16:45:00",
+    "status": "발송",
+    "campaignId": "campaign-3"
+  },
+  {
+    "id": "dm-5",
+    "templateId": "tpl-4",
+    "senderId": "md-001",
+    "recipientCreatorId": "creator-2",
+    "sentAt": "2026-03-07T11:20:00",
+    "status": "읽음",
+    "campaignId": "campaign-2"
+  },
+  {
+    "id": "dm-6",
+    "templateId": "tpl-1",
+    "senderId": "md-002",
+    "recipientCreatorId": "creator-12",
+    "sentAt": "2026-03-08T13:00:00",
+    "status": "실패",
+    "campaignId": null
+  },
+  {
+    "id": "dm-7",
+    "templateId": "tpl-2",
+    "senderId": "md-001",
+    "recipientCreatorId": "creator-3",
+    "sentAt": "2026-03-10T10:00:00",
+    "status": "읽음",
+    "campaignId": "campaign-4"
+  },
+  {
+    "id": "dm-8",
+    "templateId": "tpl-5",
+    "senderId": "md-001",
+    "recipientCreatorId": "creator-7",
+    "sentAt": "2026-03-12T15:30:00",
+    "status": "발송",
+    "campaignId": null
+  },
+  {
+    "id": "dm-9",
+    "templateId": "tpl-2",
+    "senderId": "md-002",
+    "recipientCreatorId": "creator-6",
+    "sentAt": "2026-03-13T09:45:00",
+    "status": "발송",
+    "campaignId": "campaign-5"
+  },
+  {
+    "id": "dm-10",
+    "templateId": "tpl-1",
+    "senderId": "md-001",
+    "recipientCreatorId": "creator-13",
+    "sentAt": "2026-03-14T14:00:00",
+    "status": "발송",
+    "campaignId": null
+  }
+]
