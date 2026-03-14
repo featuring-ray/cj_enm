@@ -38,6 +38,7 @@ import { featuringApi } from "@/lib/featuring-api";
 import type { Content } from "@/types/content";
 import mockBookmarksJson from "@/data/mock/campaign-bookmarks.json";
 import mockProposalsJson from "@/data/mock/campaign-proposals.json";
+import { CampaignRecommendModule } from "@/components/ontner/campaign-recommend-module";
 
 /* 현재 로그인 크리에이터 (Mock) */
 const CURRENT_CREATOR_ID = "creator-1";
@@ -359,6 +360,13 @@ export default function CampaignDetailPage() {
             </CardContent>
           </Card>
         )}
+        {/* O-C-06: 캠페인 추천 모듈 */}
+        <div className="rounded-lg border bg-card p-5 space-y-4">
+          <CampaignRecommendModule
+            creatorId="creator-1"
+            title="이런 캠페인은 어떠세요?"
+          />
+        </div>
       </main>
 
       {/* 제안 수락 확인 다이얼로그 */}

@@ -1,40 +1,27 @@
 "use client";
 
-import {
-  Users,
-  BarChart3,
-  Star,
-} from "lucide-react";
+import { Send } from "lucide-react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { PortalSidebar, type NavGroup } from "@/components/layout/portal-sidebar";
 import type { SessionUser } from "@/types/user";
 
 const navGroups: NavGroup[] = [
   {
+    label: "DM 관리",
     items: [
-      { label: "크리에이터", href: "/partner/creator", icon: Users },
-    ],
-  },
-  {
-    items: [
-      { label: "인사이트 리포트", href: "/partner/insight", icon: Star },
-    ],
-  },
-  {
-    items: [
-      { label: "성과", href: "/partner/performance", icon: BarChart3 },
+      { label: "DM 어드민 설정", href: "/admin/dm", icon: Send },
     ],
   },
 ];
 
 const mockUser: SessionUser = {
-  id: "partner-1",
-  email: "partner@test.com",
-  name: "파트너사",
-  role: "PARTNER",
+  id: "sysadmin-1",
+  email: "sysadmin@cjenm.com",
+  name: "시스템 관리자",
+  role: "ADMIN",
 };
 
-export default function PartnerLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -42,8 +29,8 @@ export default function PartnerLayout({
   return (
     <SidebarProvider>
       <PortalSidebar
-        portalName="파트너 포털"
-        portalBadge={mockUser.name}
+        portalName="어드민"
+        portalBadge="시스템 관리"
         navGroups={navGroups}
         user={mockUser}
       />

@@ -23,6 +23,7 @@ import mockCampaignsJson from "@/data/mock/campaigns.json";
 import mockContentsJson from "@/data/mock/contents.json";
 import mockRecommendationsJson from "@/data/mock/recommendations.json";
 import mockSimilarityJson from "@/data/mock/similarity.json";
+import mockCampaignRecommendationsJson from "@/data/mock/campaign-recommendations.json";
 
 import {
   mockCreators,
@@ -756,6 +757,25 @@ class FeaturingApiClient {
       ];
     }
     return this.fetch("/bookmarks/groups");
+  }
+
+  // =====================
+  // 캠페인 추천 모듈 (claude.md O-C-06)
+  // =====================
+
+  async getCampaignRecommendations(
+    creatorId: string
+  ): Promise<(typeof mockCampaignRecommendationsJson)[number] | null> {
+    if (this.useMock) {
+      return (
+        (mockCampaignRecommendationsJson as typeof mockCampaignRecommendationsJson).find(
+          (r) => r.creatorId === creatorId
+        ) ||
+        mockCampaignRecommendationsJson[0] ||
+        null
+      );
+    }
+    return this.fetch(`/campaigns/recommend/creator/${creatorId}`);
   }
 
   // =====================

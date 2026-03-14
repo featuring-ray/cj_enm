@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 interface OtrToolbarProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   leftContent?: React.ReactNode;
   className?: string;
 }

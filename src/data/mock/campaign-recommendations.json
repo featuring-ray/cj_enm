@@ -1,0 +1,186 @@
+[
+  {
+    "creatorId": "creator-1",
+    "themes": [
+      {
+        "theme": "성과기반",
+        "themeLabel": "나의 과거 성과 기반 추천",
+        "themeDescription": "매출이 높았던 캠페인과 유사한 브랜드/카테고리",
+        "updatedAt": "2026-03-14T06:00:00Z",
+        "campaigns": [
+          {
+            "campaignId": "campaign-3",
+            "score": 94,
+            "reason": "성과 유사 브랜드",
+            "reasonDetail": "패션 카테고리 과거 성과 상위 5% 매칭"
+          },
+          {
+            "campaignId": "campaign-1",
+            "score": 91,
+            "reason": "성과 유사 브랜드",
+            "reasonDetail": "뷰티 카테고리 3개월 내 고전환율 패턴"
+          },
+          {
+            "campaignId": "campaign-5",
+            "score": 85,
+            "reason": "성과 유사 브랜드",
+            "reasonDetail": "푸드/리빙 크로스 카테고리 구매 트렌드"
+          },
+          {
+            "campaignId": "campaign-6",
+            "score": 78,
+            "reason": "성과 유사 브랜드",
+            "reasonDetail": "테크 리뷰 콘텐츠 인게이지먼트 상위"
+          }
+        ]
+      },
+      {
+        "theme": "고객리텐션",
+        "themeLabel": "내 고객 재구매 데이터 기반 추천",
+        "themeDescription": "내 캠페인 구매 고객이 추가로 구매한 카테고리",
+        "updatedAt": "2026-03-14T06:00:00Z",
+        "campaigns": [
+          {
+            "campaignId": "campaign-5",
+            "score": 96,
+            "reason": "구매 고객 기반",
+            "reasonDetail": "구매 고객 72%가 식품 카테고리 재구매"
+          },
+          {
+            "campaignId": "campaign-3",
+            "score": 88,
+            "reason": "구매 고객 기반",
+            "reasonDetail": "내 고객 중 패션 관심 비율 64%"
+          },
+          {
+            "campaignId": "campaign-2",
+            "score": 82,
+            "reason": "구매 고객 기반",
+            "reasonDetail": "HMR 카테고리 반복구매 주기 21일"
+          },
+          {
+            "campaignId": "campaign-6",
+            "score": 74,
+            "reason": "구매 고객 기반",
+            "reasonDetail": "25-34세 여성 고객 테크 관심 증가 추세"
+          }
+        ]
+      },
+      {
+        "theme": "유사크리에이터",
+        "themeLabel": "비슷한 크리에이터의 고객 트렌드 기반",
+        "themeDescription": "팔로워 규모·카테고리가 유사한 크리에이터의 성과 패턴",
+        "updatedAt": "2026-03-14T06:00:00Z",
+        "campaigns": [
+          {
+            "campaignId": "campaign-1",
+            "score": 93,
+            "reason": "유사 크리에이터",
+            "reasonDetail": "유사 크리에이터 뷰티 캠페인 전환율 4.2%"
+          },
+          {
+            "campaignId": "campaign-5",
+            "score": 87,
+            "reason": "유사 크리에이터",
+            "reasonDetail": "동 규모 크리에이터 푸드 캠페인 수익 상위"
+          },
+          {
+            "campaignId": "campaign-3",
+            "score": 81,
+            "reason": "유사 크리에이터",
+            "reasonDetail": "유사 팔로워 규모 패션 공구 참여율 높음"
+          },
+          {
+            "campaignId": "campaign-6",
+            "score": 69,
+            "reason": "유사 크리에이터",
+            "reasonDetail": "테크 카테고리 진출 성공 사례 다수"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "creatorId": "creator-2",
+    "themes": [
+      {
+        "theme": "성과기반",
+        "themeLabel": "나의 과거 성과 기반 추천",
+        "themeDescription": "매출이 높았던 캠페인과 유사한 브랜드/카테고리",
+        "updatedAt": "2026-03-14T06:00:00Z",
+        "campaigns": [
+          {
+            "campaignId": "campaign-5",
+            "score": 97,
+            "reason": "성과 유사 브랜드",
+            "reasonDetail": "푸드 카테고리 과거 매출 1위 크리에이터"
+          },
+          {
+            "campaignId": "campaign-2",
+            "score": 90,
+            "reason": "성과 유사 브랜드",
+            "reasonDetail": "HMR 브랜드 협업 이력 보유"
+          },
+          {
+            "campaignId": "campaign-1",
+            "score": 75,
+            "reason": "성과 유사 브랜드",
+            "reasonDetail": "뷰티/건강 크로스 카테고리 성과"
+          }
+        ]
+      },
+      {
+        "theme": "고객리텐션",
+        "themeLabel": "내 고객 재구매 데이터 기반 추천",
+        "themeDescription": "내 캠페인 구매 고객이 추가로 구매한 카테고리",
+        "updatedAt": "2026-03-14T06:00:00Z",
+        "campaigns": [
+          {
+            "campaignId": "campaign-2",
+            "score": 95,
+            "reason": "구매 고객 기반",
+            "reasonDetail": "구매 고객 85%가 식품 카테고리 반복 구매"
+          },
+          {
+            "campaignId": "campaign-5",
+            "score": 88,
+            "reason": "구매 고객 기반",
+            "reasonDetail": "간편식 카테고리 반복구매 주기 14일"
+          },
+          {
+            "campaignId": "campaign-3",
+            "score": 70,
+            "reason": "구매 고객 기반",
+            "reasonDetail": "패션 관심 고객 비율 상승 중"
+          }
+        ]
+      },
+      {
+        "theme": "유사크리에이터",
+        "themeLabel": "비슷한 크리에이터의 고객 트렌드 기반",
+        "themeDescription": "팔로워 규모·카테고리가 유사한 크리에이터의 성과 패턴",
+        "updatedAt": "2026-03-14T06:00:00Z",
+        "campaigns": [
+          {
+            "campaignId": "campaign-5",
+            "score": 92,
+            "reason": "유사 크리에이터",
+            "reasonDetail": "동 규모 푸드 크리에이터 전환율 최상위"
+          },
+          {
+            "campaignId": "campaign-2",
+            "score": 86,
+            "reason": "유사 크리에이터",
+            "reasonDetail": "유사 채널 HMR 참여 성과 우수"
+          },
+          {
+            "campaignId": "campaign-6",
+            "score": 64,
+            "reason": "유사 크리에이터",
+            "reasonDetail": "테크 가전 콘텐츠 도전 성공 사례"
+          }
+        ]
+      }
+    ]
+  }
+]

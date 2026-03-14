@@ -1,50 +1,34 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import {
   Search,
-  SlidersHorizontal,
-  Users,
   CheckCircle2,
   CircleDashed,
-  ChevronLeft,
-  ChevronRight,
+  Eye,
+  Megaphone,
   Bookmark,
   Send,
-  Megaphone,
-  Eye,
+  GitCompare,
+  ChevronLeft,
+  ChevronRight,
+  Instagram,
+  Youtube,
+  AlertCircle,
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
-import { featuringApi } from "@/lib/featuring-api";
-import type { Creator, CreatorSearchFilters } from "@/types/creator";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  OtrSearchPanel,
+  OtrFormGrid,
+  OtrFormField,
+  OtrToolbar,
+  OtrTierBadge,
+  OtrPlatformToggle,
+} from "@/components/ontrust";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import {
   Tooltip,
   TooltipContent,
@@ -55,425 +39,608 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import rawCreators from "@/data/mock/creators.json";
+import rawCampaigns from "@/data/mock/campaigns.json";
 
-const CATEGORIES = ["뷰티", "패션", "푸드", "테크", "리빙", "육아", "헬스", "여행"];
+// ─── 타입 ───────────────────────────────────────────────
+type TierLevel = "GOLD" | "SILVER" | "BRONZE";
+type SortField = "followers" | "engagementRate" | "campaignCount" | "salesPrice";
+
+interface MockCreator {
+  id: string;
+  handle: string;
+  youtubeHandle?: string;
+  name: string;
+  followers: number;
+  engagementRate: number;
+  category: string[];
+  isOntnerMember: boolean;
+  salesPrice?: number;
+  campaigns: string[];
+  tier: TierLevel;
+  introduction?: string;
+}
+
+const CREATORS: MockCreator[] = rawCreators as MockCreator[];
+
+const TIER_MAP: Record<TierLevel, "purple" | "green" | "blue"> = {
+  GOLD: "purple",
+  SILVER: "green",
+  BRONZE: "blue",
+};
+
+const CATEGORIES = ["뷰티", "패션", "푸드", "테크", "리빙", "육아", "헬스", "여행", "라이프스타일", "인테리어"];
 const PLATFORMS = [
-  { value: "전체", label: "전체" },
-  { value: "instagram", label: "인스타그램" },
-  { value: "youtube", label: "유튜브" },
+  { id: "instagram", label: "인스타그램" },
+  { id: "youtube", label: "유튜브" },
+];
+const SORT_OPTIONS: { value: SortField; label: string }[] = [
+  { value: "engagementRate", label: "인게이지먼트순" },
+  { value: "followers", label: "팔로워순" },
+  { value: "campaignCount", label: "캠페인이력순" },
+  { value: "salesPrice", label: "세일즈단가순" },
 ];
 
 function formatNumber(n: number) {
   if (n >= 10000) return `${(n / 10000).toFixed(1)}만`;
+  if (n >= 1000) return `${(n / 1000).toFixed(0)}천`;
   return n.toLocaleString("ko-KR");
 }
 
-export default function OntrustCreatorSearchPage() {
-  const [creators, setCreators] = useState<Creator[]>([]);
-  const [total, setTotal] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const PAGE_SIZE = 20;
+const PAGE_SIZE = 15;
 
-  // 검색 & 필터
-  const [searchText, setSearchText] = useState("");
+// ─── 메인 컴포넌트 ───────────────────────────────────────
+export default function OntrustCreatorSearchPage() {
+  // 검색 조건
+  const [keyword, setKeyword] = useState("");
+  const [platforms, setPlatforms] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedPlatform, setSelectedPlatform] = useState("전체");
+  const [followerMin, setFollowerMin] = useState("");
+  const [followerMax, setFollowerMax] = useState("");
   const [commerceOnly, setCommerceOnly] = useState(false);
   const [excludeOfficial, setExcludeOfficial] = useState(false);
-  const [sortBy, setSortBy] = useState<CreatorSearchFilters["sortBy"]>("followers");
+  const [selectedCampaignId, setSelectedCampaignId] = useState("");
+  const [sortBy, setSortBy] = useState<SortField>("engagementRate");
 
-  const fetchCreators = useCallback(
-    async (p = 1) => {
-      setLoading(true);
-      try {
-        const filters: CreatorSearchFilters = {
-          categories: selectedCategories.length > 0 ? selectedCategories : undefined,
-          commerceOnly,
-          excludeOfficialAndCelebrity: excludeOfficial,
-          sortBy,
-          sortOrder: "desc",
-          viewMode: "account",
-          page: p,
-          pageSize: PAGE_SIZE,
-        };
-        const result = await featuringApi.searchCreators(filters);
-        setCreators(result.creators);
-        setTotal(result.total);
-        setPage(p);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [selectedCategories, commerceOnly, excludeOfficial, sortBy]
-  );
+  // 적용된 조건 (조회 버튼 클릭 시 반영)
+  const [appliedKeyword, setAppliedKeyword] = useState("");
+  const [appliedPlatforms, setAppliedPlatforms] = useState<string[]>([]);
+  const [appliedCategories, setAppliedCategories] = useState<string[]>([]);
+  const [appliedFollowerMin, setAppliedFollowerMin] = useState("");
+  const [appliedFollowerMax, setAppliedFollowerMax] = useState("");
+  const [appliedCommerceOnly, setAppliedCommerceOnly] = useState(false);
+  const [appliedExcludeOfficial, setAppliedExcludeOfficial] = useState(false);
+  const [appliedCampaignId, setAppliedCampaignId] = useState("");
 
-  useEffect(() => {
-    fetchCreators(1);
-  }, [fetchCreators]);
+  const [page, setPage] = useState(1);
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [bookmarkDialogOpen, setBookmarkDialogOpen] = useState(false);
+  const [dmDialogOpen, setDmDialogOpen] = useState(false);
+  const [dmTarget, setDmTarget] = useState<MockCreator | null>(null);
 
-  const totalPages = Math.ceil(total / PAGE_SIZE);
+  // 필터링 + 정렬
+  const filtered = useMemo(() => {
+    let list = [...CREATORS];
 
-  // 클라이언트 사이드 필터 (검색어, 플랫폼)
-  const filtered = creators.filter((c) => {
-    const matchesSearch =
-      !searchText ||
-      c.displayName.toLowerCase().includes(searchText.toLowerCase()) ||
-      c.username.toLowerCase().includes(searchText.toLowerCase());
-    const matchesPlatform =
-      selectedPlatform === "전체" || c.platform === selectedPlatform;
-    return matchesSearch && matchesPlatform;
-  });
+    if (appliedKeyword) {
+      const kw = appliedKeyword.toLowerCase();
+      list = list.filter(
+        (c) =>
+          c.name.toLowerCase().includes(kw) ||
+          c.handle.toLowerCase().includes(kw) ||
+          c.category.some((cat) => cat.toLowerCase().includes(kw))
+      );
+    }
+    if (appliedPlatforms.length > 0) {
+      list = list.filter((c) => {
+        const hasInstagram = appliedPlatforms.includes("instagram");
+        const hasYoutube = appliedPlatforms.includes("youtube");
+        if (hasInstagram && hasYoutube) return true;
+        if (hasYoutube) return !!c.youtubeHandle;
+        if (hasInstagram) return !c.youtubeHandle || c.handle;
+        return true;
+      });
+    }
+    if (appliedCategories.length > 0) {
+      list = list.filter((c) =>
+        appliedCategories.some((cat) => c.category.includes(cat))
+      );
+    }
+    if (appliedFollowerMin) {
+      list = list.filter((c) => c.followers >= Number(appliedFollowerMin));
+    }
+    if (appliedFollowerMax) {
+      list = list.filter((c) => c.followers <= Number(appliedFollowerMax));
+    }
+    if (appliedCommerceOnly) {
+      list = list.filter((c) => c.campaigns.length > 0);
+    }
+    if (appliedExcludeOfficial) {
+      // mock: exclude GOLD with very high followers as "official" proxy
+      list = list.filter((c) => c.followers < 700000);
+    }
+    if (appliedCampaignId) {
+      list = list.filter((c) => c.campaigns.includes(appliedCampaignId));
+    }
 
-  const activeFilterCount =
-    selectedCategories.length +
-    (commerceOnly ? 1 : 0) +
-    (excludeOfficial ? 1 : 0) +
-    (selectedPlatform !== "전체" ? 1 : 0);
+    // 정렬
+    list.sort((a, b) => {
+      if (sortBy === "engagementRate") return b.engagementRate - a.engagementRate;
+      if (sortBy === "followers") return b.followers - a.followers;
+      if (sortBy === "campaignCount") return b.campaigns.length - a.campaigns.length;
+      if (sortBy === "salesPrice") return (b.salesPrice ?? 0) - (a.salesPrice ?? 0);
+      return 0;
+    });
+
+    return list;
+  }, [
+    appliedKeyword,
+    appliedPlatforms,
+    appliedCategories,
+    appliedFollowerMin,
+    appliedFollowerMax,
+    appliedCommerceOnly,
+    appliedExcludeOfficial,
+    appliedCampaignId,
+    sortBy,
+  ]);
+
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  const pageData = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const handleSearch = useCallback(() => {
+    setAppliedKeyword(keyword);
+    setAppliedPlatforms(platforms);
+    setAppliedCategories(selectedCategories);
+    setAppliedFollowerMin(followerMin);
+    setAppliedFollowerMax(followerMax);
+    setAppliedCommerceOnly(commerceOnly);
+    setAppliedExcludeOfficial(excludeOfficial);
+    setAppliedCampaignId(selectedCampaignId);
+    setPage(1);
+    setSelected(new Set());
+  }, [
+    keyword,
+    platforms,
+    selectedCategories,
+    followerMin,
+    followerMax,
+    commerceOnly,
+    excludeOfficial,
+    selectedCampaignId,
+  ]);
+
+  const handleReset = useCallback(() => {
+    setKeyword("");
+    setPlatforms([]);
+    setSelectedCategories([]);
+    setFollowerMin("");
+    setFollowerMax("");
+    setCommerceOnly(false);
+    setExcludeOfficial(false);
+    setSelectedCampaignId("");
+    setAppliedKeyword("");
+    setAppliedPlatforms([]);
+    setAppliedCategories([]);
+    setAppliedFollowerMin("");
+    setAppliedFollowerMax("");
+    setAppliedCommerceOnly(false);
+    setAppliedExcludeOfficial(false);
+    setAppliedCampaignId("");
+    setPage(1);
+    setSelected(new Set());
+  }, []);
+
+  const toggleSelect = (id: string) => {
+    const next = new Set(selected);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    setSelected(next);
+  };
+
+  const toggleAll = () => {
+    if (pageData.every((c) => selected.has(c.id))) {
+      const next = new Set(selected);
+      pageData.forEach((c) => next.delete(c.id));
+      setSelected(next);
+    } else {
+      const next = new Set(selected);
+      pageData.forEach((c) => next.add(c.id));
+      setSelected(next);
+    }
+  };
+
+  const allPageSelected = pageData.length > 0 && pageData.every((c) => selected.has(c.id));
+  const selectedCreators = CREATORS.filter((c) => selected.has(c.id));
+
+  const toggleCategory = (cat: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+    );
+  };
 
   return (
     <TooltipProvider>
       <PageHeader
         title="크리에이터 탐색"
-        description="키워드로 크리에이터를 검색하고 캠페인에 제안하세요"
+        description="T-A-01 · 피처링 전체 크리에이터 풀에서 탐색하고 캠페인에 제안하세요"
       />
 
-      <main className="flex-1 p-4 md:p-6 space-y-4">
-        {/* 풀텍스트 검색바 + 필터 */}
-        <div className="flex gap-2">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
-              placeholder="크리에이터명, 핸들, 브랜드명으로 검색..."
-              className="pl-9"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-          </div>
-          <Select
-            value={sortBy}
-            onValueChange={(v) => setSortBy(v as CreatorSearchFilters["sortBy"])}
-          >
-            <SelectTrigger className="w-36">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="followers">팔로워순</SelectItem>
-              <SelectItem value="comments">댓글순</SelectItem>
-              <SelectItem value="shares">공유순</SelectItem>
-              <SelectItem value="views">조회수순</SelectItem>
-              <SelectItem value="likes">좋아요순</SelectItem>
-            </SelectContent>
-          </Select>
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" className="gap-2">
-                <SlidersHorizontal className="w-4 h-4" />
-                필터
-                {activeFilterCount > 0 && (
-                  <Badge
-                    variant="secondary"
-                    className="ml-1 h-5 w-5 p-0 flex items-center justify-center text-xs"
+      <main className="flex-1 p-4 space-y-3">
+        {/* ── 조회 조건 패널 ── */}
+        <OtrSearchPanel onSearch={handleSearch} onReset={handleReset}>
+          <OtrFormGrid columns={4}>
+            {/* 검색어 */}
+            <OtrFormField label="검색어" span={3}>
+              <div className="relative">
+                <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
+                <input
+                  type="text"
+                  className="w-full pl-7 pr-3"
+                  placeholder="크리에이터명, 핸들, 브랜드 키워드..."
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                />
+              </div>
+            </OtrFormField>
+
+            {/* 플랫폼 */}
+            <OtrFormField label="플랫폼">
+              <OtrPlatformToggle
+                platforms={PLATFORMS}
+                selected={platforms}
+                onChange={setPlatforms}
+              />
+            </OtrFormField>
+
+            {/* 카테고리 */}
+            <OtrFormField label="카테고리" span={3}>
+              <div className="flex flex-wrap gap-1">
+                {CATEGORIES.map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => toggleCategory(cat)}
+                    className={
+                      selectedCategories.includes(cat)
+                        ? "otr-classification-active"
+                        : "otr-classification"
+                    }
                   >
-                    {activeFilterCount}
-                  </Badge>
-                )}
-              </Button>
-            </SheetTrigger>
-            <SheetContent className="overflow-y-auto">
-              <SheetHeader>
-                <SheetTitle>검색 필터</SheetTitle>
-              </SheetHeader>
-              <div className="mt-4 space-y-5">
-                {/* 플랫폼 */}
-                <div>
-                  <p className="text-sm font-medium mb-2">플랫폼</p>
-                  <div className="flex flex-wrap gap-2">
-                    {PLATFORMS.map((p) => (
-                      <button
-                        key={p.value}
-                        onClick={() => setSelectedPlatform(p.value)}
-                        className={`px-3 py-1 text-xs rounded-full border transition-colors ${
-                          selectedPlatform === p.value
-                            ? "bg-primary text-primary-foreground border-primary"
-                            : "border-border hover:bg-muted"
-                        }`}
-                      >
-                        {p.label}
-                      </button>
-                    ))}
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </OtrFormField>
+
+            {/* 팔로워 수 */}
+            <OtrFormField label="팔로워 수">
+              <div className="flex items-center gap-1">
+                <input
+                  type="number"
+                  placeholder="최소"
+                  className="flex-1 min-w-0 px-2"
+                  value={followerMin}
+                  onChange={(e) => setFollowerMin(e.target.value)}
+                />
+                <span className="text-muted-foreground text-xs shrink-0">~</span>
+                <input
+                  type="number"
+                  placeholder="최대"
+                  className="flex-1 min-w-0 px-2"
+                  value={followerMax}
+                  onChange={(e) => setFollowerMax(e.target.value)}
+                />
+              </div>
+            </OtrFormField>
+
+            {/* 캠페인 선택 */}
+            <OtrFormField label="캠페인 선택" span={2}>
+              <select
+                className="w-full"
+                value={selectedCampaignId}
+                onChange={(e) => setSelectedCampaignId(e.target.value)}
+              >
+                <option value="">전체 (캠페인 무관)</option>
+                {rawCampaigns.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name} ({c.brand})
+                  </option>
+                ))}
+              </select>
+            </OtrFormField>
+
+            {/* 옵션 */}
+            <OtrFormField label="추가 옵션">
+              <div className="flex flex-col gap-1">
+                <label className="flex items-center gap-1.5 cursor-pointer text-xs">
+                  <input
+                    type="checkbox"
+                    checked={commerceOnly}
+                    onChange={(e) => setCommerceOnly(e.target.checked)}
+                  />
+                  공구(커머스) 진행 계정만
+                </label>
+                <label className="flex items-center gap-1.5 cursor-pointer text-xs">
+                  <input
+                    type="checkbox"
+                    checked={excludeOfficial}
+                    onChange={(e) => setExcludeOfficial(e.target.checked)}
+                  />
+                  공식계정 / 연예인 제외
+                </label>
+              </div>
+            </OtrFormField>
+
+            {/* 비활성 필터 안내 */}
+            <OtrFormField label="세일즈 단가">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground cursor-not-allowed opacity-60">
+                    <AlertCircle className="w-3 h-3" />
+                    필터 불가 (테이블에서 확인)
                   </div>
-                </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  데이터 미제공으로 필터링이 불가합니다. 결과 테이블의 세일즈 단가 컬럼을 확인하세요.
+                </TooltipContent>
+              </Tooltip>
+            </OtrFormField>
 
-                {/* 카테고리 */}
-                <div>
-                  <p className="text-sm font-medium mb-2">카테고리</p>
-                  <div className="flex flex-wrap gap-2">
-                    {CATEGORIES.map((cat) => (
-                      <button
-                        key={cat}
-                        onClick={() =>
-                          setSelectedCategories((prev) =>
-                            prev.includes(cat)
-                              ? prev.filter((c) => c !== cat)
-                              : [...prev, cat]
-                          )
-                        }
-                        className={`px-3 py-1 text-xs rounded-full border transition-colors ${
-                          selectedCategories.includes(cat)
-                            ? "bg-primary text-primary-foreground border-primary"
-                            : "border-border hover:bg-muted"
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    ))}
+            <OtrFormField label="온트너 회원">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground cursor-not-allowed opacity-60">
+                    <AlertCircle className="w-3 h-3" />
+                    필터 불가 (뱃지로 표시)
                   </div>
-                </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  검색 필터 불가 — 결과 테이블에서 온트너 뱃지로 확인 가능합니다.
+                </TooltipContent>
+              </Tooltip>
+            </OtrFormField>
+          </OtrFormGrid>
 
-                {/* 팔로워 수 범위 — 스펙에 있음 */}
-                <div>
-                  <p className="text-sm font-medium mb-2">팔로워 수</p>
-                  <div className="flex gap-2 items-center">
-                    <Input placeholder="최소" type="number" className="flex-1" />
-                    <span className="text-muted-foreground">~</span>
-                    <Input placeholder="최대" type="number" className="flex-1" />
-                  </div>
-                </div>
+          <p className="text-[10px] text-muted-foreground mt-2">
+            * X, 틱톡, 네이버블로그 탐색은 피처링 화면에서 이용하세요.
+          </p>
+        </OtrSearchPanel>
 
-                {/* 비활성 필터: 세일즈 단가 */}
-                <div>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="opacity-50 cursor-not-allowed">
-                        <p className="text-sm font-medium mb-2">
-                          세일즈 단가
-                          <Badge variant="outline" className="ml-2 text-[10px]">
-                            비활성
-                          </Badge>
-                        </p>
-                        <div className="flex gap-2 items-center">
-                          <Input placeholder="최소" disabled className="flex-1" />
-                          <span>~</span>
-                          <Input placeholder="최대" disabled className="flex-1" />
-                        </div>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>데이터 미제공으로 필터링이 불가합니다</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
+        {/* ── 결과 툴바 ── */}
+        <OtrToolbar
+          leftContent={
+            <span className="text-xs text-muted-foreground">
+              총{" "}
+              <strong className="text-foreground">{filtered.length}</strong>명
+              {selected.size > 0 && (
+                <span className="ml-2 text-[var(--otr-accent-purple)] font-semibold">
+                  {selected.size}명 선택됨
+                </span>
+              )}
+            </span>
+          }
+        >
+          {/* 선택 시 나타나는 일괄 액션 */}
+          {selected.size >= 2 && (
+            <Link href={`/ontrust/creator/similarity?ids=${[...selected].join(",")}`}>
+              <button className="otr-btn-primary flex items-center gap-1.5">
+                <GitCompare className="w-3.5 h-3.5" />
+                팔로워 유사도 분석 ({selected.size}명)
+              </button>
+            </Link>
+          )}
+          {selected.size > 0 && (
+            <>
+              <button
+                className="otr-btn-toolbar flex items-center gap-1.5"
+                onClick={() => setBookmarkDialogOpen(true)}
+              >
+                <Bookmark className="w-3.5 h-3.5" />
+                북마크 추가
+              </button>
+              <button
+                className="otr-btn-toolbar flex items-center gap-1.5"
+                onClick={() => setDmDialogOpen(true)}
+              >
+                <Send className="w-3.5 h-3.5" />
+                DM 발송
+              </button>
+            </>
+          )}
 
-                {/* 비활성 필터: 온트너 회원 필터 */}
-                <div>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="opacity-50 cursor-not-allowed">
-                        <label className="flex items-center gap-2">
-                          <Checkbox disabled />
-                          <span className="text-sm">온트너 회원만 보기</span>
-                          <Badge variant="outline" className="text-[10px]">
-                            비활성
-                          </Badge>
-                        </label>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>검색 필터 불가 — 결과 테이블에서 뱃지로 확인 가능</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
+          <select
+            style={{ height: "var(--otr-btn-height)", fontSize: "var(--otr-font-body)" }}
+            className="border border-[var(--otr-border)] rounded px-2 bg-background"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as SortField)}
+          >
+            {SORT_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </OtrToolbar>
 
-                <div className="space-y-2">
-                  <p className="text-sm font-medium">옵션</p>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <Checkbox
-                      checked={commerceOnly}
-                      onCheckedChange={(v) => setCommerceOnly(!!v)}
-                    />
-                    <span className="text-sm">공구(커머스) 진행 계정만</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <Checkbox
-                      checked={excludeOfficial}
-                      onCheckedChange={(v) => setExcludeOfficial(!!v)}
-                    />
-                    <span className="text-sm">공식계정 및 연예인 제외</span>
-                  </label>
-                </div>
-
-                <div className="flex gap-2 pt-2">
-                  <Button
-                    variant="outline"
-                    className="flex-1"
-                    onClick={() => {
-                      setSelectedCategories([]);
-                      setCommerceOnly(false);
-                      setExcludeOfficial(false);
-                      setSelectedPlatform("전체");
+        {/* ── 결과 테이블 ── */}
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th style={{ width: 36, textAlign: "center" }}>
+                  <input
+                    type="checkbox"
+                    checked={allPageSelected}
+                    onChange={toggleAll}
+                  />
+                </th>
+                <th style={{ width: 30, textAlign: "center" }}>No</th>
+                <th style={{ width: 200 }}>크리에이터</th>
+                <th style={{ width: 80, textAlign: "center" }}>플랫폼</th>
+                <th style={{ width: 150 }}>카테고리</th>
+                <th style={{ width: 80, textAlign: "right" }}>팔로워</th>
+                <th style={{ width: 80, textAlign: "right" }}>참여율</th>
+                <th style={{ width: 80, textAlign: "center" }}>등급</th>
+                <th style={{ width: 110, textAlign: "right" }}>세일즈 단가</th>
+                <th style={{ width: 70, textAlign: "center" }}>온트너</th>
+                <th style={{ width: 80, textAlign: "center" }}>캠페인 이력</th>
+                <th style={{ width: 80, textAlign: "center" }}>액션</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pageData.length === 0 ? (
+                <tr>
+                  <td colSpan={12} style={{ textAlign: "center", padding: "40px 0", color: "#999" }}>
+                    검색 결과가 없습니다. 조건을 변경하여 다시 조회하세요.
+                  </td>
+                </tr>
+              ) : (
+                pageData.map((creator, idx) => (
+                  <tr
+                    key={creator.id}
+                    style={{
+                      backgroundColor: selected.has(creator.id) ? "var(--otr-accent-purple-light)" : undefined,
                     }}
                   >
-                    초기화
-                  </Button>
-                  <Button className="flex-1" onClick={() => fetchCreators(1)}>
-                    적용
-                  </Button>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        {/* 활성 필터 태그 */}
-        {activeFilterCount > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {selectedPlatform !== "전체" && (
-              <Badge
-                variant="secondary"
-                className="gap-1 cursor-pointer"
-                onClick={() => setSelectedPlatform("전체")}
-              >
-                {PLATFORMS.find((p) => p.value === selectedPlatform)?.label} ×
-              </Badge>
-            )}
-            {selectedCategories.map((cat) => (
-              <Badge
-                key={cat}
-                variant="secondary"
-                className="gap-1 cursor-pointer"
-                onClick={() =>
-                  setSelectedCategories((prev) => prev.filter((c) => c !== cat))
-                }
-              >
-                {cat} ×
-              </Badge>
-            ))}
-            {commerceOnly && (
-              <Badge
-                variant="secondary"
-                className="gap-1 cursor-pointer"
-                onClick={() => setCommerceOnly(false)}
-              >
-                커머스만 ×
-              </Badge>
-            )}
-            {excludeOfficial && (
-              <Badge
-                variant="secondary"
-                className="gap-1 cursor-pointer"
-                onClick={() => setExcludeOfficial(false)}
-              >
-                공식계정 제외 ×
-              </Badge>
-            )}
-          </div>
-        )}
-
-        <p className="text-sm text-muted-foreground">
-          총 <span className="font-semibold text-foreground">{total}</span>명
-        </p>
-
-        {/* 검색 결과 테이블 */}
-        <Card>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>크리에이터</TableHead>
-                <TableHead>카테고리</TableHead>
-                <TableHead className="text-right">팔로워</TableHead>
-                <TableHead className="text-right">참여율</TableHead>
-                <TableHead className="text-right">세일즈 단가</TableHead>
-                <TableHead>온트너</TableHead>
-                <TableHead className="text-center">액션</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {loading ? (
-                Array.from({ length: 6 }).map((_, i) => (
-                  <TableRow key={i}>
-                    {Array.from({ length: 7 }).map((__, j) => (
-                      <TableCell key={j}>
-                        <div className="h-4 bg-muted rounded animate-pulse" />
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
-              ) : filtered.length === 0 ? (
-                <TableRow>
-                  <TableCell
-                    colSpan={7}
-                    className="text-center py-12 text-muted-foreground"
-                  >
-                    <Users className="w-10 h-10 mx-auto mb-2 opacity-30" />
-                    <p className="text-sm">검색 결과가 없습니다</p>
-                  </TableCell>
-                </TableRow>
-              ) : (
-                filtered.map((creator) => (
-                  <TableRow
-                    key={creator.id}
-                    className="cursor-pointer hover:bg-muted/50"
-                  >
-                    <TableCell>
+                    <td style={{ textAlign: "center" }}>
+                      <input
+                        type="checkbox"
+                        checked={selected.has(creator.id)}
+                        onChange={() => toggleSelect(creator.id)}
+                      />
+                    </td>
+                    <td style={{ textAlign: "center", color: "var(--otr-text-secondary)" }}>
+                      {(page - 1) * PAGE_SIZE + idx + 1}
+                    </td>
+                    {/* 크리에이터 */}
+                    <td>
                       <Link
                         href={`/ontrust/creator/${creator.id}`}
                         className="flex items-center gap-2 hover:underline"
                       >
-                        <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground shrink-0">
-                          {creator.displayName.charAt(0)}
+                        <div
+                          style={{
+                            width: 28,
+                            height: 28,
+                            borderRadius: "50%",
+                            background: "var(--otr-accent-purple-light)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: 11,
+                            fontWeight: 700,
+                            color: "var(--otr-accent-purple)",
+                            flexShrink: 0,
+                          }}
+                        >
+                          {creator.name.charAt(0)}
                         </div>
                         <div>
-                          <p className="font-medium text-sm">
-                            {creator.displayName}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            @{creator.username}
-                          </p>
+                          <div style={{ fontWeight: 600, fontSize: "var(--otr-font-body)" }}>
+                            {creator.name}
+                          </div>
+                          <div style={{ fontSize: 10, color: "var(--otr-text-secondary)" }}>
+                            @{creator.handle}
+                          </div>
                         </div>
                       </Link>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex flex-wrap gap-1">
-                        {creator.categories.slice(0, 2).map((cat) => (
-                          <Badge key={cat} variant="secondary" className="text-xs">
+                    </td>
+                    {/* 플랫폼 */}
+                    <td style={{ textAlign: "center" }}>
+                      <div className="flex items-center justify-center gap-1">
+                        <Instagram className="w-3 h-3 text-pink-500" />
+                        {creator.youtubeHandle && (
+                          <Youtube className="w-3 h-3 text-red-500" />
+                        )}
+                      </div>
+                    </td>
+                    {/* 카테고리 */}
+                    <td>
+                      <div className="flex flex-wrap gap-0.5">
+                        {creator.category.slice(0, 2).map((cat) => (
+                          <span key={cat} className="otr-badge otr-badge-blue">
                             {cat}
-                          </Badge>
+                          </span>
                         ))}
                       </div>
-                    </TableCell>
-                    <TableCell className="text-right font-medium">
-                      {formatNumber(creator.followerCount)}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {creator.engagementRate.toFixed(1)}%
-                    </TableCell>
-                    <TableCell className="text-right text-muted-foreground">
-                      {creator.avgUnitPrice
-                        ? `${creator.avgUnitPrice.toLocaleString("ko-KR")}원`
-                        : "-"}
-                    </TableCell>
-                    <TableCell>
+                    </td>
+                    {/* 팔로워 */}
+                    <td style={{ textAlign: "right", fontWeight: 600 }}>
+                      {formatNumber(creator.followers)}
+                    </td>
+                    {/* 참여율 */}
+                    <td style={{ textAlign: "right" }}>
+                      <span
+                        style={{
+                          color: creator.engagementRate >= 5 ? "#22c55e" : creator.engagementRate >= 3 ? "var(--otr-text-primary)" : "#ef4444",
+                          fontWeight: 600,
+                        }}
+                      >
+                        {creator.engagementRate.toFixed(1)}%
+                      </span>
+                    </td>
+                    {/* 등급 */}
+                    <td style={{ textAlign: "center" }}>
+                      <OtrTierBadge tier={TIER_MAP[creator.tier]} />
+                    </td>
+                    {/* 세일즈 단가 */}
+                    <td style={{ textAlign: "right", color: "var(--otr-text-secondary)" }}>
+                      {creator.salesPrice
+                        ? `${(creator.salesPrice / 10000).toFixed(0)}만원`
+                        : "—"}
+                    </td>
+                    {/* 온트너 */}
+                    <td style={{ textAlign: "center" }}>
                       {creator.isOntnerMember ? (
-                        <span className="flex items-center gap-1 text-xs text-emerald-600">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          온트너
+                        <span
+                          style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 3, color: "#22c55e", fontSize: 11 }}
+                        >
+                          <CheckCircle2 style={{ width: 13, height: 13 }} />
+                          회원
                         </span>
                       ) : (
-                        <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <CircleDashed className="w-3.5 h-3.5" />
+                        <span
+                          style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 3, color: "#999", fontSize: 11 }}
+                        >
+                          <CircleDashed style={{ width: 13, height: 13 }} />
                           비회원
                         </span>
                       )}
-                    </TableCell>
-                    <TableCell>
+                    </td>
+                    {/* 캠페인 이력 */}
+                    <td style={{ textAlign: "center" }}>
+                      {creator.campaigns.length > 0 ? (
+                        <span style={{ fontWeight: 600, color: "var(--otr-accent-purple)" }}>
+                          {creator.campaigns.length}회
+                        </span>
+                      ) : (
+                        <span style={{ color: "#ccc" }}>—</span>
+                      )}
+                    </td>
+                    {/* 액션 */}
+                    <td style={{ textAlign: "center" }}>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="sm" className="h-7 text-xs">
-                            액션
-                          </Button>
+                          <button className="otr-btn-toolbar px-3">액션 ▾</button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem asChild>
@@ -482,60 +649,158 @@ export default function OntrustCreatorSearchPage() {
                               상세 보기
                             </Link>
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            <Megaphone className="w-3.5 h-3.5 mr-2" />
-                            캠페인 제안
-                          </DropdownMenuItem>
+                          {creator.isOntnerMember ? (
+                            <DropdownMenuItem>
+                              <Megaphone className="w-3.5 h-3.5 mr-2" />
+                              캠페인 참여 제안
+                            </DropdownMenuItem>
+                          ) : (
+                            <>
+                              <DropdownMenuItem>
+                                <Send className="w-3.5 h-3.5 mr-2" />
+                                온트너 가입 제안 (DM)
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Megaphone className="w-3.5 h-3.5 mr-2" />
+                                캠페인+가입 제안
+                              </DropdownMenuItem>
+                            </>
+                          )}
+                          <DropdownMenuSeparator />
                           <DropdownMenuItem>
                             <Bookmark className="w-3.5 h-3.5 mr-2" />
-                            북마크
+                            북마크에 추가
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setDmTarget(creator);
+                              setDmDialogOpen(true);
+                            }}
+                          >
                             <Send className="w-3.5 h-3.5 mr-2" />
                             DM 발송
                           </DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem asChild>
+                            <Link href={`/ontrust/creator/similarity?ids=${creator.id}`}>
+                              <GitCompare className="w-3.5 h-3.5 mr-2" />
+                              유사도 분석에 추가
+                            </Link>
+                          </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
+                    </td>
+                  </tr>
                 ))
               )}
-            </TableBody>
-          </Table>
-        </Card>
+            </tbody>
+          </table>
+        </div>
 
-        {/* 페이지네이션 */}
+        {/* ── 페이지네이션 ── */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-2 pt-2">
-            <Button
-              variant="outline"
-              size="icon"
+          <div className="flex items-center justify-center gap-1 pt-2">
+            <button
+              className="otr-btn-toolbar px-2"
               disabled={page <= 1}
-              onClick={() => fetchCreators(page - 1)}
+              onClick={() => setPage((p) => p - 1)}
             >
-              <ChevronLeft className="w-4 h-4" />
-            </Button>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-              <Button
+              <ChevronLeft className="w-3.5 h-3.5" />
+            </button>
+            {Array.from({ length: Math.min(totalPages, 10) }, (_, i) => i + 1).map((p) => (
+              <button
                 key={p}
-                variant={p === page ? "default" : "outline"}
-                size="icon"
-                onClick={() => fetchCreators(p)}
+                className={p === page ? "otr-btn-primary px-3" : "otr-btn-toolbar px-3"}
+                onClick={() => setPage(p)}
               >
                 {p}
-              </Button>
+              </button>
             ))}
-            <Button
-              variant="outline"
-              size="icon"
+            <button
+              className="otr-btn-toolbar px-2"
               disabled={page >= totalPages}
-              onClick={() => fetchCreators(page + 1)}
+              onClick={() => setPage((p) => p + 1)}
             >
-              <ChevronRight className="w-4 h-4" />
-            </Button>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         )}
       </main>
+
+      {/* ── 북마크 그룹 선택 다이얼로그 ── */}
+      <Dialog open={bookmarkDialogOpen} onOpenChange={setBookmarkDialogOpen}>
+        <DialogContent className="sm:max-w-sm">
+          <DialogHeader>
+            <DialogTitle>북마크 그룹에 추가</DialogTitle>
+          </DialogHeader>
+          <div className="py-2 space-y-2">
+            <p className="text-xs text-muted-foreground">
+              {selected.size}명의 크리에이터를 북마크 그룹에 추가합니다.
+            </p>
+            <select className="w-full" style={{ height: 30, fontSize: 13 }}>
+              <option value="">그룹 선택...</option>
+              <option value="group-1">뷰티/패션 타겟</option>
+              <option value="group-2">신규 발굴 후보</option>
+              <option value="group-3">봄 시즌 캠페인</option>
+            </select>
+          </div>
+          <DialogFooter>
+            <button className="otr-btn-secondary" onClick={() => setBookmarkDialogOpen(false)}>
+              취소
+            </button>
+            <button className="otr-btn-primary" onClick={() => setBookmarkDialogOpen(false)}>
+              추가
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* ── DM 발송 다이얼로그 ── */}
+      <Dialog open={dmDialogOpen} onOpenChange={(o) => { setDmDialogOpen(o); if (!o) setDmTarget(null); }}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>DM 발송</DialogTitle>
+          </DialogHeader>
+          <div className="py-2 space-y-3">
+            <p className="text-xs text-muted-foreground">
+              {dmTarget
+                ? `@${dmTarget.handle}에게 DM을 발송합니다.`
+                : `${selected.size}명의 크리에이터에게 DM을 발송합니다.`}
+            </p>
+            <div className="space-y-1">
+              <label className="text-xs font-medium">DM 템플릿 선택</label>
+              <select className="w-full" style={{ height: 30, fontSize: 13 }}>
+                <option value="">직접 입력</option>
+                <option value="template-1">온트너 가입 제안</option>
+                <option value="template-2">캠페인 참여 제안</option>
+                <option value="template-3">캠페인+가입 통합 제안</option>
+              </select>
+            </div>
+            <div className="space-y-1">
+              <label className="text-xs font-medium">메시지 내용</label>
+              <textarea
+                rows={4}
+                className="w-full border border-[var(--otr-border)] rounded p-2 text-sm resize-none"
+                placeholder="DM 내용을 입력하세요..."
+              />
+            </div>
+            <p className="text-[10px] text-muted-foreground">
+              * 인스타그램 DM은 텍스트+링크만 발송 가능합니다 (이미지 불가).
+            </p>
+          </div>
+          <DialogFooter>
+            <button className="otr-btn-secondary" onClick={() => { setDmDialogOpen(false); setDmTarget(null); }}>
+              취소
+            </button>
+            <button
+              className="otr-btn-primary"
+              onClick={() => { setDmDialogOpen(false); setDmTarget(null); }}
+            >
+              발송
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </TooltipProvider>
   );
 }

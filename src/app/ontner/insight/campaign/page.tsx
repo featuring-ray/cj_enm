@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
+import { CampaignRecommendModule } from "@/components/ontner/campaign-recommend-module";
 import {
   Card,
   CardContent,
@@ -405,6 +406,14 @@ export default function CampaignInsightPage() {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* O-C-06: 리포트 하단 추천 모듈 */}
+        <div className="rounded-lg border bg-card p-5">
+          <CampaignRecommendModule
+            creatorId="creator-1"
+            title="참여 추천 캠페인 · 리워드링크 상품"
+          />
         </div>
       </main>
     </>

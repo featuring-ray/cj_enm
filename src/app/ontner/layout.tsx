@@ -1,6 +1,6 @@
 "use client";
 
-import { User, CalendarDays, Wallet } from "lucide-react";
+import { User, CalendarDays, BarChart3, Users } from "lucide-react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { OntnerSidebar, type OntnerNavGroup } from "@/components/layout/ontner-sidebar";
 import type { SessionUser } from "@/types/user";
@@ -11,30 +11,33 @@ const navGroups: OntnerNavGroup[] = [
     icon: User,
     defaultOpen: true,
     items: [
-      { label: "계정 및 계좌 관리", href: "/ontner/mypage/account" },
-      { label: "약관/계약 관리", href: "/ontner/mypage/terms" },
-      { label: "크리에이터 페이지", href: "/ontner/mypage" },
+      { label: "프로필 관리", href: "/ontner/mypage" },
     ],
   },
   {
-    label: "캠페인 탐색/관리",
+    label: "캠페인",
     icon: CalendarDays,
     items: [
       { label: "탐색/추천", href: "/ontner/campaign/explore" },
-      { label: "저장한 캠페인", href: "/ontner/campaign/saved" },
-      { label: "협업 관리", href: "/ontner/campaign/collaboration" },
+      { label: "콘텐츠 탐색", href: "/ontner/campaign/content" },
       { label: "역제안", href: "/ontner/campaign/counter-proposal" },
-      { label: "크루찾기", href: "/ontner/crew-finder" },
-      { label: "콘텐츠", href: "/ontner/content" },
     ],
   },
   {
-    label: "정산 관리",
-    icon: Wallet,
+    label: "크리에이터",
+    icon: Users,
     items: [
-      { label: "성과조회", href: "/ontner/performance" },
-      { label: "인사이트 리포트", href: "/ontner/insight/campaign" },
-      { label: "제휴 인사이트", href: "/ontner/insight/affiliate" },
+      { label: "크루찾기", href: "/ontner/crew-finder" },
+      { label: "관심 크리에이터", href: "/ontner/creators/bookmarks" },
+    ],
+  },
+  {
+    label: "성과",
+    icon: BarChart3,
+    items: [
+      { label: "캠페인별 성과조회", href: "/ontner/performance" },
+      { label: "인사이트 리포트 (캠페인)", href: "/ontner/insight/campaign" },
+      { label: "인사이트 리포트 (어필리에이트)", href: "/ontner/insight/affiliate" },
     ],
   },
 ];
