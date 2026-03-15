@@ -262,6 +262,348 @@
   border-radius: 0 !important;
 }
 
+/* ── ONTNER Design Tokens ── */
+.ontner-portal {
+  --ontn-primary: #7c3aed;
+  --ontn-primary-light: #f3f0ff;
+  --ontn-bg-page: #f8f9fa;
+  --ontn-bg-card: #ffffff;
+  --ontn-border: #e5e7eb;
+  --ontn-text-primary: #111827;
+  --ontn-text-secondary: #6b7280;
+  --ontn-text-muted: #9ca3af;
+}
+
+/* ── ONTNER Category Tabs ── */
+.ontn-category-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: var(--ontn-text-secondary);
+  background: white;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.ontn-category-tab:hover {
+  color: var(--ontn-text-primary);
+}
+.ontn-category-tab-active {
+  color: var(--ontn-primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--ontn-primary);
+}
+
+/* ── ONTNER Campaign Card ── */
+.ontn-campaign-card {
+  border: 1px solid var(--ontn-border);
+  background: var(--ontn-bg-card);
+  overflow: hidden;
+  transition: border-color 0.15s;
+  cursor: pointer;
+}
+.ontn-campaign-card:hover {
+  border-color: var(--ontn-primary);
+}
+
+.ontn-card-image {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: #f3f4f6;
+  overflow: hidden;
+}
+
+/* ── ONTNER Status Badge ── */
+.ontn-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  background: var(--ontn-primary);
+  border-radius: 2px;
+}
+
+.ontn-recruit-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  font-size: 11px;
+  color: var(--ontn-text-secondary);
+  background: rgba(255,255,255,0.9);
+  border-radius: 2px;
+}
+
+/* ── ONTNER Reward Label ── */
+.ontn-reward-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ontn-primary);
+}
+
+/* ── ONTNER Info Table (Detail page) ── */
+.ontn-info-table {
+  display: grid;
+  border: 1px solid var(--ontn-border);
+  width: 100%;
+}
+.ontn-info-table-2col {
+  grid-template-columns: 140px 1fr;
+}
+.ontn-info-label {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--ontn-text-secondary);
+  background: #f9fafb;
+  border: 1px solid var(--ontn-border);
+  min-height: 44px;
+  white-space: nowrap;
+}
+.ontn-info-value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  border: 1px solid var(--ontn-border);
+  min-height: 44px;
+  font-size: 14px;
+  color: var(--ontn-text-primary);
+}
+
+/* ── ONTNER Section Title ── */
+.ontn-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ontn-text-primary);
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ontn-text-primary);
+  margin-bottom: 0;
+}
+
+/* ── ONTNER Guide Box ── */
+.ontn-guide-box {
+  background: #f9fafb;
+  border: 1px solid var(--ontn-border);
+  padding: 20px 24px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--ontn-text-secondary);
+}
+
+/* ── ONTNER Bottom Action Bar ── */
+.ontn-bottom-bar {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: white;
+  border-top: 1px solid var(--ontn-border);
+  z-index: 10;
+}
+
+/* ── ONTNER Filter Dropdown ── */
+.ontn-filter-dropdown {
+  height: 36px;
+  padding: 0 12px;
+  font-size: 13px;
+  border: 1px solid var(--ontn-border);
+  background: white;
+  color: var(--ontn-text-primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+/* ── ONTNER Heart Button ── */
+.ontn-heart-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ontn-border);
+  background: white;
+  color: var(--ontn-text-muted);
+  cursor: pointer;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+.ontn-heart-btn:hover,
+.ontn-heart-btn-active {
+  color: #ef4444;
+  border-color: #fecaca;
+}
+
+/* ── ONTNER Apply Button ── */
+.ontn-apply-btn {
+  flex: 1;
+  height: 48px;
+  background: var(--ontn-primary);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.ontn-apply-btn:hover {
+  opacity: 0.9;
+}
+.ontn-apply-btn:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* ── ONTNER Product Card ── */
+.ontn-product-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--ontn-border);
+}
+.ontn-product-thumb {
+  width: 60px;
+  height: 60px;
+  background: #f3f4f6;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── ONTNER Top-level Tab Switcher ── */
+.ontn-top-tab {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ontn-text-secondary);
+  background: white;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.ontn-top-tab:hover {
+  color: var(--ontn-text-primary);
+}
+.ontn-top-tab-active {
+  color: var(--ontn-primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--ontn-primary);
+}
+
+/* ── ONTNER Period Chip ── */
+.ontn-period-chip {
+  height: 30px;
+  padding: 0 12px;
+  font-size: 12px;
+  border: 1px solid var(--ontn-border);
+  background: white;
+  color: var(--ontn-text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.ontn-period-chip:hover {
+  border-color: var(--ontn-primary);
+  color: var(--ontn-primary);
+}
+.ontn-period-chip-active {
+  background: var(--ontn-primary);
+  border-color: var(--ontn-primary);
+  color: white;
+  font-weight: 600;
+}
+
+/* ── ONTNER Content Card ── */
+.ontn-content-card {
+  border: 1px solid var(--ontn-border);
+  background: var(--ontn-bg-card);
+  transition: border-color 0.15s;
+}
+.ontn-content-card:hover {
+  border-color: var(--ontn-primary);
+}
+
+/* ── ONTNER Rank Badge ── */
+.ontn-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #f3f4f6;
+  color: var(--ontn-text-secondary);
+  flex-shrink: 0;
+}
+.ontn-rank-badge-gold {
+  background: #f59e0b;
+  color: white;
+}
+.ontn-rank-badge-silver {
+  background: #9ca3af;
+  color: white;
+}
+.ontn-rank-badge-bronze {
+  background: #b45309;
+  color: white;
+}
+
+/* ── ONTNER Platform Badge ── */
+.ontn-platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 5px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.92);
+}
+
+/* ── ONTNER Metric Item ── */
+.ontn-metric-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  color: var(--ontn-text-secondary);
+}
+
+/* ── ONTNER Mapped Campaign Chip ── */
+.ontn-mapped-campaign {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 7px;
+  border: 1px solid var(--ontn-border);
+  background: #faf9ff;
+  font-size: 11px;
+}
+.ontn-mapped-campaign:hover {
+  border-color: var(--ontn-primary);
+  background: var(--ontn-primary-light);
+}
+
 /* ============================================
    ONTRUST Design System (어드민 포털)
    - 스크린샷 기반 엔터프라이즈 어드민 스타일
