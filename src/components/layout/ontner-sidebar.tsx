@@ -12,6 +12,8 @@ import type { SessionUser } from "@/types/user";
 export interface OntnerNavSubItem {
   label: string;
   href: string;
+  disabled?: boolean;
+  badge?: string;
 }
 
 export interface OntnerNavGroup {
@@ -109,6 +111,18 @@ export function OntnerSidebar({ navGroups, user, onLogout }: OntnerSidebarProps)
               {isOpen && (
                 <div className="ml-9 mt-0.5 mb-1 space-y-0.5">
                   {group.items.map((item) => {
+                    if (item.disabled) {
+                      return (
+                        <span
+                          key={item.href}
+                          title="해당 기능은 준비 중입니다"
+                          className="flex items-center gap-1.5 px-2 py-2 text-sm text-gray-300 cursor-not-allowed select-none"
+                        >
+                          {item.label}
+                        </span>
+                      );
+                    }
+
                     const isActive =
                       pathname === item.href ||
                       (item.href !== "/" && pathname.startsWith(item.href + "/"));
@@ -118,13 +132,18 @@ export function OntnerSidebar({ navGroups, user, onLogout }: OntnerSidebarProps)
                         key={item.href}
                         href={item.href}
                         className={cn(
-                          "block px-2 py-2 text-sm transition-colors",
+                          "flex items-center gap-1.5 px-2 py-2 text-sm transition-colors",
                           isActive
                             ? "text-purple-600 font-medium underline underline-offset-2"
                             : "text-gray-500 hover:text-gray-800 hover:bg-gray-50"
                         )}
                       >
                         {item.label}
+                        {item.badge && (
+                          <span className="px-1.5 py-0.5 rounded-full text-[10px] font-semibold text-white bg-gradient-to-r from-purple-500 to-teal-400 leading-none">
+                            {item.badge}
+                          </span>
+                        )}
                       </Link>
                     );
                   })}

@@ -1,0 +1,220 @@
+[
+  {
+    "id": "perf-001",
+    "influencerHandle": "@beauty_hani",
+    "influencerAvatar": "https://placehold.co/40x40/E8D5F5/7C3AED?text=BH",
+    "influencerName": "뷰티하니",
+    "campaignId": "campaign-1",
+    "campaignName": "올리브영 봄 신상 공구",
+    "automationId": "auto-001",
+    "contentMetrics": {
+      "likeCount": 2103,
+      "commentCount": 712,
+      "saveCount": 189,
+      "repostCount": 45,
+      "shareCount": 67
+    },
+    "uniqueRecipients": 423,
+    "uniqueClickers": 312,
+    "ctr": 73.8,
+    "followConversions": 156,
+    "followConversionRate": 36.9,
+    "buttonPerformance": [
+      {
+        "slotNo": 1,
+        "buttonName": "쿠폰 받기",
+        "url": "https://example.com/coupon/spring2026",
+        "uniqueClickers": 245,
+        "totalClicks": 312,
+        "ctr": 57.9
+      },
+      {
+        "slotNo": 2,
+        "buttonName": "상품 보러가기",
+        "url": "https://example.com/shop/spring",
+        "uniqueClickers": 178,
+        "totalClicks": 203,
+        "ctr": 42.1
+      }
+    ]
+  },
+  {
+    "id": "perf-002",
+    "influencerHandle": "@food_yuna",
+    "influencerAvatar": "https://placehold.co/40x40/FDE8E8/DC2626?text=FY",
+    "influencerName": "푸드유나",
+    "campaignId": "campaign-2",
+    "campaignName": "CJ제일제당 비비고 봄 캠페인",
+    "automationId": "auto-002",
+    "contentMetrics": {
+      "likeCount": 943,
+      "commentCount": 178,
+      "saveCount": 95,
+      "repostCount": 22,
+      "shareCount": 38
+    },
+    "uniqueRecipients": 156,
+    "uniqueClickers": 112,
+    "ctr": 71.8,
+    "followConversions": 67,
+    "followConversionRate": 42.9,
+    "buttonPerformance": [
+      {
+        "slotNo": 1,
+        "buttonName": "무료 체험 신청",
+        "url": "https://example.com/bibigo/trial",
+        "uniqueClickers": 89,
+        "totalClicks": 124,
+        "ctr": 57.1
+      },
+      {
+        "slotNo": 2,
+        "buttonName": "제품 상세 보기",
+        "url": "https://example.com/bibigo/products",
+        "uniqueClickers": 65,
+        "totalClicks": 78,
+        "ctr": 41.7
+      }
+    ]
+  },
+  {
+    "id": "perf-003",
+    "influencerHandle": "@style_jimin",
+    "influencerAvatar": "https://placehold.co/40x40/DBEAFE/2563EB?text=SJ",
+    "influencerName": "스타일지민",
+    "campaignId": "campaign-1",
+    "campaignName": "올리브영 봄 신상 공구",
+    "automationId": "auto-005",
+    "contentMetrics": {
+      "likeCount": 1567,
+      "commentCount": 423,
+      "saveCount": 234,
+      "repostCount": 56,
+      "shareCount": 89
+    },
+    "uniqueRecipients": 287,
+    "uniqueClickers": 198,
+    "ctr": 69.0,
+    "followConversions": 112,
+    "followConversionRate": 39.0,
+    "buttonPerformance": [
+      {
+        "slotNo": 1,
+        "buttonName": "쿠폰 받기",
+        "url": "https://example.com/coupon/spring2026",
+        "uniqueClickers": 156,
+        "totalClicks": 189,
+        "ctr": 54.4
+      },
+      {
+        "slotNo": 2,
+        "buttonName": "상품 보러가기",
+        "url": "https://example.com/shop/spring",
+        "uniqueClickers": 98,
+        "totalClicks": 112,
+        "ctr": 34.1
+      }
+    ]
+  },
+  {
+    "id": "perf-004",
+    "influencerHandle": "@daily_soyeon",
+    "influencerAvatar": "https://placehold.co/40x40/FEF3C7/D97706?text=DS",
+    "influencerName": "데일리소연",
+    "campaignId": "campaign-15",
+    "campaignName": "무신사 봄 컬렉션 공구",
+    "automationId": "auto-006",
+    "contentMetrics": {
+      "likeCount": 834,
+      "commentCount": 156,
+      "saveCount": 78,
+      "repostCount": 12,
+      "shareCount": 34
+    },
+    "uniqueRecipients": 134,
+    "uniqueClickers": 89,
+    "ctr": 66.4,
+    "followConversions": 45,
+    "followConversionRate": 33.6,
+    "buttonPerformance": [
+      {
+        "slotNo": 1,
+        "buttonName": "컬렉션 보기",
+        "url": "https://example.com/musinsa/ss26",
+        "uniqueClickers": 78,
+        "totalClicks": 95,
+        "ctr": 58.2
+      }
+    ]
+  },
+  {
+    "id": "perf-005",
+    "influencerHandle": "@beauty_hani",
+    "influencerAvatar": "https://placehold.co/40x40/E8D5F5/7C3AED?text=BH",
+    "influencerName": "뷰티하니",
+    "campaignId": "campaign-2",
+    "campaignName": "CJ제일제당 비비고 봄 캠페인",
+    "automationId": "auto-007",
+    "contentMetrics": {
+      "likeCount": 1245,
+      "commentCount": 298,
+      "saveCount": 156,
+      "repostCount": 34,
+      "shareCount": 52
+    },
+    "uniqueRecipients": 198,
+    "uniqueClickers": 145,
+    "ctr": 73.2,
+    "followConversions": 78,
+    "followConversionRate": 39.4,
+    "buttonPerformance": [
+      {
+        "slotNo": 1,
+        "buttonName": "무료 체험 신청",
+        "url": "https://example.com/bibigo/trial",
+        "uniqueClickers": 112,
+        "totalClicks": 134,
+        "ctr": 56.6
+      },
+      {
+        "slotNo": 2,
+        "buttonName": "제품 상세 보기",
+        "url": "https://example.com/bibigo/products",
+        "uniqueClickers": 78,
+        "totalClicks": 92,
+        "ctr": 39.4
+      }
+    ]
+  },
+  {
+    "id": "perf-006",
+    "influencerHandle": "@travel_minho",
+    "influencerAvatar": "https://placehold.co/40x40/D1FAE5/059669?text=TM",
+    "influencerName": "여행민호",
+    "campaignId": "campaign-3",
+    "campaignName": "제안 | 휘닉스호텔앤드리조츠 대표인기상품 공동구매 참여신청",
+    "automationId": "auto-008",
+    "contentMetrics": {
+      "likeCount": 678,
+      "commentCount": 123,
+      "saveCount": 89,
+      "repostCount": 18,
+      "shareCount": 45
+    },
+    "uniqueRecipients": 98,
+    "uniqueClickers": 67,
+    "ctr": 68.4,
+    "followConversions": 34,
+    "followConversionRate": 34.7,
+    "buttonPerformance": [
+      {
+        "slotNo": 1,
+        "buttonName": "할인 예약하기",
+        "url": "https://example.com/phoenix/booking",
+        "uniqueClickers": 56,
+        "totalClicks": 72,
+        "ctr": 57.1
+      }
+    ]
+  }
+]

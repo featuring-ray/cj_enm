@@ -1,0 +1,170 @@
+[
+  {
+    "id": "auto-001",
+    "name": "봄 이벤트 자동 DM",
+    "status": "실행 중",
+    "sourceDraftId": "draft-001",
+    "sourceCampaignId": "campaign-1",
+    "sourceCampaignName": "올리브영 봄 신상 공구",
+    "postId": "post-002",
+    "postSnapshot": {
+      "id": "post-002",
+      "imageUrl": "https://placehold.co/400x400/FDE8E8/DC2626?text=Post+2",
+      "caption": "🎁 이벤트! '참여' 댓글 남기고 DM으로 쿠폰 받아가세요~",
+      "postedAt": "2026-03-18T14:00:00Z",
+      "likeCount": 2103,
+      "commentCount": 712,
+      "usedInAutomationId": "auto-001"
+    },
+    "triggerMode": "keywords",
+    "keywords": ["참여", "이벤트", "쿠폰"],
+    "autoReplyEnabled": true,
+    "replyTexts": [
+      "참여 감사합니다! DM을 확인해주세요 💌",
+      "이벤트 참여 완료! DM으로 쿠폰을 보내드렸어요 🎁",
+      "감사해요! DM에서 특별 혜택을 확인하세요 ✨"
+    ],
+    "dmMessageBody": "안녕하세요! 🎁\n\n이벤트에 참여해주셔서 감사합니다.\n아래 버튼을 클릭하시면 특별 할인 쿠폰을 받으실 수 있어요!\n\n쿠폰은 7일 이내 사용 가능합니다.",
+    "dmImageUrl": null,
+    "buttons": [
+      { "enabled": true, "name": "쿠폰 받기", "url": "https://example.com/coupon/spring2026" },
+      { "enabled": true, "name": "상품 보러가기", "url": "https://example.com/shop/spring" },
+      { "enabled": false, "name": "", "url": "" }
+    ],
+    "followerFlow": {
+      "enabled": true,
+      "actionAMessage": "팔로우를 먼저 해주시면 쿠폰을 보내드릴게요! 팔로우 후 아래 버튼을 눌러주세요 😊",
+      "actionAButtonName": "팔로우 완료했어요",
+      "actionBMessage": "팔로우 감사합니다! 🎉 아래 버튼을 눌러 쿠폰을 받아가세요!",
+      "actionBButtonName": "쿠폰 받기"
+    },
+    "sentCount": 423,
+    "replyCount": 89,
+    "clickCount": 312,
+    "createdAt": "2026-03-17T09:00:00Z",
+    "updatedAt": "2026-03-20T14:30:00Z",
+    "lastRefreshedAt": "2026-03-22T08:00:00Z"
+  },
+  {
+    "id": "auto-002",
+    "name": "뷰티 루틴 정보 공유",
+    "status": "실행 중",
+    "sourceDraftId": "draft-002",
+    "sourceCampaignId": "campaign-2",
+    "sourceCampaignName": "CJ제일제당 비비고 봄 캠페인",
+    "postId": "post-005",
+    "postSnapshot": {
+      "id": "post-005",
+      "imageUrl": "https://placehold.co/400x400/FEF3C7/D97706?text=Post+5",
+      "caption": "💄 뷰티 루틴 공개! 사용 제품이 궁금하시면 '뷰티' 댓글 남겨주세요 ✨",
+      "postedAt": "2026-03-12T11:15:00Z",
+      "likeCount": 943,
+      "commentCount": 178,
+      "usedInAutomationId": "auto-002"
+    },
+    "triggerMode": "keywords",
+    "keywords": ["뷰티", "제품", "루틴"],
+    "autoReplyEnabled": true,
+    "replyTexts": [
+      "DM으로 제품 정보 보내드렸어요! 확인해주세요 💄",
+      "뷰티 루틴 상세 정보를 DM으로 전달했습니다 ✨",
+      "관심 감사해요! DM을 확인해주세요 💌"
+    ],
+    "dmMessageBody": "안녕하세요! 💄\n\n뷰티 루틴에 관심 가져주셔서 감사해요!\n사용한 제품 리스트와 할인 링크를 보내드릴게요.\n\n궁금한 점이 있으시면 편하게 질문해주세요!",
+    "dmImageUrl": null,
+    "buttons": [
+      { "enabled": true, "name": "제품 리스트 보기", "url": "https://example.com/beauty-routine" },
+      { "enabled": false, "name": "", "url": "" },
+      { "enabled": false, "name": "", "url": "" }
+    ],
+    "followerFlow": {
+      "enabled": false,
+      "actionAMessage": "아직 팔로우를 하지 않으셨네요! 팔로우하고 혜택을 받아보세요.",
+      "actionAButtonName": "팔로우 완료했어요",
+      "actionBMessage": "팔로우 감사합니다! 아래 링크에서 혜택을 확인하세요.",
+      "actionBButtonName": "혜택 확인하기"
+    },
+    "sentCount": 156,
+    "replyCount": 34,
+    "clickCount": 112,
+    "createdAt": "2026-03-11T15:00:00Z",
+    "updatedAt": "2026-03-15T10:20:00Z",
+    "lastRefreshedAt": "2026-03-22T07:30:00Z"
+  },
+  {
+    "id": "auto-003",
+    "name": "홈카페 레시피 공유",
+    "status": "중단됨",
+    "sourceDraftId": null,
+    "sourceCampaignId": null,
+    "sourceCampaignName": null,
+    "postId": "post-007",
+    "postSnapshot": {
+      "id": "post-007",
+      "imageUrl": "https://placehold.co/400x400/FCE7F3/DB2777?text=Post+7",
+      "caption": "🏠 홈카페 레시피 대공개! '레시피' 댓글 남기면 DM으로 전체 레시피 보내드려요 ☕",
+      "postedAt": "2026-03-08T13:45:00Z",
+      "likeCount": 1823,
+      "commentCount": 521,
+      "usedInAutomationId": null
+    },
+    "triggerMode": "keywords",
+    "keywords": ["레시피", "홈카페"],
+    "autoReplyEnabled": false,
+    "replyTexts": [],
+    "dmMessageBody": "안녕하세요! ☕\n\n홈카페 레시피에 관심 가져주셔서 감사합니다.\n아래 버튼을 클릭하시면 전체 레시피 PDF를 다운로드하실 수 있어요!",
+    "dmImageUrl": null,
+    "buttons": [
+      { "enabled": true, "name": "레시피 다운로드", "url": "https://example.com/recipe-download" },
+      { "enabled": true, "name": "더 많은 레시피", "url": "https://example.com/recipes" },
+      { "enabled": false, "name": "", "url": "" }
+    ],
+    "followerFlow": {
+      "enabled": false,
+      "actionAMessage": "",
+      "actionAButtonName": "",
+      "actionBMessage": "",
+      "actionBButtonName": ""
+    },
+    "sentCount": 287,
+    "replyCount": 45,
+    "clickCount": 198,
+    "createdAt": "2026-03-07T11:00:00Z",
+    "updatedAt": "2026-03-09T16:45:00Z",
+    "lastRefreshedAt": "2026-03-09T16:00:00Z"
+  },
+  {
+    "id": "auto-004",
+    "name": "콜라보 이벤트 (작성중)",
+    "status": "초안",
+    "sourceDraftId": null,
+    "sourceCampaignId": null,
+    "sourceCampaignName": null,
+    "postId": null,
+    "postSnapshot": null,
+    "triggerMode": "all",
+    "keywords": [],
+    "autoReplyEnabled": false,
+    "replyTexts": ["", "", ""],
+    "dmMessageBody": "",
+    "dmImageUrl": null,
+    "buttons": [
+      { "enabled": false, "name": "", "url": "" },
+      { "enabled": false, "name": "", "url": "" },
+      { "enabled": false, "name": "", "url": "" }
+    ],
+    "followerFlow": {
+      "enabled": false,
+      "actionAMessage": "아직 팔로우를 하지 않으셨네요! 팔로우하고 혜택을 받아보세요.",
+      "actionAButtonName": "팔로우 완료했어요",
+      "actionBMessage": "팔로우 감사합니다! 아래 링크에서 혜택을 확인하세요.",
+      "actionBButtonName": "혜택 확인하기"
+    },
+    "sentCount": 0,
+    "replyCount": 0,
+    "clickCount": 0,
+    "createdAt": "2026-03-21T09:30:00Z",
+    "updatedAt": "2026-03-21T09:30:00Z",
+    "lastRefreshedAt": null
+  }
+]

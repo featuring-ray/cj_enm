@@ -1,0 +1,74 @@
+[
+  {
+    "id": "post-001",
+    "imageUrl": "https://placehold.co/400x400/E8D5F5/7C3AED?text=Post+1",
+    "caption": "🌸 봄 신상 컬렉션 공개! 댓글로 '봄' 입력하면 특별 할인 코드를 DM으로 보내드려요 💜",
+    "postedAt": "2026-03-20T10:30:00Z",
+    "likeCount": 1247,
+    "commentCount": 389,
+    "usedInAutomationId": null
+  },
+  {
+    "id": "post-002",
+    "imageUrl": "https://placehold.co/400x400/FDE8E8/DC2626?text=Post+2",
+    "caption": "🎁 이벤트! '참여' 댓글 남기고 DM으로 쿠폰 받아가세요~ 선착순 500명!",
+    "postedAt": "2026-03-18T14:00:00Z",
+    "likeCount": 2103,
+    "commentCount": 712,
+    "usedInAutomationId": "auto-001"
+  },
+  {
+    "id": "post-003",
+    "imageUrl": "https://placehold.co/400x400/DBEAFE/2563EB?text=Post+3",
+    "caption": "여름 컬렉션 미리보기 👀 어떤 스타일이 가장 마음에 드시나요? 댓글로 알려주세요!",
+    "postedAt": "2026-03-15T09:00:00Z",
+    "likeCount": 856,
+    "commentCount": 234,
+    "usedInAutomationId": null
+  },
+  {
+    "id": "post-004",
+    "imageUrl": "https://placehold.co/400x400/D1FAE5/059669?text=Post+4",
+    "caption": "오늘의 OOTD 🧥 이 코디 궁금하면 '정보' 댓글 남겨주세요! DM으로 상세 정보 보내드립니다",
+    "postedAt": "2026-03-14T16:20:00Z",
+    "likeCount": 1589,
+    "commentCount": 456,
+    "usedInAutomationId": null
+  },
+  {
+    "id": "post-005",
+    "imageUrl": "https://placehold.co/400x400/FEF3C7/D97706?text=Post+5",
+    "caption": "💄 뷰티 루틴 공개! 사용 제품이 궁금하시면 '뷰티' 댓글 남겨주세요 ✨",
+    "postedAt": "2026-03-12T11:15:00Z",
+    "likeCount": 943,
+    "commentCount": 178,
+    "usedInAutomationId": "auto-002"
+  },
+  {
+    "id": "post-006",
+    "imageUrl": "https://placehold.co/400x400/E0E7FF/4F46E5?text=Post+6",
+    "caption": "주말 브이로그 🎬 함께하고 싶은 활동 댓글로 추천해주세요!",
+    "postedAt": "2026-03-10T18:00:00Z",
+    "likeCount": 672,
+    "commentCount": 145,
+    "usedInAutomationId": null
+  },
+  {
+    "id": "post-007",
+    "imageUrl": "https://placehold.co/400x400/FCE7F3/DB2777?text=Post+7",
+    "caption": "🏠 홈카페 레시피 대공개! '레시피' 댓글 남기면 DM으로 전체 레시피 보내드려요 ☕",
+    "postedAt": "2026-03-08T13:45:00Z",
+    "likeCount": 1823,
+    "commentCount": 521,
+    "usedInAutomationId": null
+  },
+  {
+    "id": "post-008",
+    "imageUrl": "https://placehold.co/400x400/F3E8FF/9333EA?text=Post+8",
+    "caption": "신규 콜라보 제품 출시 기념 이벤트 🎉 팔로우 + '이벤트' 댓글로 참여하세요!",
+    "postedAt": "2026-03-05T10:00:00Z",
+    "likeCount": 3201,
+    "commentCount": 1089,
+    "usedInAutomationId": null
+  }
+]
