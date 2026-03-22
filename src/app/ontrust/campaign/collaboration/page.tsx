@@ -16,7 +16,6 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -46,7 +45,7 @@ function StatusBadge({ status }: { status: AppStatus }) {
   const cfg = STATUS_CONFIG[status];
   const Icon = cfg.icon;
   return (
-    <span className={`inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded border font-medium ${cfg.color}`}>
+    <span className={`inline-flex items-center gap-1 text-[11px] px-2 py-0.5 border font-medium ${cfg.color}`}>
       <Icon className="h-3 w-3" />
       {cfg.label}
     </span>
@@ -117,7 +116,7 @@ export default function OnttrustCollaborationPage() {
         description="크리에이터 참여 신청 및 제안 발신 현황을 관리합니다"
       />
 
-      <main className="flex-1 p-4 md:p-6">
+      <main className="flex-1 p-4">
         <Tabs defaultValue="applications">
           <TabsList className="mb-6">
             <TabsTrigger value="applications">
@@ -164,7 +163,7 @@ export default function OnttrustCollaborationPage() {
                           <p className="text-xs text-muted-foreground">{campaign.brand} · {campaign.brandCategory}</p>
                         </div>
                         <Link href={`/ontrust/creator/${creator.id}`} className="group inline-flex items-center gap-1.5">
-                          <div className="h-5 w-5 rounded-full bg-muted flex items-center justify-center">
+                          <div className="h-5 w-5 bg-muted flex items-center justify-center">
                             <User className="h-3 w-3 text-muted-foreground" />
                           </div>
                           <span className="text-sm font-medium group-hover:text-blue-600 transition-colors">@{creator.handle}</span>
@@ -172,30 +171,27 @@ export default function OnttrustCollaborationPage() {
                           <ChevronRight className="h-3.5 w-3.5 text-muted-foreground" />
                         </Link>
                         {app.message && (
-                          <p className="text-xs text-muted-foreground bg-muted/50 rounded px-2 py-1 line-clamp-2">
+                          <p className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 line-clamp-2">
                             &ldquo;{app.message}&rdquo;
                           </p>
                         )}
                       </div>
                       {app.status === "대기" && (
                         <div className="flex flex-col gap-2 shrink-0">
-                          <Button
-                            size="sm"
-                            className="bg-emerald-600 hover:bg-emerald-700 h-8"
+                          <button
+                            className="otr-btn-primary h-8 text-sm inline-flex items-center px-3"
                             onClick={() => respondApplication(app.id, "수락", creator.handle, campaign.name)}
                           >
                             <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
                             수락
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="h-8 text-red-600 border-red-200 hover:bg-red-50"
+                          </button>
+                          <button
+                            className="otr-btn-secondary h-8 text-sm inline-flex items-center px-3"
                             onClick={() => respondApplication(app.id, "거절", creator.handle, campaign.name)}
                           >
                             <XCircle className="h-3.5 w-3.5 mr-1" />
                             거절
-                          </Button>
+                          </button>
                         </div>
                       )}
                     </CardContent>
@@ -231,7 +227,7 @@ export default function OnttrustCollaborationPage() {
                           <p className="text-xs text-muted-foreground">{campaign.brand} · {campaign.brandCategory}</p>
                         </div>
                         <Link href={`/ontrust/creator/${creator.id}`} className="group inline-flex items-center gap-1.5">
-                          <div className="h-5 w-5 rounded-full bg-muted flex items-center justify-center">
+                          <div className="h-5 w-5 bg-muted flex items-center justify-center">
                             <User className="h-3 w-3 text-muted-foreground" />
                           </div>
                           <span className="text-sm font-medium group-hover:text-blue-600 transition-colors">@{creator.handle}</span>
@@ -239,20 +235,18 @@ export default function OnttrustCollaborationPage() {
                           <ChevronRight className="h-3.5 w-3.5 text-muted-foreground" />
                         </Link>
                         {prop.message && (
-                          <p className="text-xs text-muted-foreground bg-muted/50 rounded px-2 py-1 line-clamp-2">
+                          <p className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 line-clamp-2">
                             &ldquo;{prop.message}&rdquo;
                           </p>
                         )}
                       </div>
                       {prop.status === "대기" && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="shrink-0 text-red-600 border-red-200 hover:bg-red-50"
+                        <button
+                          className="otr-btn-secondary shrink-0 h-8 text-sm inline-flex items-center px-3"
                           onClick={() => cancelProposal(prop.id, creator.handle, campaign.name)}
                         >
                           제안 취소
-                        </Button>
+                        </button>
                       )}
                     </CardContent>
                   </Card>
@@ -271,18 +265,18 @@ export default function OnttrustCollaborationPage() {
             <DialogDescription>{confirmDialog.description}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setConfirmDialog((d) => ({ ...d, open: false }))}>
+            <button className="otr-btn-secondary h-9 px-4 text-sm" onClick={() => setConfirmDialog((d) => ({ ...d, open: false }))}>
               유지하기
-            </Button>
-            <Button
-              variant={confirmDialog.variant === "destructive" ? "destructive" : "default"}
+            </button>
+            <button
+              className={confirmDialog.variant === "destructive" ? "otr-btn-secondary h-9 px-4 text-sm" : "otr-btn-primary h-9 px-4 text-sm"}
               onClick={() => {
                 confirmDialog.onConfirm();
                 setConfirmDialog((d) => ({ ...d, open: false }));
               }}
             >
               {confirmDialog.confirmLabel}
-            </Button>
+            </button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

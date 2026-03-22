@@ -178,7 +178,7 @@ export default function PerformancePage() {
     <>
       <PageHeader title="성과 분석" description="캠페인별/기간별 성과를 조회합니다" />
 
-      <main className="flex-1 p-4 md:p-6">
+      <main className="flex-1 p-4">
         <Tabs defaultValue="campaign">
           <TabsList>
             <TabsTrigger value="campaign">캠페인 종합 성과</TabsTrigger>
@@ -187,25 +187,23 @@ export default function PerformancePage() {
 
           {/* T-C-01: 캠페인 종합 성과 조회 */}
           <TabsContent value="campaign" className="space-y-6 mt-4">
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-center gap-4">
-                  <Label className="shrink-0">캠페인 선택</Label>
-                  <Select value={selectedCampaignId} onValueChange={setSelectedCampaignId}>
-                    <SelectTrigger className="max-w-md">
-                      <SelectValue placeholder="캠페인을 선택하세요" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {campaigns.map((c) => (
-                        <SelectItem key={c.id} value={c.id}>
-                          {c.title} ({c.brandName})
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="otr-search-panel">
+              <div className="flex items-center gap-4">
+                <Label className="shrink-0">캠페인 선택</Label>
+                <Select value={selectedCampaignId} onValueChange={setSelectedCampaignId}>
+                  <SelectTrigger className="max-w-md">
+                    <SelectValue placeholder="캠페인을 선택하세요" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {campaigns.map((c) => (
+                      <SelectItem key={c.id} value={c.id}>
+                        {c.title} ({c.brandName})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
             {!selectedCampaignId && (
               <div className="text-center py-16 text-muted-foreground text-sm">
@@ -217,7 +215,7 @@ export default function PerformancePage() {
               <>
                 {/* D+14 확정 매출 배너 */}
                 {perfData && (
-                  <Card className={isConfirmed ? "border-green-200 bg-green-50/30" : "border-amber-200 bg-amber-50/30"}>
+                  <Card className={isConfirmed ? "border-green-200 bg-green-50/30 rounded-none" : "border-amber-200 bg-amber-50/30 rounded-none"}>
                     <CardContent className="pt-4 pb-4 flex items-center gap-3">
                       {isConfirmed ? (
                         <>
@@ -257,9 +255,9 @@ export default function PerformancePage() {
                 )}
 
                 {/* 통합 Summary 차트 */}
-                <Card>
+                <Card className="rounded-none">
                   <CardHeader>
-                    <CardTitle className="text-base">통합 성과 추이</CardTitle>
+                    <CardTitle className="text-base otr-section-marker">◆ 통합 성과 추이</CardTitle>
                     <CardDescription>콘텐츠 인게이지먼트 + 주문 수량 + 콘텐츠 업로드 통합 그래프</CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -280,14 +278,14 @@ export default function PerformancePage() {
                 </Card>
 
                 {/* 콘텐츠 기준 상세 */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-base flex items-center gap-2">
-                      <FileText className="h-4 w-4" /> 콘텐츠 기준 상세
-                    </CardTitle>
-                    <CardDescription>크리에이터별 콘텐츠 인게이지먼트</CardDescription>
-                  </CardHeader>
-                  <CardContent className="overflow-x-auto">
+                <div>
+                  <div className="mb-3">
+                    <h3 className="text-base font-semibold otr-section-marker flex items-center gap-2">
+                      <FileText className="h-4 w-4" /> ◆ 콘텐츠 기준 상세
+                    </h3>
+                    <p className="text-sm text-muted-foreground">크리에이터별 콘텐츠 인게이지먼트</p>
+                  </div>
+                  <div className="overflow-x-auto">
                     {contentRows.length > 0 ? (
                       <Table>
                         <TableHeader>
@@ -328,15 +326,15 @@ export default function PerformancePage() {
                     ) : (
                       <p className="text-sm text-muted-foreground text-center py-8">콘텐츠 상세 데이터가 없습니다</p>
                     )}
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
 
                 {/* 매출 기준 상세 */}
                 {perfData && (
                   <>
-                    <Card>
+                    <Card className="rounded-none">
                       <CardHeader>
-                        <CardTitle className="text-base">시간별 주문/매출 현황</CardTitle>
+                        <CardTitle className="text-base otr-section-marker">◆ 시간별 주문/매출 현황</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <ResponsiveContainer width="100%" height={280}>
@@ -349,7 +347,7 @@ export default function PerformancePage() {
                               name === "매출" ? formatKRW(value) : value.toLocaleString()
                             } />
                             <Legend />
-                            <Bar yAxisId="left" dataKey="orders" fill="#6366f1" name="주문수" radius={[4, 4, 0, 0]} />
+                            <Bar yAxisId="left" dataKey="orders" fill="#6366f1" name="주문수" radius={[0, 0, 0, 0]} />
                             <Line yAxisId="right" type="monotone" dataKey="revenue" stroke="#f43f5e" name="매출" strokeWidth={2} />
                           </BarChart>
                         </ResponsiveContainer>
@@ -357,10 +355,10 @@ export default function PerformancePage() {
                     </Card>
 
                     <div className="grid md:grid-cols-2 gap-6">
-                      <Card>
+                      <Card className="rounded-none">
                         <CardHeader>
-                          <CardTitle className="text-base flex items-center gap-2">
-                            <Users className="h-4 w-4" /> 주문 고객 연령 분포
+                          <CardTitle className="text-base otr-section-marker flex items-center gap-2">
+                            <Users className="h-4 w-4" /> ◆ 주문 고객 연령 분포
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
@@ -370,15 +368,15 @@ export default function PerformancePage() {
                               <XAxis type="number" tick={{ fontSize: 11 }} />
                               <YAxis dataKey="range" type="category" tick={{ fontSize: 11 }} width={50} />
                               <Tooltip />
-                              <Bar dataKey="count" fill="#6366f1" name="고객수" radius={[0, 4, 4, 0]} />
+                              <Bar dataKey="count" fill="#6366f1" name="고객수" radius={[0, 0, 0, 0]} />
                             </BarChart>
                           </ResponsiveContainer>
                         </CardContent>
                       </Card>
 
-                      <Card>
+                      <Card className="rounded-none">
                         <CardHeader>
-                          <CardTitle className="text-base">성별 분포</CardTitle>
+                          <CardTitle className="text-base otr-section-marker">◆ 성별 분포</CardTitle>
                         </CardHeader>
                         <CardContent>
                           <ResponsiveContainer width="100%" height={180}>
@@ -402,42 +400,40 @@ export default function PerformancePage() {
                       </Card>
                     </div>
 
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-base">함께 구매한 상품 Top 10</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <Table>
-                          <TableHeader>
-                            <TableRow>
-                              <TableHead className="w-12">순위</TableHead>
-                              <TableHead>상품명</TableHead>
-                              <TableHead className="text-right">주문수</TableHead>
-                              <TableHead className="w-40">비율</TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {perfData.topProducts.slice(0, 10).map((p, i) => {
-                              const max = perfData.topProducts[0]?.orders ?? 1;
-                              return (
-                                <TableRow key={p.productId}>
-                                  <TableCell className="font-medium">{i + 1}</TableCell>
-                                  <TableCell className="text-sm">{p.name}</TableCell>
-                                  <TableCell className="text-right text-sm">{p.orders.toLocaleString()}</TableCell>
-                                  <TableCell><Progress value={(p.orders / max) * 100} className="h-2" /></TableCell>
-                                </TableRow>
-                              );
-                            })}
-                          </TableBody>
-                        </Table>
-                      </CardContent>
-                    </Card>
+                    <div>
+                      <div className="mb-3">
+                        <h3 className="text-base font-semibold otr-section-marker">◆ 함께 구매한 상품 Top 10</h3>
+                      </div>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead className="w-12">순위</TableHead>
+                            <TableHead>상품명</TableHead>
+                            <TableHead className="text-right">주문수</TableHead>
+                            <TableHead className="w-40">비율</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {perfData.topProducts.slice(0, 10).map((p, i) => {
+                            const max = perfData.topProducts[0]?.orders ?? 1;
+                            return (
+                              <TableRow key={p.productId}>
+                                <TableCell className="font-medium">{i + 1}</TableCell>
+                                <TableCell className="text-sm">{p.name}</TableCell>
+                                <TableCell className="text-right text-sm">{p.orders.toLocaleString()}</TableCell>
+                                <TableCell><Progress value={(p.orders / max) * 100} className="h-2" /></TableCell>
+                              </TableRow>
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </div>
 
-                    <Card>
+                    <Card className="rounded-none">
                       <CardHeader>
-                        <CardTitle className="text-base flex items-center gap-2">
+                        <CardTitle className="text-base otr-section-marker flex items-center gap-2">
                           <AlertTriangle className="h-4 w-4 text-amber-500" />
-                          취소/교환/반품 현황 ({perfData.cancelReturnRate}%)
+                          ◆ 취소/교환/반품 현황 ({perfData.cancelReturnRate}%)
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
@@ -479,12 +475,12 @@ export default function PerformancePage() {
                 )}
 
                 {/* 크리에이터 x 캠페인 매트릭스 */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-base">크리에이터 × 캠페인 매트릭스</CardTitle>
-                    <CardDescription>크리에이터별 캠페인 매출 기여도</CardDescription>
-                  </CardHeader>
-                  <CardContent className="overflow-x-auto">
+                <div>
+                  <div className="mb-3">
+                    <h3 className="text-base font-semibold otr-section-marker">◆ 크리에이터 × 캠페인 매트릭스</h3>
+                    <p className="text-sm text-muted-foreground">크리에이터별 캠페인 매출 기여도</p>
+                  </div>
+                  <div className="overflow-x-auto">
                     <Table>
                       <TableHeader>
                         <TableRow>
@@ -505,24 +501,22 @@ export default function PerformancePage() {
                         ))}
                       </TableBody>
                     </Table>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </>
             )}
           </TabsContent>
 
           {/* T-C-02: 기간별 성과 조회 */}
           <TabsContent value="period" className="space-y-6 mt-4">
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-center gap-4">
-                  <Label className="shrink-0">기간 선택</Label>
-                  <Input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="w-40" />
-                  <span className="text-sm text-muted-foreground">~</span>
-                  <Input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="w-40" />
-                </div>
-              </CardContent>
-            </Card>
+            <div className="otr-search-panel">
+              <div className="flex items-center gap-4">
+                <Label className="shrink-0">기간 선택</Label>
+                <Input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="w-40" />
+                <span className="text-sm text-muted-foreground">~</span>
+                <Input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="w-40" />
+              </div>
+            </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <StatsCard title="총 조회수" value={formatNumber(periodMetrics.totalViews)} icon={Eye} />
@@ -533,9 +527,9 @@ export default function PerformancePage() {
               <StatsCard title="총 매출" value={`${formatNumber(periodMetrics.totalRevenue)}원`} icon={TrendingUp} />
             </div>
 
-            <Card>
+            <Card className="rounded-none">
               <CardHeader>
-                <CardTitle className="text-base">기간 내 캠페인 집계 추이</CardTitle>
+                <CardTitle className="text-base otr-section-marker">◆ 기간 내 캠페인 집계 추이</CardTitle>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -546,19 +540,19 @@ export default function PerformancePage() {
                     <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 12 }} />
                     <Tooltip />
                     <Legend />
-                    <Bar yAxisId="left" dataKey="views" fill="hsl(var(--primary))" name="조회수" radius={[4, 4, 0, 0]} />
+                    <Bar yAxisId="left" dataKey="views" fill="hsl(var(--primary))" name="조회수" radius={[0, 0, 0, 0]} />
                     <Line yAxisId="right" type="monotone" dataKey="orders" stroke="#ef4444" name="주문수" strokeWidth={2} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">크리에이터 × 캠페인 매트릭스</CardTitle>
-                <CardDescription>크리에이터별 캠페인 매출 기여도</CardDescription>
-              </CardHeader>
-              <CardContent className="overflow-x-auto">
+            <div>
+              <div className="mb-3">
+                <h3 className="text-base font-semibold otr-section-marker">◆ 크리에이터 × 캠페인 매트릭스</h3>
+                <p className="text-sm text-muted-foreground">크리에이터별 캠페인 매출 기여도</p>
+              </div>
+              <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -579,8 +573,8 @@ export default function PerformancePage() {
                     ))}
                   </TableBody>
                 </Table>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </TabsContent>
         </Tabs>
       </main>

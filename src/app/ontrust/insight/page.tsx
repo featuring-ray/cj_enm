@@ -121,7 +121,7 @@ export default function InsightPage() {
         description="캠페인/크리에이터/상품별 상세 분석 인사이트"
       />
 
-      <main className="flex-1 p-4 md:p-6">
+      <main className="flex-1 p-4">
         <Tabs defaultValue="campaign">
           <TabsList className="flex-wrap h-auto">
             <TabsTrigger value="campaign">캠페인별</TabsTrigger>
@@ -132,25 +132,23 @@ export default function InsightPage() {
 
           {/* Campaign Insight */}
           <TabsContent value="campaign" className="space-y-6 mt-4">
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-center gap-4">
-                  <label className="text-sm font-medium shrink-0">캠페인 선택</label>
-                  <Select value={selectedCampaignId} onValueChange={setSelectedCampaignId}>
-                    <SelectTrigger className="max-w-md">
-                      <SelectValue placeholder="캠페인을 선택하세요" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {campaigns.map((c) => (
-                        <SelectItem key={c.id} value={c.id}>
-                          {c.title} ({c.brandName})
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="otr-search-panel">
+              <div className="flex items-center gap-4">
+                <label className="text-sm font-medium shrink-0">캠페인 선택</label>
+                <Select value={selectedCampaignId} onValueChange={setSelectedCampaignId}>
+                  <SelectTrigger className="max-w-md">
+                    <SelectValue placeholder="캠페인을 선택하세요" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {campaigns.map((c) => (
+                      <SelectItem key={c.id} value={c.id}>
+                        {c.title} ({c.brandName})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
             {/* Engagement Top 5 */}
             <Card>
@@ -165,7 +163,7 @@ export default function InsightPage() {
                     <XAxis type="number" />
                     <YAxis type="category" dataKey="name" width={100} tick={{ fontSize: 12 }} />
                     <Tooltip />
-                    <Bar dataKey="engagement" fill="hsl(var(--primary))" name="참여수" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="engagement" fill="hsl(var(--primary))" name="참여수" radius={[0, 0, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -253,7 +251,7 @@ export default function InsightPage() {
                   {MOCK_CJ_DATA.topProducts.map((p, idx) => (
                     <div
                       key={p.name}
-                      className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
+                      className="flex items-center justify-between p-3 bg-muted/50"
                     >
                       <div className="flex items-center gap-3">
                         <span className="text-sm font-bold text-muted-foreground w-6 text-center">
@@ -295,7 +293,7 @@ export default function InsightPage() {
                     <XAxis dataKey="name" tick={{ fontSize: 12 }} />
                     <YAxis tick={{ fontSize: 12 }} />
                     <Tooltip />
-                    <Bar dataKey="engagement" fill="hsl(var(--primary))" name="참여수" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="engagement" fill="hsl(var(--primary))" name="참여수" radius={[0, 0, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -411,24 +409,22 @@ export default function InsightPage() {
 
           {/* Brand Insight */}
           <TabsContent value="brand" className="space-y-6 mt-4">
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-center gap-4">
-                  <label className="text-sm font-medium shrink-0">브랜드 선택</label>
-                  <Select defaultValue="oliveyoung">
-                    <SelectTrigger className="max-w-md">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="oliveyoung">올리브영</SelectItem>
-                      <SelectItem value="cjcheiljedang">CJ제일제당</SelectItem>
-                      <SelectItem value="musinsa">무신사</SelectItem>
-                      <SelectItem value="tvn">tvN</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="otr-search-panel">
+              <div className="flex items-center gap-4">
+                <label className="text-sm font-medium shrink-0">브랜드 선택</label>
+                <Select defaultValue="oliveyoung">
+                  <SelectTrigger className="max-w-md">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="oliveyoung">올리브영</SelectItem>
+                    <SelectItem value="cjcheiljedang">CJ제일제당</SelectItem>
+                    <SelectItem value="musinsa">무신사</SelectItem>
+                    <SelectItem value="tvn">tvN</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <StatsCard title="브랜드 캠페인" value="12건" icon={Package} description="올리브영 기준" />
@@ -449,7 +445,7 @@ export default function InsightPage() {
                     <XAxis type="number" />
                     <YAxis type="category" dataKey="name" width={100} tick={{ fontSize: 12 }} />
                     <Tooltip />
-                    <Bar dataKey="engagement" fill="hsl(var(--primary))" name="참여수" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="engagement" fill="hsl(var(--primary))" name="참여수" radius={[0, 0, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>

@@ -128,7 +128,7 @@ export function OntrustShell({
     .slice(0, 2);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="ontrust-portal flex flex-col min-h-screen bg-background">
       {/* ═══════════ GNB 상단 바 ═══════════ */}
       <header className="shrink-0 border-b bg-white z-30">
         {/* 1단: 로고 + GNB 메뉴 + 검색/유저 */}

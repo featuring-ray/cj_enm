@@ -5,19 +5,11 @@ import {
   Settings,
   Save,
   FileText,
-  Calendar,
   CheckCircle2,
   Clock,
   XCircle,
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -67,7 +59,7 @@ export default function AdminDmPage() {
         description="자동 DM 초안 발송 이력 및 시스템 설정을 관리합니다"
       />
 
-      <main className="flex-1 p-6 space-y-6">
+      <main className="flex-1 p-4 space-y-4">
         <Tabs defaultValue="history">
           <TabsList>
             <TabsTrigger value="history">초안 발송 이력</TabsTrigger>
@@ -76,17 +68,13 @@ export default function AdminDmPage() {
 
           {/* 초안 발송 이력 탭 */}
           <TabsContent value="history" className="mt-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2">
-                  <FileText className="h-4 w-4" />
-                  초안 발송 이력
-                </CardTitle>
-                <CardDescription>
-                  어떤 초안이 어떤 크리에이터에게 언제 발송되었는지 조회합니다
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-0">
+            <div className="otr-section-marker">
+              <FileText className="h-4 w-4" />
+              ◆ 초안 발송 이력
+            </div>
+            <p className="text-xs text-muted-foreground mb-3">
+              어떤 초안이 어떤 크리에이터에게 언제 발송되었는지 조회합니다
+            </p>
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -149,21 +137,16 @@ export default function AdminDmPage() {
                     })}
                   </TableBody>
                 </Table>
-              </CardContent>
-            </Card>
           </TabsContent>
 
           {/* 시스템 설정 탭 */}
           <TabsContent value="settings" className="mt-4">
             <div className="max-w-2xl space-y-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base flex items-center gap-2">
-                    <Settings className="h-4 w-4" />
-                    시스템 설정
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
+              <div className="otr-section-marker">
+                <Settings className="h-4 w-4" />
+                ◆ 시스템 설정
+              </div>
+              <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <Label>블랙리스트 필터 사용</Label>
@@ -194,11 +177,10 @@ export default function AdminDmPage() {
                       onChange={(e) => setDefaultFollowBMsg(e.target.value)}
                     />
                   </div>
-                </CardContent>
-              </Card>
+              </div>
 
               <div className="flex justify-end">
-                <Button onClick={handleSave}>
+                <Button className="otr-btn-primary" onClick={handleSave}>
                   <Save className="h-4 w-4 mr-1" />
                   {savedAlert ? "저장 완료!" : "설정 저장"}
                 </Button>

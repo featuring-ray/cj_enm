@@ -11,7 +11,6 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -134,41 +133,51 @@ export default function CampaignManagementPage() {
         }
       />
 
-      <main className="flex-1 p-4 md:p-6 space-y-4">
+      <main className="flex-1 p-4 space-y-4">
         {/* Filters */}
-        <div className="flex items-center gap-3">
-          <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              className="pl-9"
-              placeholder="캠페인명 또는 브랜드 검색..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+        <div className="otr-search-panel">
+          <div className="flex items-center gap-3">
+            <div className="relative flex-1 max-w-sm">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                className="pl-9"
+                placeholder="캠페인명 또는 브랜드 검색..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-36">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">전체 상태</SelectItem>
+                <SelectItem value="draft">초안</SelectItem>
+                <SelectItem value="proposed">제안됨</SelectItem>
+                <SelectItem value="in_progress">진행중</SelectItem>
+                <SelectItem value="completed">완료</SelectItem>
+                <SelectItem value="cancelled">취소</SelectItem>
+              </SelectContent>
+            </Select>
+            <span className="text-sm text-muted-foreground">총 {total}건</span>
           </div>
-          <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-36">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">전체 상태</SelectItem>
-              <SelectItem value="draft">초안</SelectItem>
-              <SelectItem value="proposed">제안됨</SelectItem>
-              <SelectItem value="in_progress">진행중</SelectItem>
-              <SelectItem value="completed">완료</SelectItem>
-              <SelectItem value="cancelled">취소</SelectItem>
-            </SelectContent>
-          </Select>
-          <span className="text-sm text-muted-foreground">총 {total}건</span>
+          <div className="flex items-center justify-end gap-2 mt-3">
+            <Button className="otr-btn-secondary" onClick={() => { setSearchQuery(""); setStatusFilter("all"); }}>
+              초기화
+            </Button>
+            <Button className="otr-btn-primary">
+              <Search className="h-4 w-4 mr-1.5" />
+              검색
+            </Button>
+          </div>
         </div>
 
         {/* Campaign Table */}
-        <Card>
-          <CardContent className="p-0">
+        <div>
             {loading ? (
               <div className="p-8 space-y-3">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <div key={i} className="h-12 bg-muted rounded animate-pulse" />
+                  <div key={i} className="h-12 bg-muted animate-pulse" />
                 ))}
               </div>
             ) : (
@@ -234,8 +243,7 @@ export default function CampaignManagementPage() {
                 </TableBody>
               </Table>
             )}
-          </CardContent>
-        </Card>
+        </div>
       </main>
 
       {/* Campaign Propose Modal (2 steps) */}
@@ -290,13 +298,14 @@ export default function CampaignManagementPage() {
 
           <DialogFooter>
             {proposeStep === 2 && (
-              <Button variant="outline" onClick={() => setProposeStep(1)}>
+              <Button className="otr-btn-secondary" onClick={() => setProposeStep(1)}>
                 <ChevronLeft className="h-4 w-4 mr-1" />
                 이전
               </Button>
             )}
             {proposeStep === 1 ? (
               <Button
+                className="otr-btn-primary"
                 onClick={() => setProposeStep(2)}
                 disabled={!selectedCampaignId}
               >
@@ -304,7 +313,7 @@ export default function CampaignManagementPage() {
                 <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
             ) : (
-              <Button onClick={handlePropose} disabled={!proposalCreatorIds.trim()}>
+              <Button className="otr-btn-primary" onClick={handlePropose} disabled={!proposalCreatorIds.trim()}>
                 <Send className="h-4 w-4 mr-1.5" />
                 제안 발송
               </Button>
@@ -341,8 +350,8 @@ export default function CampaignManagementPage() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setSignupOpen(false)}>취소</Button>
-            <Button onClick={handleSignup} disabled={!signupCreatorName.trim()}>
+            <Button className="otr-btn-secondary" onClick={() => setSignupOpen(false)}>취소</Button>
+            <Button className="otr-btn-primary" onClick={handleSignup} disabled={!signupCreatorName.trim()}>
               <UserPlus className="h-4 w-4 mr-1.5" />
               발송
             </Button>

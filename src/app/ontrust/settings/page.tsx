@@ -181,7 +181,7 @@ export default function SettingsPage() {
         description="피처링 SNS 계정 연동 상태 및 워크스페이스 멤버를 관리합니다"
       />
 
-      <main className="flex-1 p-4 md:p-6 space-y-6">
+      <main className="flex-1 p-4 space-y-4">
         {/* KPI Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <StatsCard
@@ -288,6 +288,7 @@ export default function SettingsPage() {
                           <Button
                             variant="outline"
                             size="sm"
+                            className="otr-btn-secondary"
                             disabled={syncing === account.id || account.status === "pending"}
                             onClick={() => handleSync(account.id)}
                           >
@@ -303,7 +304,7 @@ export default function SettingsPage() {
                 </Table>
 
                 {errorCount > 0 && (
-                  <div className="mt-4 flex items-start gap-2 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                  <div className="mt-4 flex items-start gap-2 text-sm text-red-600 bg-red-50 border border-red-200 px-4 py-3">
                     <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
                     <span>
                       {errorCount}개 계정에 연동 오류가 발생했습니다. 동기화 버튼을 눌러 재연동해 주세요.
@@ -325,7 +326,7 @@ export default function SettingsPage() {
                       온트러스트 접근 권한이 있는 멤버를 관리합니다 (최대 {LICENSE_LIMIT}명)
                     </CardDescription>
                   </div>
-                  <Button size="sm" onClick={() => setInviteOpen(true)}>
+                  <Button size="sm" className="otr-btn-primary" onClick={() => setInviteOpen(true)}>
                     <Plus className="h-4 w-4 mr-1.5" />
                     멤버 초대
                   </Button>
@@ -426,9 +427,9 @@ export default function SettingsPage() {
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Plan Info */}
-                <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg border">
+                <div className="flex items-center justify-between p-4 bg-muted/50 border">
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <div className="h-10 w-10 bg-primary/10 flex items-center justify-center">
                       <Key className="h-5 w-5 text-primary" />
                     </div>
                     <div>
@@ -534,10 +535,10 @@ export default function SettingsPage() {
             </p>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setInviteOpen(false)}>
+            <Button variant="outline" className="otr-btn-secondary" onClick={() => setInviteOpen(false)}>
               취소
             </Button>
-            <Button onClick={handleInvite} disabled={!inviteEmail.trim()}>
+            <Button className="otr-btn-primary" onClick={handleInvite} disabled={!inviteEmail.trim()}>
               초대 발송
             </Button>
           </DialogFooter>
@@ -555,10 +556,10 @@ export default function SettingsPage() {
             해당 멤버는 더 이상 온트러스트에 접근할 수 없습니다.
           </p>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteMember(null)}>
+            <Button variant="outline" className="otr-btn-secondary" onClick={() => setDeleteMember(null)}>
               취소
             </Button>
-            <Button variant="destructive" onClick={handleDeleteMember}>
+            <Button variant="destructive" className="otr-btn-primary" onClick={handleDeleteMember}>
               삭제
             </Button>
           </DialogFooter>

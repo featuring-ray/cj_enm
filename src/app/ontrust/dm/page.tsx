@@ -193,7 +193,7 @@ export default function DmPage() {
         description="자동 DM 성과 조회 및 초안을 관리합니다"
       />
 
-      <main className="flex-1 p-4 md:p-6">
+      <main className="flex-1 p-4">
         <Tabs defaultValue="performance">
           <TabsList>
             <TabsTrigger value="performance" className="gap-1.5">
@@ -212,7 +212,7 @@ export default function DmPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Card>
                 <CardContent className="flex items-center gap-3 pt-4 pb-4">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-100">
+                  <div className="flex h-9 w-9 items-center justify-center bg-blue-100">
                     <Activity className="h-4 w-4 text-blue-600" />
                   </div>
                   <div>
@@ -227,7 +227,7 @@ export default function DmPage() {
               </Card>
               <Card>
                 <CardContent className="flex items-center gap-3 pt-4 pb-4">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-green-100">
+                  <div className="flex h-9 w-9 items-center justify-center bg-green-100">
                     <Users className="h-4 w-4 text-green-600" />
                   </div>
                   <div>
@@ -242,7 +242,7 @@ export default function DmPage() {
               </Card>
               <Card>
                 <CardContent className="flex items-center gap-3 pt-4 pb-4">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100">
+                  <div className="flex h-9 w-9 items-center justify-center bg-amber-100">
                     <MousePointerClick className="h-4 w-4 text-amber-600" />
                   </div>
                   <div>
@@ -257,7 +257,7 @@ export default function DmPage() {
               </Card>
               <Card>
                 <CardContent className="flex items-center gap-3 pt-4 pb-4">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-100">
+                  <div className="flex h-9 w-9 items-center justify-center bg-purple-100">
                     <TrendingUp className="h-4 w-4 text-purple-600" />
                   </div>
                   <div>
@@ -273,31 +273,33 @@ export default function DmPage() {
             </div>
 
             {/* 필터 */}
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Select
-                value={perfCampaignFilter}
-                onValueChange={setPerfCampaignFilter}
-              >
-                <SelectTrigger className="w-full sm:w-[240px]">
-                  <SelectValue placeholder="캠페인 전체" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">캠페인 전체</SelectItem>
-                  {campaignOptions.map((c) => (
-                    <SelectItem key={c.id} value={c.id}>
-                      {c.name.length > 25 ? c.name.slice(0, 25) + "..." : c.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <div className="relative flex-1 max-w-xs">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  className="pl-9"
-                  placeholder="인플루언서 검색..."
-                  value={perfSearch}
-                  onChange={(e) => setPerfSearch(e.target.value)}
-                />
+            <div className="otr-search-panel">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Select
+                  value={perfCampaignFilter}
+                  onValueChange={setPerfCampaignFilter}
+                >
+                  <SelectTrigger className="w-full sm:w-[240px]">
+                    <SelectValue placeholder="캠페인 전체" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">캠페인 전체</SelectItem>
+                    {campaignOptions.map((c) => (
+                      <SelectItem key={c.id} value={c.id}>
+                        {c.name.length > 25 ? c.name.slice(0, 25) + "..." : c.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <div className="relative flex-1 max-w-xs">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    className="pl-9"
+                    placeholder="인플루언서 검색..."
+                    value={perfSearch}
+                    onChange={(e) => setPerfSearch(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
 
@@ -310,6 +312,7 @@ export default function DmPage() {
             <div className="flex justify-end">
               <Button
                 size="sm"
+                className="otr-btn-primary"
                 onClick={() => {
                   setEditingDraft(null);
                   setFormDialogOpen(true);
@@ -330,7 +333,7 @@ export default function DmPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="mt-3"
+                    className="mt-3 otr-btn-secondary"
                     onClick={() => {
                       setEditingDraft(null);
                       setFormDialogOpen(true);
@@ -401,7 +404,7 @@ export default function DmPage() {
               </div>
               <div>
                 <p className="text-xs text-muted-foreground mb-1">DM 메시지</p>
-                <div className="bg-muted/50 rounded-lg p-3 text-sm whitespace-pre-wrap">
+                <div className="bg-muted/50 p-3 text-sm whitespace-pre-wrap">
                   {previewDraft.dmMessageBody || "(메시지 미작성)"}
                 </div>
               </div>
@@ -414,7 +417,7 @@ export default function DmPage() {
                       .map((b, i) => (
                         <div
                           key={i}
-                          className="flex items-center justify-between rounded-lg border p-2"
+                          className="flex items-center justify-between border p-2"
                         >
                           <span className="text-sm font-medium">{b.name}</span>
                           <span className="text-xs text-muted-foreground truncate max-w-[180px]">
@@ -428,7 +431,7 @@ export default function DmPage() {
             </div>
           )}
           <DialogFooter>
-            <Button variant="outline" onClick={() => setPreviewDraft(null)}>
+            <Button variant="outline" className="otr-btn-secondary" onClick={() => setPreviewDraft(null)}>
               닫기
             </Button>
           </DialogFooter>
@@ -449,10 +452,10 @@ export default function DmPage() {
             <br />이 작업은 되돌릴 수 없습니다.
           </p>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteTarget(null)}>
+            <Button variant="outline" className="otr-btn-secondary" onClick={() => setDeleteTarget(null)}>
               취소
             </Button>
-            <Button variant="destructive" onClick={handleDeleteDraft}>
+            <Button variant="destructive" className="otr-btn-primary" onClick={handleDeleteDraft}>
               삭제
             </Button>
           </DialogFooter>

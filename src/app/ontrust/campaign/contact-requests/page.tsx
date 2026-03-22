@@ -356,14 +356,14 @@ export default function ContactRequestsPage() {
         title="컨택 요청 관리"
         description="T-A-15 · MD가 발송한 크리에이터 컨택 요청 건을 확인하고 처리 상태를 관리합니다."
         actions={
-          <Button size="sm" onClick={() => setNewRequestDialog(true)}>
+          <Button size="sm" className="otr-btn-primary" onClick={() => setNewRequestDialog(true)}>
             <UserPlus className="mr-1.5 h-4 w-4" />
             신규 요청 등록
           </Button>
         }
       />
 
-      <div className="p-6 space-y-6">
+      <div className="p-4 space-y-4">
         {/* ─── 통계 카드 ─── */}
         <div className="grid grid-cols-5 gap-4">
           {[
@@ -383,7 +383,7 @@ export default function ContactRequestsPage() {
         </div>
 
         {/* ─── 필터 및 액션 바 ─── */}
-        <div className="flex items-center gap-3 flex-wrap">
+        <div className="otr-search-panel flex items-center gap-3 flex-wrap">
           <div className="flex items-center gap-1.5">
             <Filter className="h-4 w-4 text-muted-foreground" />
             <span className="text-sm text-muted-foreground">필터:</span>
@@ -426,7 +426,7 @@ export default function ContactRequestsPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-8 text-xs"
+                  className="otr-btn-secondary h-8 text-xs"
                   onClick={() => setBulkStatusDialog(true)}
                 >
                   일괄 상태 변경
@@ -437,7 +437,7 @@ export default function ContactRequestsPage() {
         </div>
 
         {/* ─── 테이블 ─── */}
-        <Card>
+        <div>
           <div className="overflow-auto">
             <Table>
               <TableHeader>
@@ -611,7 +611,7 @@ export default function ContactRequestsPage() {
             </p>
             <p className="text-xs text-muted-foreground">1 / 1 페이지</p>
           </div>
-        </Card>
+        </div>
 
         {/* ─── 메모 영역: 선택된 항목이 1개일 때 ─── */}
         {selectedIds.length === 1 && (() => {
@@ -657,10 +657,10 @@ export default function ContactRequestsPage() {
             </Select>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setBulkStatusDialog(false)}>
+            <Button variant="outline" className="otr-btn-secondary" onClick={() => setBulkStatusDialog(false)}>
               취소
             </Button>
-            <Button onClick={handleBulkStatusChange} disabled={!bulkTargetStatus}>
+            <Button className="otr-btn-primary" onClick={handleBulkStatusChange} disabled={!bulkTargetStatus}>
               변경 적용
             </Button>
           </DialogFooter>
@@ -743,7 +743,7 @@ function NewRequestDialog({
           <div className="space-y-2">
             <Label className="text-sm">크리에이터 *</Label>
             {selectedCreator ? (
-              <div className="flex items-center gap-2 p-2 bg-gray-50 rounded-md">
+              <div className="flex items-center gap-2 p-2 bg-gray-50">
                 <Avatar className="h-6 w-6">
                   <AvatarFallback className="text-[10px]">
                     {getCreator(selectedCreator)?.name.charAt(0)}
@@ -769,7 +769,7 @@ function NewRequestDialog({
                   className="h-8 text-sm"
                 />
                 {matchingCreators.length > 0 && (
-                  <div className="border rounded-md max-h-[160px] overflow-auto">
+                  <div className="border max-h-[160px] overflow-auto">
                     {matchingCreators.map((c) => (
                       <button
                         key={c.id}
@@ -853,10 +853,10 @@ function NewRequestDialog({
           </div>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+          <Button variant="outline" className="otr-btn-secondary" onClick={() => onOpenChange(false)}>
             취소
           </Button>
-          <Button onClick={handleSubmit} disabled={!selectedCreator}>
+          <Button className="otr-btn-primary" onClick={handleSubmit} disabled={!selectedCreator}>
             <Send className="mr-1.5 h-4 w-4" />
             요청 발송
           </Button>
