@@ -22,6 +22,75 @@ export interface Creator {
   updatedAt: Date;
 }
 
+/** Mock 크리에이터 (OnTrust 검색용 확장 필드 포함) */
+export interface MockCreatorExtended {
+  id: string;
+  handle: string;
+  youtubeHandle?: string;
+  name: string;
+  profileImage?: string;
+  followers: number;
+  engagementRate: number;
+  category: string[];
+  isOntnerMember: boolean;
+  salesPrice?: number;
+  desiredCategory?: string;
+  desiredRate?: number;
+  introduction?: string;
+  biography: string;
+  campaigns: string[];
+  tier: "GOLD" | "SILVER" | "BRONZE";
+  // P2 확장 필드
+  contactEmail: string;
+  recentUploadDate: string;
+  avgFeedLikes: number;
+  avgVideoLikes: number;
+  avgVideoViews: number;
+  avgShortsViews?: number;
+  avgComments: number;
+  hasVerificationBadge: boolean;
+  estimatedReach: number;
+  audienceGender: { male: number; female: number };
+  audienceAge: Record<string, number>;
+  hasCoPurchase: boolean;
+  socialBuzzDetected: boolean;
+  // CJ 내부 데이터
+  ontnerCampaignCount: number;
+  avgPerformance?: number;
+  avgProductPrice?: number;
+  customerAge?: Record<string, number>;
+  rewardLinkUsage: boolean;
+  hasFollowerData: boolean;
+}
+
+/** 고급 필터 상태 (플랫폼별) */
+export interface AdvancedSearchFilters {
+  platform: "instagram" | "youtube" | "";
+  category: string[];
+  recentUploadPeriod: string;
+  followerMin: string;
+  followerMax: string;
+  // 인스타그램 전용
+  hasVerificationBadge: "all" | "yes" | "no";
+  avgFeedLikesMin: string;
+  avgFeedLikesMax: string;
+  avgVideoLikesMin: string;
+  avgVideoLikesMax: string;
+  avgVideoViewsMin: string;
+  avgVideoViewsMax: string;
+  erMin: string;
+  erMax: string;
+  estimatedReachMin: string;
+  estimatedReachMax: string;
+  // 유튜브 전용
+  avgShortsViewsMin: string;
+  avgShortsViewsMax: string;
+  // 오디언스
+  audienceGender: "all" | "female" | "male";
+  audienceAgeMin: string;
+  audienceAgeMax: string;
+}
+
 export interface CreatorBrand {
   brandId: string;
   brandName: string;

@@ -1,0 +1,19 @@
+[
+  {
+    "agencyId": "agency-1",
+    "agencyName": "뷰티크루 에이전시",
+    "creators": [
+      { "id": "creator-1", "name": "tomato422" },
+      { "id": "creator-2", "name": "beauty_jin" },
+      { "id": "creator-3", "name": "skincare_hana" }
+    ]
+  },
+  {
+    "agencyId": "agency-2",
+    "agencyName": "푸드스타 에이전시",
+    "creators": [
+      { "id": "creator-1", "name": "tomato422" },
+      { "id": "creator-2", "name": "beauty_jin" }
+    ]
+  }
+]

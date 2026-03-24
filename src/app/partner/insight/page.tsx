@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   TrendingUp,
   BarChart3,
@@ -403,10 +404,12 @@ export default function PartnerInsightPage() {
                   {campaign.brand} 브랜드와 핏이 좋은 온트너 회원 크리에이터
                 </CardDescription>
               </div>
-              <Button variant="outline" size="sm">
-                더보기
-                <ChevronRight className="h-4 w-4 ml-1" />
-              </Button>
+              <Link href="/partner/creator/recommend">
+                <Button variant="outline" size="sm">
+                  더보기
+                  <ChevronRight className="h-4 w-4 ml-1" />
+                </Button>
+              </Link>
             </div>
           </CardHeader>
           <CardContent>

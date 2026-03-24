@@ -8,3 +8,6 @@ export { OtrTierBadge } from "./otr-tier-badge";
 export { OtrPlatformToggle } from "./otr-platform-toggle";
 export { OtrDateRange } from "./otr-date-range";
 export { OtrTextareaCounter } from "./otr-textarea-counter";
+export { OtrTabBar } from "./otr-tab-bar";
+export { OtrRangeInput } from "./otr-range-input";
+export { OtrAdvancedFilterPanel, defaultAdvancedFilters, type AdvancedFilterState } from "./otr-advanced-filter-panel";

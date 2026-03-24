@@ -320,22 +320,25 @@
 .ontn-status-badge {
   display: inline-flex;
   align-items: center;
-  padding: 3px 10px;
+  padding: 4px 10px;
   font-size: 11px;
   font-weight: 600;
   color: white;
   background: var(--ontn-primary);
   border-radius: 2px;
+  letter-spacing: 0.02em;
 }
 
 .ontn-recruit-badge {
   display: inline-flex;
   align-items: center;
-  padding: 3px 8px;
+  padding: 4px 10px;
   font-size: 11px;
-  color: var(--ontn-text-secondary);
-  background: rgba(255,255,255,0.9);
+  font-weight: 500;
+  color: white;
+  background: rgba(0,0,0,0.45);
   border-radius: 2px;
+  letter-spacing: 0.01em;
 }
 
 /* ── ONTNER Reward Label ── */
@@ -754,6 +757,36 @@
 .ontrust-portal [data-slot="table-row"],
 .ontrust-portal tr {
   border: none;
+}
+
+/* ── Sticky table — separate borders so sticky cells fully cover content ── */
+.ontrust-portal table.otr-sticky-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.ontrust-portal table.otr-sticky-table th,
+.ontrust-portal table.otr-sticky-table td {
+  border: none;
+  border-right: 1px solid var(--otr-border);
+  border-bottom: 1px solid var(--otr-border);
+}
+.ontrust-portal table.otr-sticky-table thead tr:first-child th {
+  border-top: 1px solid var(--otr-border);
+}
+.ontrust-portal table.otr-sticky-table th:first-child,
+.ontrust-portal table.otr-sticky-table td:first-child {
+  border-left: 1px solid var(--otr-border);
+}
+/* Sticky columns: border-box so width includes padding+border → left offsets match exactly */
+.ontrust-portal table.otr-sticky-table th:nth-child(-n+4),
+.ontrust-portal table.otr-sticky-table td:nth-child(-n+4) {
+  box-sizing: border-box;
+}
+/* Last sticky column shadow: covers any sub-pixel gap + visual separator */
+.ontrust-portal table.otr-sticky-table th:nth-child(4),
+.ontrust-portal table.otr-sticky-table td:nth-child(4) {
+  border-right: none;
+  box-shadow: 2px 0 4px -1px rgba(0, 0, 0, 0.08);
 }
 
 /* ── Tabs — traditional tab style ── */

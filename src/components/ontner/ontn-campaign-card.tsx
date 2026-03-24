@@ -49,7 +49,7 @@ export function OntnCampaignCard({ campaign, className }: OntnCampaignCardProps)
               e.stopPropagation();
               setLiked(!liked);
             }}
-            className="absolute top-3 right-3 p-1"
+            className="absolute top-3 right-3 p-1 z-[1]"
           >
             <Heart
               className={cn(
@@ -59,8 +59,11 @@ export function OntnCampaignCard({ campaign, className }: OntnCampaignCardProps)
             />
           </button>
 
-          {/* Bottom Overlay */}
-          <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-2 py-1.5">
+          {/* Bottom Gradient Overlay */}
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+
+          {/* Bottom Badges */}
+          <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-2.5 py-2 z-[1]">
             <span className="ontn-status-badge">{campaign.status}</span>
             <span className="ontn-recruit-badge">
               모집인원 {campaign.recruitCount}명
@@ -69,17 +72,17 @@ export function OntnCampaignCard({ campaign, className }: OntnCampaignCardProps)
         </div>
 
         {/* Info Area */}
-        <div className="p-3 space-y-1">
-          <p className="text-xs text-gray-500">
+        <div className="px-3 pt-3 pb-3.5 space-y-1">
+          <p className="text-xs text-gray-500 truncate">
             {campaign.campaignType} | {campaign.brand}
           </p>
           <p className="ontn-reward-label">{campaign.settlementType}</p>
-          <p className="text-sm text-gray-900 line-clamp-2 leading-snug">
+          <p className="text-[13px] text-gray-900 font-medium line-clamp-2 leading-[1.4]">
             {campaign.name}
           </p>
           <p className="flex items-center gap-1 text-xs text-gray-400 pt-1">
-            <Calendar className="w-3 h-3" />
-            모집기한 {campaign.recruitEndDate.replace(/-/g, ".")} 23:59
+            <Calendar className="w-3 h-3 flex-shrink-0" />
+            <span>모집기한 {campaign.recruitEndDate.replace(/-/g, ".")} 23:59</span>
           </p>
         </div>
       </div>

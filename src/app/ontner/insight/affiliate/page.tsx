@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, Link2 } from "lucide-react";
+import { Sparkles, Link2, Info, Lightbulb, RefreshCcw, ArrowRight } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
+import { Progress } from "@/components/ui/progress";
 import {
   Card,
   CardContent,
@@ -20,6 +21,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
   BarChart,
   Bar,
@@ -130,19 +139,29 @@ const mockAffiliateTrend = [
   { date: "03/10", clicks: 320, conversions: 17, revenue: 595000 },
 ];
 
-// CJ data (mock)
+// 성과 상위 상품 TOP 5 (매출 포함)
 const mockAffiliateTopProducts = [
-  { rank: 1, name: "그린티 시드 세럼", conversions: 204, conversionRate: 4.2 },
-  { rank: 2, name: "비비고 만두 세트", conversions: 178, conversionRate: 3.8 },
-  { rank: 3, name: "올영 스킨케어 세트", conversions: 152, conversionRate: 3.5 },
-  { rank: 4, name: "무신사 봄 재킷", conversions: 98, conversionRate: 2.9 },
-  { rank: 5, name: "스타일러 신모델", conversions: 42, conversionRate: 5.1 },
+  { rank: 1, name: "그린티 시드 세럼", conversions: 204, conversionRate: 4.2, revenue: 7140000 },
+  { rank: 2, name: "비비고 만두 세트", conversions: 178, conversionRate: 3.8, revenue: 5340000 },
+  { rank: 3, name: "올영 스킨케어 세트", conversions: 152, conversionRate: 3.5, revenue: 4560000 },
+  { rank: 4, name: "무신사 봄 재킷", conversions: 98, conversionRate: 2.9, revenue: 5880000 },
+  { rank: 5, name: "스타일러 신모델", conversions: 42, conversionRate: 5.1, revenue: 8400000 },
 ];
 
-const mockRepurchaseByProduct = [
-  { name: "그린티 시드 세럼", rate: 35.2 },
-  { name: "비비고 만두 세트", rate: 42.8 },
-  { name: "올영 스킨케어 세트", rate: 28.5 },
+// 리워드 링크 리텐션 (상품 간 구매 리텐션)
+const mockProductRetention = [
+  { fromProduct: "그린티 시드 세럼", toProduct: "비타C 토너패드 70매", retentionRate: 24.5 },
+  { fromProduct: "비비고 만두 세트", toProduct: "비비고 갈비탕 500g", retentionRate: 31.2 },
+  { fromProduct: "올영 스킨케어 세트", toProduct: "그린티 시드 세럼", retentionRate: 18.8 },
+  { fromProduct: "그린티 시드 세럼", toProduct: "히알루론 크림 50ml", retentionRate: 22.1 },
+  { fromProduct: "무신사 봄 재킷", toProduct: "무신사 데님 팬츠", retentionRate: 15.6 },
+];
+
+const mockRetentionBrands = [
+  { brand: "이니스프리", repurchaseRate: 28.5 },
+  { brand: "CJ제일제당", repurchaseRate: 24.2 },
+  { brand: "올리브영", repurchaseRate: 21.8 },
+  { brand: "무신사", repurchaseRate: 15.6 },
 ];
 
 function formatKRW(amount: number) {
@@ -175,7 +194,7 @@ export default function AffiliateInsightPage() {
     <>
       <PageHeader
         title="인사이트 리포트 - 제휴/리워드"
-        description="제휴 링크 상품별 성과 분석"
+        description="리워드 링크 상품별 성과 분석 및 구매 고객 리텐션 인사이트"
       />
 
       <main className="flex-1 p-4 md:p-6 space-y-6">
@@ -221,6 +240,16 @@ export default function AffiliateInsightPage() {
           </CardContent>
         </Card>
 
+        {/* 통합 집계 안내 */}
+        <Card className="border-blue-200 bg-blue-50/30">
+          <CardContent className="pt-4 pb-4 flex items-start gap-3">
+            <Info className="h-4 w-4 text-blue-600 mt-0.5 shrink-0" />
+            <p className="text-xs text-blue-700">
+              리워드 링크는 시작/종료 개념이 없으므로, 설정 기간 내 발생 매출을 기준으로 통합 집계합니다.
+            </p>
+          </CardContent>
+        </Card>
+
         {/* Insight Summary */}
         <Card>
           <CardHeader>
@@ -232,15 +261,111 @@ export default function AffiliateInsightPage() {
           <CardContent className="space-y-2">
             <p className="text-sm">
               <strong>{productName}</strong> 상품에서 가장 높은 참여도를 기록한 콘텐츠는{" "}
-              <strong>&quot;{topContentName}&quot;</strong> (참여 점수 {topContentScore})입니다.
+              <strong>&quot;{topContentName}&quot;</strong> (참여 점수 <strong>{topContentScore}</strong>)입니다.
             </p>
             <p className="text-sm">
-              콘텐츠 유형 중 <strong>{topType}</strong>가 전체의 {topTypePercent}%로 가장 높은 전환을 기록했습니다.
+              콘텐츠 유형 중 <strong>{topType}</strong>가 전체의 <strong>{topTypePercent}%</strong>로 가장 높은 전환을 기록했습니다.
             </p>
             <p className="text-sm">
               선택 기간 총 클릭 <strong>{totalClicks.toLocaleString()}회</strong>, 전환{" "}
               <strong>{totalConversions}건</strong>, 매출 <strong>{formatKRW(totalRevenue)}</strong>을 달성했습니다.
             </p>
+          </CardContent>
+        </Card>
+
+        {/* ═══ 1. 성과 상위 상품 TOP 5 ═══ */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">성과 상위 상품 TOP 5</CardTitle>
+            <CardDescription>기간 내 리워드 링크 매출액 기준</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-12">순위</TableHead>
+                  <TableHead>상품명</TableHead>
+                  <TableHead className="text-right">전환</TableHead>
+                  <TableHead className="text-right">전환율</TableHead>
+                  <TableHead className="text-right">매출</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {mockAffiliateTopProducts.map((p) => (
+                  <TableRow key={p.rank}>
+                    <TableCell>
+                      <Badge variant="outline" className="text-xs w-6 justify-center">
+                        {p.rank}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-sm font-medium">{p.name}</TableCell>
+                    <TableCell className="text-right text-sm">{p.conversions}건</TableCell>
+                    <TableCell className="text-right text-sm">{p.conversionRate}%</TableCell>
+                    <TableCell className="text-right text-sm font-medium">{formatKRW(p.revenue)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+
+        {/* ═══ 2. 리워드 링크 리텐션 ═══ */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2">
+              <RefreshCcw className="h-4 w-4 text-blue-500" />
+              리워드 링크 리텐션
+            </CardTitle>
+            <CardDescription>
+              리워드 링크 구매 고객의 재구매 패턴 (기간 기준 통합 집계)
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="rounded-md border p-3 bg-blue-50/50 text-sm text-blue-800 flex items-start gap-2">
+              <Lightbulb className="h-4 w-4 mt-0.5 shrink-0" />
+              <span>[활용 TIP] 상품 간 리텐션이 높은 조합을 파악하여 교차 프로모션 전략에 활용하세요</span>
+            </div>
+
+            {/* 상품 간 구매 리텐션율 */}
+            <div>
+              <p className="text-sm font-medium mb-3">상품 간 구매 리텐션율</p>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>구매 상품</TableHead>
+                    <TableHead><ArrowRight className="h-3.5 w-3.5 inline" /></TableHead>
+                    <TableHead>추가 구매 상품</TableHead>
+                    <TableHead className="text-right">리텐션율</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {mockProductRetention.map((pr, i) => (
+                    <TableRow key={i}>
+                      <TableCell className="text-sm">{pr.fromProduct}</TableCell>
+                      <TableCell><ArrowRight className="h-3 w-3 text-muted-foreground" /></TableCell>
+                      <TableCell className="text-sm">{pr.toProduct}</TableCell>
+                      <TableCell className="text-right font-medium text-sm">{pr.retentionRate}%</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+
+            {/* 재구매 상위 브랜드 */}
+            <div>
+              <p className="text-sm font-medium mb-3">재구매 상위 브랜드</p>
+              <div className="space-y-2">
+                {mockRetentionBrands.map((b) => (
+                  <div key={b.brand} className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span>{b.brand}</span>
+                      <span className="font-medium">{b.repurchaseRate}%</span>
+                    </div>
+                    <Progress value={b.repurchaseRate} className="h-2" />
+                  </div>
+                ))}
+              </div>
+            </div>
           </CardContent>
         </Card>
 
@@ -336,70 +461,6 @@ export default function AffiliateInsightPage() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-
-        {/* CJ Data Area (Mock) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Top Products by Conversion */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">상품별 전환 현황</CardTitle>
-              <CardDescription>CJ 사내 데이터 (mock)</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {mockAffiliateTopProducts.map((p) => (
-                  <div
-                    key={p.rank}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Badge variant="outline" className="text-xs w-6 justify-center">
-                        {p.rank}
-                      </Badge>
-                      <span className="text-sm truncate max-w-[140px]">
-                        {p.name}
-                      </span>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-sm font-medium">
-                        {p.conversions}건
-                      </span>
-                      <span className="text-xs text-muted-foreground ml-2">
-                        ({p.conversionRate}%)
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Repurchase Rate by Product */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">상품별 재구매율</CardTitle>
-              <CardDescription>CJ 사내 데이터 (mock)</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {mockRepurchaseByProduct.map((item) => (
-                  <div key={item.name} className="space-y-1">
-                    <div className="flex justify-between text-sm">
-                      <span className="truncate max-w-[180px]">{item.name}</span>
-                      <span className="font-medium">{item.rate}%</span>
-                    </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-primary rounded-full"
-                        style={{ width: `${item.rate}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
       </main>
     </>
   );

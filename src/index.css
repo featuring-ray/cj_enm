@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-500: #0070f3;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900;
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+}

@@ -331,14 +331,16 @@ interface AudienceSegment {
 }
 
 interface SimilarityConfig {
+  platform: "instagram";     // 온트너는 인스타그램만 지원
   maxComparisons: {
     ontrust: number;         // 최대 5명
     ontner: number;          // 1:1만
   };
   tierLimits: {
     tier: string;
-    dailyLimit: number;
+    dailyLimit: number;      // 등급별 제공 횟수
   }[];
+  resultValidityMonths: number;  // 분석 결과 유효기간 (6개월)
 }
 ```
 

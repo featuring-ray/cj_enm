@@ -7,14 +7,56 @@
     "profileImage": "/avatars/creator-1.jpg",
     "followers": 285000,
     "engagementRate": 4.2,
-    "category": ["뷰티", "패션"],
+    "category": [
+      "뷰티",
+      "패션"
+    ],
     "isOntnerMember": true,
     "salesPrice": 1500000,
     "desiredCategory": "뷰티",
     "desiredRate": 2000000,
     "introduction": "뷰티/패션 크리에이터. CJ온스타일 공동구매 다수 진행.",
-    "campaigns": ["campaign-1", "campaign-2", "campaign-4"],
-    "tier": "GOLD"
+    "biography": "뷰티 & 패션 크리에이터 | 매주 공구 진행 | 협업 문의 DM",
+    "campaigns": [
+      "campaign-1",
+      "campaign-2",
+      "campaign-4"
+    ],
+    "tier": "GOLD",
+    "contactEmail": "beauty_hana@creator.co.kr",
+    "recentUploadDate": "2026-03-20",
+    "avgFeedLikes": 8200,
+    "avgVideoLikes": 12400,
+    "avgVideoViews": 45000,
+    "avgShortsViews": 32000,
+    "avgComments": 890,
+    "hasVerificationBadge": true,
+    "estimatedReach": 142000,
+    "audienceGender": {
+      "male": 22,
+      "female": 78
+    },
+    "audienceAge": {
+      "13-17": 5,
+      "18-24": 28,
+      "25-34": 42,
+      "35-44": 18,
+      "45-54": 5,
+      "55+": 2
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 3,
+    "avgPerformance": 9800000,
+    "avgProductPrice": 35000,
+    "customerAge": {
+      "20대": 35,
+      "30대": 42,
+      "40대": 18,
+      "50대+": 5
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
   },
   {
     "id": "creator-2",
@@ -24,14 +66,55 @@
     "profileImage": "/avatars/creator-2.jpg",
     "followers": 520000,
     "engagementRate": 3.8,
-    "category": ["푸드", "리빙"],
+    "category": [
+      "푸드",
+      "리빙"
+    ],
     "isOntnerMember": true,
     "salesPrice": 2500000,
     "desiredCategory": "푸드",
     "desiredRate": 3000000,
     "introduction": "맛집 탐방 & 쿡방 전문. 식품 브랜드 협업 경험 풍부.",
-    "campaigns": ["campaign-2", "campaign-5"],
-    "tier": "GOLD"
+    "biography": "맛집 탐방 | 쿡방 | 식품 리뷰 전문 크리에이터",
+    "campaigns": [
+      "campaign-2",
+      "campaign-5"
+    ],
+    "tier": "GOLD",
+    "contactEmail": "foodie_jin@naver.com",
+    "recentUploadDate": "2026-03-22",
+    "avgFeedLikes": 15200,
+    "avgVideoLikes": 18500,
+    "avgVideoViews": 82000,
+    "avgShortsViews": 55000,
+    "avgComments": 1230,
+    "hasVerificationBadge": true,
+    "estimatedReach": 260000,
+    "audienceGender": {
+      "male": 35,
+      "female": 65
+    },
+    "audienceAge": {
+      "13-17": 3,
+      "18-24": 22,
+      "25-34": 38,
+      "35-44": 25,
+      "45-54": 9,
+      "55+": 3
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": true,
+    "ontnerCampaignCount": 2,
+    "avgPerformance": 12500000,
+    "avgProductPrice": 28000,
+    "customerAge": {
+      "20대": 25,
+      "30대": 40,
+      "40대": 28,
+      "50대+": 7
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
   },
   {
     "id": "creator-3",
@@ -40,13 +123,53 @@
     "profileImage": "/avatars/creator-3.jpg",
     "followers": 180000,
     "engagementRate": 5.1,
-    "category": ["패션", "라이프스타일"],
+    "category": [
+      "패션",
+      "라이프스타일"
+    ],
     "isOntnerMember": true,
     "desiredCategory": "패션",
     "desiredRate": 1500000,
     "introduction": "데일리룩 & 쇼핑하울 전문 크리에이터.",
-    "campaigns": ["campaign-1", "campaign-3"],
-    "tier": "SILVER"
+    "biography": "패션 크리에이터 | 데일리룩 & 쇼핑하울 | 30대 직장인 스타일",
+    "campaigns": [
+      "campaign-1",
+      "campaign-3"
+    ],
+    "tier": "SILVER",
+    "contactEmail": "style_mina@gmail.com",
+    "recentUploadDate": "2026-03-19",
+    "avgFeedLikes": 6800,
+    "avgVideoLikes": 9200,
+    "avgVideoViews": 28000,
+    "avgComments": 670,
+    "hasVerificationBadge": false,
+    "estimatedReach": 90000,
+    "audienceGender": {
+      "male": 15,
+      "female": 85
+    },
+    "audienceAge": {
+      "13-17": 8,
+      "18-24": 32,
+      "25-34": 38,
+      "35-44": 16,
+      "45-54": 4,
+      "55+": 2
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 2,
+    "avgPerformance": 6200000,
+    "avgProductPrice": 42000,
+    "customerAge": {
+      "20대": 38,
+      "30대": 35,
+      "40대": 20,
+      "50대+": 7
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
   },
   {
     "id": "creator-4",
@@ -56,12 +179,44 @@
     "profileImage": "/avatars/creator-4.jpg",
     "followers": 890000,
     "engagementRate": 2.9,
-    "category": ["테크", "리빙"],
+    "category": [
+      "테크",
+      "리빙"
+    ],
     "isOntnerMember": false,
     "salesPrice": 4000000,
     "introduction": "IT/가전 전문 리뷰어. 유튜브 중심 활동.",
-    "campaigns": ["campaign-6"],
-    "tier": "GOLD"
+    "biography": "IT·가전 전문 리뷰어 | 유튜브 89만 | 정직한 리뷰",
+    "campaigns": [
+      "campaign-6"
+    ],
+    "tier": "GOLD",
+    "contactEmail": "techreview_kr@gmail.com",
+    "recentUploadDate": "2026-03-21",
+    "avgFeedLikes": 22000,
+    "avgVideoLikes": 35000,
+    "avgVideoViews": 280000,
+    "avgShortsViews": 120000,
+    "avgComments": 3400,
+    "hasVerificationBadge": true,
+    "estimatedReach": 445000,
+    "audienceGender": {
+      "male": 72,
+      "female": 28
+    },
+    "audienceAge": {
+      "13-17": 8,
+      "18-24": 30,
+      "25-34": 35,
+      "35-44": 18,
+      "45-54": 7,
+      "55+": 2
+    },
+    "hasCoPurchase": false,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 0,
+    "rewardLinkUsage": false,
+    "hasFollowerData": false
   },
   {
     "id": "creator-5",
@@ -70,13 +225,52 @@
     "profileImage": "/avatars/creator-5.jpg",
     "followers": 95000,
     "engagementRate": 6.3,
-    "category": ["리빙", "인테리어"],
+    "category": [
+      "리빙",
+      "인테리어"
+    ],
     "isOntnerMember": true,
     "desiredCategory": "리빙",
     "desiredRate": 800000,
     "introduction": "홈스타일링 & 인테리어 소품 전문.",
-    "campaigns": ["campaign-3"],
-    "tier": "BRONZE"
+    "biography": "홈스타일링 전문 | 인테리어 소품 추천 | 신혼집 꾸미기",
+    "campaigns": [
+      "campaign-3"
+    ],
+    "tier": "BRONZE",
+    "contactEmail": "living_soo@naver.com",
+    "recentUploadDate": "2026-03-18",
+    "avgFeedLikes": 4200,
+    "avgVideoLikes": 5800,
+    "avgVideoViews": 18000,
+    "avgComments": 540,
+    "hasVerificationBadge": false,
+    "estimatedReach": 47000,
+    "audienceGender": {
+      "male": 28,
+      "female": 72
+    },
+    "audienceAge": {
+      "13-17": 3,
+      "18-24": 18,
+      "25-34": 45,
+      "35-44": 25,
+      "45-54": 7,
+      "55+": 2
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 1,
+    "avgPerformance": 3200000,
+    "avgProductPrice": 25000,
+    "customerAge": {
+      "20대": 22,
+      "30대": 48,
+      "40대": 22,
+      "50대+": 8
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
   },
   {
     "id": "creator-6",
@@ -85,13 +279,53 @@
     "profileImage": "/avatars/creator-6.jpg",
     "followers": 150000,
     "engagementRate": 4.8,
-    "category": ["육아", "리빙"],
+    "category": [
+      "육아",
+      "리빙"
+    ],
     "isOntnerMember": true,
     "desiredCategory": "육아",
     "desiredRate": 1200000,
     "introduction": "두 아이 엄마. 육아템/리빙 꿀템 공유.",
-    "campaigns": ["campaign-5", "campaign-7"],
-    "tier": "SILVER"
+    "biography": "두 아이 엄마 | 육아템 리뷰 | 리빙 꿀템 | 공구 진행",
+    "campaigns": [
+      "campaign-5",
+      "campaign-7"
+    ],
+    "tier": "SILVER",
+    "contactEmail": "mom_yeon@daum.net",
+    "recentUploadDate": "2026-03-21",
+    "avgFeedLikes": 5600,
+    "avgVideoLikes": 7200,
+    "avgVideoViews": 22000,
+    "avgComments": 820,
+    "hasVerificationBadge": false,
+    "estimatedReach": 75000,
+    "audienceGender": {
+      "male": 12,
+      "female": 88
+    },
+    "audienceAge": {
+      "13-17": 1,
+      "18-24": 8,
+      "25-34": 42,
+      "35-44": 38,
+      "45-54": 9,
+      "55+": 2
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": true,
+    "ontnerCampaignCount": 2,
+    "avgPerformance": 7800000,
+    "avgProductPrice": 18000,
+    "customerAge": {
+      "20대": 12,
+      "30대": 52,
+      "40대": 30,
+      "50대+": 6
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
   },
   {
     "id": "creator-7",
@@ -101,12 +335,42 @@
     "profileImage": "/avatars/creator-7.jpg",
     "followers": 320000,
     "engagementRate": 3.5,
-    "category": ["헬스", "뷰티"],
+    "category": [
+      "헬스",
+      "뷰티"
+    ],
     "isOntnerMember": false,
     "salesPrice": 1800000,
     "introduction": "피트니스 & 건강식품 전문 인플루언서.",
+    "biography": "피트니스 트레이너 | 건강식품 리뷰 | 운동 루틴 공유",
     "campaigns": [],
-    "tier": "SILVER"
+    "tier": "SILVER",
+    "contactEmail": "fit_jiwon@gmail.com",
+    "recentUploadDate": "2026-03-15",
+    "avgFeedLikes": 9800,
+    "avgVideoLikes": 14200,
+    "avgVideoViews": 52000,
+    "avgShortsViews": 38000,
+    "avgComments": 480,
+    "hasVerificationBadge": false,
+    "estimatedReach": 160000,
+    "audienceGender": {
+      "male": 45,
+      "female": 55
+    },
+    "audienceAge": {
+      "13-17": 5,
+      "18-24": 35,
+      "25-34": 38,
+      "35-44": 15,
+      "45-54": 5,
+      "55+": 2
+    },
+    "hasCoPurchase": false,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 0,
+    "rewardLinkUsage": false,
+    "hasFollowerData": false
   },
   {
     "id": "creator-8",
@@ -116,10 +380,649 @@
     "profileImage": "/avatars/creator-8.jpg",
     "followers": 410000,
     "engagementRate": 3.2,
-    "category": ["여행", "라이프스타일"],
+    "category": [
+      "여행",
+      "라이프스타일"
+    ],
     "isOntnerMember": false,
     "introduction": "국내외 여행 & 호캉스 전문.",
+    "biography": "여행 크리에이터 | 호캉스 전문 | 전세계 42개국 방문",
     "campaigns": [],
-    "tier": "SILVER"
+    "tier": "SILVER",
+    "contactEmail": "travel_hee@gmail.com",
+    "recentUploadDate": "2026-03-17",
+    "avgFeedLikes": 13500,
+    "avgVideoLikes": 18500,
+    "avgVideoViews": 95000,
+    "avgShortsViews": 62000,
+    "avgComments": 920,
+    "hasVerificationBadge": true,
+    "estimatedReach": 205000,
+    "audienceGender": {
+      "male": 40,
+      "female": 60
+    },
+    "audienceAge": {
+      "13-17": 4,
+      "18-24": 28,
+      "25-34": 40,
+      "35-44": 20,
+      "45-54": 6,
+      "55+": 2
+    },
+    "hasCoPurchase": false,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 0,
+    "rewardLinkUsage": false,
+    "hasFollowerData": false
+  },
+  {
+    "id": "creator-9",
+    "handle": "skincare_mina",
+    "name": "스킨케어미나",
+    "profileImage": "/avatars/creator-9.jpg",
+    "followers": 220000,
+    "engagementRate": 5.5,
+    "category": [
+      "뷰티",
+      "헬스"
+    ],
+    "isOntnerMember": true,
+    "salesPrice": 1200000,
+    "introduction": "피부과학 기반 스킨케어 리뷰어.",
+    "biography": "피부과학 기반 스킨케어 리뷰 | 성분 분석 전문",
+    "campaigns": [
+      "campaign-1"
+    ],
+    "tier": "SILVER",
+    "contactEmail": "skincare_mina@naver.com",
+    "recentUploadDate": "2026-03-22",
+    "avgFeedLikes": 9500,
+    "avgVideoLikes": 11000,
+    "avgVideoViews": 38000,
+    "avgComments": 1050,
+    "hasVerificationBadge": false,
+    "estimatedReach": 110000,
+    "audienceGender": {
+      "male": 18,
+      "female": 82
+    },
+    "audienceAge": {
+      "13-17": 6,
+      "18-24": 30,
+      "25-34": 40,
+      "35-44": 17,
+      "45-54": 5,
+      "55+": 2
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 1,
+    "avgPerformance": 5400000,
+    "avgProductPrice": 32000,
+    "customerAge": {
+      "20대": 35,
+      "30대": 40,
+      "40대": 18,
+      "50대+": 7
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
+  },
+  {
+    "id": "creator-10",
+    "handle": "cook_mama_ji",
+    "name": "쿡마마지",
+    "profileImage": "/avatars/creator-10.jpg",
+    "followers": 380000,
+    "engagementRate": 4.1,
+    "category": [
+      "푸드",
+      "육아"
+    ],
+    "isOntnerMember": true,
+    "salesPrice": 2000000,
+    "introduction": "요리하는 엄마. 간편식/밀키트 전문 리뷰.",
+    "biography": "요리하는 엄마 | 간편식 리뷰 | 아이 간식 레시피",
+    "campaigns": [
+      "campaign-2",
+      "campaign-5"
+    ],
+    "tier": "GOLD",
+    "contactEmail": "cook_mama@naver.com",
+    "recentUploadDate": "2026-03-20",
+    "avgFeedLikes": 11800,
+    "avgVideoLikes": 15600,
+    "avgVideoViews": 62000,
+    "avgComments": 1420,
+    "hasVerificationBadge": false,
+    "estimatedReach": 190000,
+    "audienceGender": {
+      "male": 20,
+      "female": 80
+    },
+    "audienceAge": {
+      "13-17": 2,
+      "18-24": 12,
+      "25-34": 35,
+      "35-44": 38,
+      "45-54": 10,
+      "55+": 3
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": true,
+    "ontnerCampaignCount": 2,
+    "avgPerformance": 8900000,
+    "avgProductPrice": 22000,
+    "customerAge": {
+      "20대": 15,
+      "30대": 45,
+      "40대": 32,
+      "50대+": 8
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
+  },
+  {
+    "id": "creator-11",
+    "handle": "daily_yumi",
+    "youtubeHandle": "YumiDaily",
+    "name": "데일리유미",
+    "profileImage": "/avatars/creator-11.jpg",
+    "followers": 165000,
+    "engagementRate": 4.6,
+    "category": [
+      "라이프스타일",
+      "뷰티"
+    ],
+    "isOntnerMember": true,
+    "salesPrice": 900000,
+    "introduction": "일상 브이로그 & 뷰티 하울.",
+    "biography": "일상 브이로그 | 뷰티 하울 | 20대 직장인 라이프",
+    "campaigns": [
+      "campaign-1"
+    ],
+    "tier": "BRONZE",
+    "contactEmail": "daily_yumi@gmail.com",
+    "recentUploadDate": "2026-03-21",
+    "avgFeedLikes": 5400,
+    "avgVideoLikes": 7800,
+    "avgVideoViews": 25000,
+    "avgShortsViews": 18000,
+    "avgComments": 620,
+    "hasVerificationBadge": false,
+    "estimatedReach": 82000,
+    "audienceGender": {
+      "male": 20,
+      "female": 80
+    },
+    "audienceAge": {
+      "13-17": 10,
+      "18-24": 40,
+      "25-34": 32,
+      "35-44": 12,
+      "45-54": 4,
+      "55+": 2
+    },
+    "hasCoPurchase": false,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 1,
+    "avgPerformance": 2800000,
+    "avgProductPrice": 28000,
+    "customerAge": {
+      "20대": 48,
+      "30대": 32,
+      "40대": 15,
+      "50대+": 5
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
+  },
+  {
+    "id": "creator-12",
+    "handle": "pet_love_su",
+    "name": "펫러브수",
+    "profileImage": "/avatars/creator-12.jpg",
+    "followers": 240000,
+    "engagementRate": 5.8,
+    "category": [
+      "리빙",
+      "라이프스타일"
+    ],
+    "isOntnerMember": true,
+    "salesPrice": 1100000,
+    "introduction": "반려동물 용품 리뷰 & 일상 공유.",
+    "biography": "강아지 2마리 집사 | 반려동물 용품 리뷰 | 펫 인테리어",
+    "campaigns": [
+      "campaign-3"
+    ],
+    "tier": "SILVER",
+    "contactEmail": "pet_love_su@gmail.com",
+    "recentUploadDate": "2026-03-19",
+    "avgFeedLikes": 10200,
+    "avgVideoLikes": 13400,
+    "avgVideoViews": 42000,
+    "avgComments": 1580,
+    "hasVerificationBadge": false,
+    "estimatedReach": 120000,
+    "audienceGender": {
+      "male": 30,
+      "female": 70
+    },
+    "audienceAge": {
+      "13-17": 5,
+      "18-24": 25,
+      "25-34": 42,
+      "35-44": 20,
+      "45-54": 6,
+      "55+": 2
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 1,
+    "avgPerformance": 4500000,
+    "avgProductPrice": 15000,
+    "customerAge": {
+      "20대": 30,
+      "30대": 42,
+      "40대": 20,
+      "50대+": 8
+    },
+    "rewardLinkUsage": false,
+    "hasFollowerData": true
+  },
+  {
+    "id": "creator-13",
+    "handle": "fashion_dh",
+    "youtubeHandle": "DHStyle",
+    "name": "패션DH",
+    "profileImage": "/avatars/creator-13.jpg",
+    "followers": 450000,
+    "engagementRate": 3.4,
+    "category": [
+      "패션",
+      "라이프스타일"
+    ],
+    "isOntnerMember": false,
+    "salesPrice": 3200000,
+    "introduction": "남성 패션 크리에이터. 스트릿 & 캐주얼.",
+    "biography": "남성 패션 크리에이터 | 스트릿 & 캐주얼 | 코디 추천",
+    "campaigns": [],
+    "tier": "GOLD",
+    "contactEmail": "fashion_dh@naver.com",
+    "recentUploadDate": "2026-03-16",
+    "avgFeedLikes": 12000,
+    "avgVideoLikes": 16800,
+    "avgVideoViews": 72000,
+    "avgShortsViews": 48000,
+    "avgComments": 780,
+    "hasVerificationBadge": true,
+    "estimatedReach": 225000,
+    "audienceGender": {
+      "male": 75,
+      "female": 25
+    },
+    "audienceAge": {
+      "13-17": 12,
+      "18-24": 38,
+      "25-34": 32,
+      "35-44": 12,
+      "45-54": 4,
+      "55+": 2
+    },
+    "hasCoPurchase": false,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 0,
+    "rewardLinkUsage": false,
+    "hasFollowerData": false
+  },
+  {
+    "id": "creator-14",
+    "handle": "interior_joo",
+    "name": "인테리어주",
+    "profileImage": "/avatars/creator-14.jpg",
+    "followers": 130000,
+    "engagementRate": 5.9,
+    "category": [
+      "인테리어",
+      "리빙"
+    ],
+    "isOntnerMember": true,
+    "salesPrice": 750000,
+    "introduction": "인테리어 디자이너 출신. 셀프 인테리어 꿀팁.",
+    "biography": "인테리어 디자이너 | 셀프 인테리어 | 원룸~아파트 꾸미기",
+    "campaigns": [
+      "campaign-3"
+    ],
+    "tier": "BRONZE",
+    "contactEmail": "interior_joo@gmail.com",
+    "recentUploadDate": "2026-03-18",
+    "avgFeedLikes": 5600,
+    "avgVideoLikes": 7200,
+    "avgVideoViews": 22000,
+    "avgComments": 680,
+    "hasVerificationBadge": false,
+    "estimatedReach": 65000,
+    "audienceGender": {
+      "male": 32,
+      "female": 68
+    },
+    "audienceAge": {
+      "13-17": 2,
+      "18-24": 20,
+      "25-34": 48,
+      "35-44": 22,
+      "45-54": 6,
+      "55+": 2
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 1,
+    "avgPerformance": 2900000,
+    "avgProductPrice": 35000,
+    "customerAge": {
+      "20대": 25,
+      "30대": 45,
+      "40대": 22,
+      "50대+": 8
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
+  },
+  {
+    "id": "creator-15",
+    "handle": "gaming_hoya",
+    "youtubeHandle": "HoyaGaming",
+    "name": "겜호야",
+    "profileImage": "/avatars/creator-15.jpg",
+    "followers": 680000,
+    "engagementRate": 2.8,
+    "category": [
+      "테크",
+      "라이프스타일"
+    ],
+    "isOntnerMember": false,
+    "salesPrice": 3500000,
+    "introduction": "게임 & 테크 유튜버. 하드웨어 리뷰.",
+    "biography": "게임 스트리머 | 테크 리뷰 | PC 빌드 전문",
+    "campaigns": [
+      "campaign-6"
+    ],
+    "tier": "GOLD",
+    "contactEmail": "gaming_hoya@gmail.com",
+    "recentUploadDate": "2026-03-22",
+    "avgFeedLikes": 18000,
+    "avgVideoLikes": 28000,
+    "avgVideoViews": 220000,
+    "avgShortsViews": 95000,
+    "avgComments": 2200,
+    "hasVerificationBadge": true,
+    "estimatedReach": 340000,
+    "audienceGender": {
+      "male": 82,
+      "female": 18
+    },
+    "audienceAge": {
+      "13-17": 15,
+      "18-24": 38,
+      "25-34": 30,
+      "35-44": 12,
+      "45-54": 4,
+      "55+": 1
+    },
+    "hasCoPurchase": false,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 0,
+    "rewardLinkUsage": false,
+    "hasFollowerData": false
+  },
+  {
+    "id": "creator-16",
+    "handle": "health_dr_park",
+    "youtubeHandle": "DrParkHealth",
+    "name": "건강박사박",
+    "profileImage": "/avatars/creator-16.jpg",
+    "followers": 195000,
+    "engagementRate": 4.4,
+    "category": [
+      "헬스",
+      "푸드"
+    ],
+    "isOntnerMember": true,
+    "salesPrice": 1400000,
+    "introduction": "영양사 출신. 건강식품 & 다이어트 전문.",
+    "biography": "영양사 출신 | 건강식품 리뷰 | 다이어트 레시피",
+    "campaigns": [
+      "campaign-5"
+    ],
+    "tier": "SILVER",
+    "contactEmail": "dr_park@naver.com",
+    "recentUploadDate": "2026-03-20",
+    "avgFeedLikes": 6800,
+    "avgVideoLikes": 9500,
+    "avgVideoViews": 35000,
+    "avgShortsViews": 22000,
+    "avgComments": 750,
+    "hasVerificationBadge": false,
+    "estimatedReach": 98000,
+    "audienceGender": {
+      "male": 35,
+      "female": 65
+    },
+    "audienceAge": {
+      "13-17": 2,
+      "18-24": 18,
+      "25-34": 35,
+      "35-44": 30,
+      "45-54": 12,
+      "55+": 3
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 1,
+    "avgPerformance": 4200000,
+    "avgProductPrice": 25000,
+    "customerAge": {
+      "20대": 20,
+      "30대": 38,
+      "40대": 30,
+      "50대+": 12
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
+  },
+  {
+    "id": "creator-17",
+    "handle": "baby_goods_ah",
+    "name": "베이비굿즈아",
+    "profileImage": "/avatars/creator-17.jpg",
+    "followers": 110000,
+    "engagementRate": 6.1,
+    "category": [
+      "육아",
+      "리빙"
+    ],
+    "isOntnerMember": true,
+    "salesPrice": 650000,
+    "introduction": "육아용품 전문 리뷰어. 공구 다수 진행.",
+    "biography": "첫째맘 | 육아용품 리뷰 | 공구 진행 | 실사용 후기만",
+    "campaigns": [
+      "campaign-7"
+    ],
+    "tier": "BRONZE",
+    "contactEmail": "baby_ah@daum.net",
+    "recentUploadDate": "2026-03-21",
+    "avgFeedLikes": 4800,
+    "avgVideoLikes": 6200,
+    "avgVideoViews": 15000,
+    "avgComments": 920,
+    "hasVerificationBadge": false,
+    "estimatedReach": 55000,
+    "audienceGender": {
+      "male": 8,
+      "female": 92
+    },
+    "audienceAge": {
+      "13-17": 1,
+      "18-24": 5,
+      "25-34": 48,
+      "35-44": 38,
+      "45-54": 6,
+      "55+": 2
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": true,
+    "ontnerCampaignCount": 1,
+    "avgPerformance": 3100000,
+    "avgProductPrice": 15000,
+    "customerAge": {
+      "20대": 8,
+      "30대": 55,
+      "40대": 30,
+      "50대+": 7
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
+  },
+  {
+    "id": "creator-18",
+    "handle": "luxury_ari",
+    "name": "럭셔리아리",
+    "profileImage": "/avatars/creator-18.jpg",
+    "followers": 350000,
+    "engagementRate": 3.6,
+    "category": [
+      "패션",
+      "뷰티"
+    ],
+    "isOntnerMember": false,
+    "salesPrice": 2800000,
+    "introduction": "하이엔드 패션 & 뷰티 크리에이터.",
+    "biography": "럭셔리 패션 & 뷰티 | 하이엔드 브랜드 리뷰 | 명품 언박싱",
+    "campaigns": [],
+    "tier": "GOLD",
+    "contactEmail": "luxury_ari@gmail.com",
+    "recentUploadDate": "2026-03-14",
+    "avgFeedLikes": 11200,
+    "avgVideoLikes": 15800,
+    "avgVideoViews": 58000,
+    "avgComments": 620,
+    "hasVerificationBadge": true,
+    "estimatedReach": 175000,
+    "audienceGender": {
+      "male": 18,
+      "female": 82
+    },
+    "audienceAge": {
+      "13-17": 3,
+      "18-24": 22,
+      "25-34": 38,
+      "35-44": 28,
+      "45-54": 7,
+      "55+": 2
+    },
+    "hasCoPurchase": false,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 0,
+    "rewardLinkUsage": false,
+    "hasFollowerData": false
+  },
+  {
+    "id": "creator-19",
+    "handle": "eco_green_ji",
+    "name": "에코그린지",
+    "profileImage": "/avatars/creator-19.jpg",
+    "followers": 88000,
+    "engagementRate": 7.2,
+    "category": [
+      "리빙",
+      "헬스"
+    ],
+    "isOntnerMember": true,
+    "salesPrice": 500000,
+    "introduction": "친환경 라이프 & 제로웨이스트 실천.",
+    "biography": "제로웨이스트 실천 | 친환경 제품 리뷰 | 비건 라이프",
+    "campaigns": [
+      "campaign-3"
+    ],
+    "tier": "BRONZE",
+    "contactEmail": "eco_ji@naver.com",
+    "recentUploadDate": "2026-03-19",
+    "avgFeedLikes": 4500,
+    "avgVideoLikes": 5800,
+    "avgVideoViews": 14000,
+    "avgComments": 820,
+    "hasVerificationBadge": false,
+    "estimatedReach": 44000,
+    "audienceGender": {
+      "male": 25,
+      "female": 75
+    },
+    "audienceAge": {
+      "13-17": 3,
+      "18-24": 22,
+      "25-34": 45,
+      "35-44": 22,
+      "45-54": 6,
+      "55+": 2
+    },
+    "hasCoPurchase": true,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 1,
+    "avgPerformance": 1800000,
+    "avgProductPrice": 18000,
+    "customerAge": {
+      "20대": 28,
+      "30대": 45,
+      "40대": 20,
+      "50대+": 7
+    },
+    "rewardLinkUsage": true,
+    "hasFollowerData": true
+  },
+  {
+    "id": "creator-20",
+    "handle": "outdoor_min",
+    "youtubeHandle": "MinOutdoor",
+    "name": "아웃도어민",
+    "profileImage": "/avatars/creator-20.jpg",
+    "followers": 275000,
+    "engagementRate": 3.9,
+    "category": [
+      "여행",
+      "헬스"
+    ],
+    "isOntnerMember": false,
+    "salesPrice": 1600000,
+    "introduction": "등산 & 캠핑 전문. 아웃도어 장비 리뷰.",
+    "biography": "등산 & 캠핑 전문 | 아웃도어 장비 리뷰 | 국토대장정 완주",
+    "campaigns": [],
+    "tier": "SILVER",
+    "contactEmail": "outdoor_min@gmail.com",
+    "recentUploadDate": "2026-03-16",
+    "avgFeedLikes": 8200,
+    "avgVideoLikes": 12000,
+    "avgVideoViews": 48000,
+    "avgShortsViews": 28000,
+    "avgComments": 580,
+    "hasVerificationBadge": false,
+    "estimatedReach": 137000,
+    "audienceGender": {
+      "male": 68,
+      "female": 32
+    },
+    "audienceAge": {
+      "13-17": 4,
+      "18-24": 20,
+      "25-34": 35,
+      "35-44": 28,
+      "45-54": 10,
+      "55+": 3
+    },
+    "hasCoPurchase": false,
+    "socialBuzzDetected": false,
+    "ontnerCampaignCount": 0,
+    "rewardLinkUsage": false,
+    "hasFollowerData": false
   }
 ]

@@ -1,44 +1,101 @@
 [
   {
+    "id": "sim-1",
+    "requesterId": "user-admin",
+    "requesterName": "관리자",
     "creatorA": "creator-1",
     "creatorB": "creator-3",
     "matchRate": 34.2,
     "analyzedAt": "2026-03-08T02:00:00Z",
-    "validUntil": "2026-09-08T02:00:00Z"
+    "validUntil": "2026-09-08T02:00:00Z",
+    "status": "완료"
   },
   {
+    "id": "sim-2",
+    "requesterId": "user-admin",
+    "requesterName": "관리자",
     "creatorA": "creator-1",
     "creatorB": "creator-6",
     "matchRate": 22.8,
     "analyzedAt": "2026-03-08T02:00:00Z",
-    "validUntil": "2026-09-08T02:00:00Z"
+    "validUntil": "2026-09-08T02:00:00Z",
+    "status": "완료"
   },
   {
+    "id": "sim-3",
+    "requesterId": "user-md-kim",
+    "requesterName": "김MD",
     "creatorA": "creator-2",
     "creatorB": "creator-6",
     "matchRate": 41.5,
     "analyzedAt": "2026-03-08T02:00:00Z",
-    "validUntil": "2026-09-08T02:00:00Z"
+    "validUntil": "2026-09-08T02:00:00Z",
+    "status": "완료"
   },
   {
+    "id": "sim-4",
+    "requesterId": "user-md-lee",
+    "requesterName": "이MD",
     "creatorA": "creator-3",
     "creatorB": "creator-5",
     "matchRate": 18.7,
     "analyzedAt": "2026-03-08T02:00:00Z",
-    "validUntil": "2026-09-08T02:00:00Z"
+    "validUntil": "2026-09-08T02:00:00Z",
+    "status": "완료"
   },
   {
+    "id": "sim-5",
+    "requesterId": "user-admin",
+    "requesterName": "관리자",
     "creatorA": "creator-1",
-    "creatorB": "creator-7",
+    "creatorB": "creator-9",
     "matchRate": 28.3,
     "analyzedAt": "2026-03-08T02:00:00Z",
-    "validUntil": "2026-09-08T02:00:00Z"
+    "validUntil": "2026-09-08T02:00:00Z",
+    "status": "완료"
   },
   {
+    "id": "sim-6",
+    "requesterId": "user-md-kim",
+    "requesterName": "김MD",
     "creatorA": "creator-2",
     "creatorB": "creator-5",
     "matchRate": 15.4,
     "analyzedAt": "2026-03-08T02:00:00Z",
-    "validUntil": "2026-09-08T02:00:00Z"
+    "validUntil": "2026-09-08T02:00:00Z",
+    "status": "완료"
+  },
+  {
+    "id": "sim-7",
+    "requesterId": "user-admin",
+    "requesterName": "관리자",
+    "creatorA": "creator-9",
+    "creatorB": "creator-11",
+    "matchRate": 31.8,
+    "analyzedAt": "2025-08-15T02:00:00Z",
+    "validUntil": "2026-02-15T02:00:00Z",
+    "status": "완료"
+  },
+  {
+    "id": "sim-8",
+    "requesterId": "user-md-lee",
+    "requesterName": "이MD",
+    "creatorA": "creator-6",
+    "creatorB": "creator-10",
+    "matchRate": 45.2,
+    "analyzedAt": "2025-07-20T02:00:00Z",
+    "validUntil": "2026-01-20T02:00:00Z",
+    "status": "완료"
+  },
+  {
+    "id": "sim-9",
+    "requesterId": "user-md-kim",
+    "requesterName": "김MD",
+    "creatorA": "creator-12",
+    "creatorB": "creator-14",
+    "matchRate": 0,
+    "analyzedAt": "2026-03-22T02:00:00Z",
+    "validUntil": "2026-09-22T02:00:00Z",
+    "status": "분석중"
   }
 ]

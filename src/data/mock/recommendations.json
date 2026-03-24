@@ -2,46 +2,81 @@
   {
     "campaignId": "campaign-1",
     "creators": [
-      {"creatorId": "creator-1", "score": 95, "reason": "성과유사"},
-      {"creatorId": "creator-3", "score": 88, "reason": "카테고리유사"},
-      {"creatorId": "creator-7", "score": 82, "reason": "카테고리유사"},
-      {"creatorId": "creator-6", "score": 76, "reason": "구매기반"}
+      {"creatorId": "creator-1", "score": 95, "reason": "성과유사", "categoryMatch": true, "brandSimilarity": true, "coPurchaseStatus": true, "engagementScore": 57, "salesScore": 38, "avgComments": 890, "avgViews": 45000, "ontnerCampaignCount": 3, "cumulativeSales": 29400000},
+      {"creatorId": "creator-9", "score": 91, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 54.6, "salesScore": 36.4, "avgComments": 1050, "avgViews": 38000, "ontnerCampaignCount": 1, "cumulativeSales": 5400000},
+      {"creatorId": "creator-3", "score": 88, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 52.8, "salesScore": 35.2, "avgComments": 670, "avgViews": 28000, "ontnerCampaignCount": 2, "cumulativeSales": 12400000},
+      {"creatorId": "creator-11", "score": 84, "reason": "브랜드유사", "categoryMatch": true, "brandSimilarity": true, "coPurchaseStatus": false, "engagementScore": 50.4, "salesScore": 33.6, "avgComments": 620, "avgViews": 25000, "ontnerCampaignCount": 1, "cumulativeSales": 2800000},
+      {"creatorId": "creator-7", "score": 82, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": false, "engagementScore": 82, "salesScore": null, "avgComments": 480, "avgViews": 52000, "ontnerCampaignCount": 0, "cumulativeSales": null},
+      {"creatorId": "creator-6", "score": 76, "reason": "구매기반", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 45.6, "salesScore": 30.4, "avgComments": 820, "avgViews": 22000, "ontnerCampaignCount": 2, "cumulativeSales": 15600000},
+      {"creatorId": "creator-18", "score": 74, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": false, "engagementScore": 74, "salesScore": null, "avgComments": 620, "avgViews": 58000, "ontnerCampaignCount": 0, "cumulativeSales": null},
+      {"creatorId": "creator-12", "score": 72, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 43.2, "salesScore": 28.8, "avgComments": 1580, "avgViews": 42000, "ontnerCampaignCount": 1, "cumulativeSales": 4500000},
+      {"creatorId": "creator-5", "score": 68, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 40.8, "salesScore": 27.2, "avgComments": 540, "avgViews": 18000, "ontnerCampaignCount": 1, "cumulativeSales": 3200000},
+      {"creatorId": "creator-17", "score": 65, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 39, "salesScore": 26, "avgComments": 920, "avgViews": 15000, "ontnerCampaignCount": 1, "cumulativeSales": 3100000}
     ],
-    "updatedAt": "2026-03-10T06:00:00Z"
+    "updatedAt": "2026-03-23T03:00:00Z"
   },
   {
     "campaignId": "campaign-2",
     "creators": [
-      {"creatorId": "creator-2", "score": 97, "reason": "성과유사"},
-      {"creatorId": "creator-6", "score": 85, "reason": "구매기반"},
-      {"creatorId": "creator-5", "score": 78, "reason": "카테고리유사"}
+      {"creatorId": "creator-2", "score": 97, "reason": "성과유사", "categoryMatch": true, "brandSimilarity": true, "coPurchaseStatus": true, "engagementScore": 58.2, "salesScore": 38.8, "avgComments": 1230, "avgViews": 82000, "ontnerCampaignCount": 2, "cumulativeSales": 25000000},
+      {"creatorId": "creator-10", "score": 93, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": true, "coPurchaseStatus": true, "engagementScore": 55.8, "salesScore": 37.2, "avgComments": 1420, "avgViews": 62000, "ontnerCampaignCount": 2, "cumulativeSales": 17800000},
+      {"creatorId": "creator-16", "score": 87, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 52.2, "salesScore": 34.8, "avgComments": 750, "avgViews": 35000, "ontnerCampaignCount": 1, "cumulativeSales": 4200000},
+      {"creatorId": "creator-6", "score": 85, "reason": "구매기반", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 51, "salesScore": 34, "avgComments": 820, "avgViews": 22000, "ontnerCampaignCount": 2, "cumulativeSales": 15600000},
+      {"creatorId": "creator-5", "score": 78, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 46.8, "salesScore": 31.2, "avgComments": 540, "avgViews": 18000, "ontnerCampaignCount": 1, "cumulativeSales": 3200000},
+      {"creatorId": "creator-19", "score": 74, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 44.4, "salesScore": 29.6, "avgComments": 820, "avgViews": 14000, "ontnerCampaignCount": 1, "cumulativeSales": 1800000},
+      {"creatorId": "creator-1", "score": 72, "reason": "구매기반", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 43.2, "salesScore": 28.8, "avgComments": 890, "avgViews": 45000, "ontnerCampaignCount": 3, "cumulativeSales": 29400000},
+      {"creatorId": "creator-17", "score": 70, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 42, "salesScore": 28, "avgComments": 920, "avgViews": 15000, "ontnerCampaignCount": 1, "cumulativeSales": 3100000},
+      {"creatorId": "creator-14", "score": 66, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 39.6, "salesScore": 26.4, "avgComments": 680, "avgViews": 22000, "ontnerCampaignCount": 1, "cumulativeSales": 2900000},
+      {"creatorId": "creator-12", "score": 63, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 37.8, "salesScore": 25.2, "avgComments": 1580, "avgViews": 42000, "ontnerCampaignCount": 1, "cumulativeSales": 4500000}
     ],
-    "updatedAt": "2026-03-10T06:00:00Z"
+    "updatedAt": "2026-03-23T03:00:00Z"
   },
   {
     "campaignId": "campaign-3",
     "creators": [
-      {"creatorId": "creator-3", "score": 96, "reason": "성과유사"},
-      {"creatorId": "creator-1", "score": 89, "reason": "카테고리유사"},
-      {"creatorId": "creator-8", "score": 74, "reason": "구매기반"}
+      {"creatorId": "creator-3", "score": 96, "reason": "성과유사", "categoryMatch": true, "brandSimilarity": true, "coPurchaseStatus": true, "engagementScore": 57.6, "salesScore": 38.4, "avgComments": 670, "avgViews": 28000, "ontnerCampaignCount": 2, "cumulativeSales": 12400000},
+      {"creatorId": "creator-1", "score": 89, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 53.4, "salesScore": 35.6, "avgComments": 890, "avgViews": 45000, "ontnerCampaignCount": 3, "cumulativeSales": 29400000},
+      {"creatorId": "creator-5", "score": 85, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 51, "salesScore": 34, "avgComments": 540, "avgViews": 18000, "ontnerCampaignCount": 1, "cumulativeSales": 3200000},
+      {"creatorId": "creator-14", "score": 82, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 49.2, "salesScore": 32.8, "avgComments": 680, "avgViews": 22000, "ontnerCampaignCount": 1, "cumulativeSales": 2900000},
+      {"creatorId": "creator-12", "score": 79, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 47.4, "salesScore": 31.6, "avgComments": 1580, "avgViews": 42000, "ontnerCampaignCount": 1, "cumulativeSales": 4500000},
+      {"creatorId": "creator-19", "score": 76, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 45.6, "salesScore": 30.4, "avgComments": 820, "avgViews": 14000, "ontnerCampaignCount": 1, "cumulativeSales": 1800000},
+      {"creatorId": "creator-8", "score": 74, "reason": "구매기반", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": false, "engagementScore": 74, "salesScore": null, "avgComments": 920, "avgViews": 95000, "ontnerCampaignCount": 0, "cumulativeSales": null},
+      {"creatorId": "creator-13", "score": 71, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": false, "engagementScore": 71, "salesScore": null, "avgComments": 780, "avgViews": 72000, "ontnerCampaignCount": 0, "cumulativeSales": null},
+      {"creatorId": "creator-11", "score": 68, "reason": "브랜드유사", "categoryMatch": false, "brandSimilarity": true, "coPurchaseStatus": false, "engagementScore": 40.8, "salesScore": 27.2, "avgComments": 620, "avgViews": 25000, "ontnerCampaignCount": 1, "cumulativeSales": 2800000},
+      {"creatorId": "creator-18", "score": 65, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": false, "engagementScore": 65, "salesScore": null, "avgComments": 620, "avgViews": 58000, "ontnerCampaignCount": 0, "cumulativeSales": null}
     ],
-    "updatedAt": "2026-03-10T06:00:00Z"
+    "updatedAt": "2026-03-23T03:00:00Z"
   },
   {
     "campaignId": "campaign-5",
     "creators": [
-      {"creatorId": "creator-2", "score": 94, "reason": "성과유사"},
-      {"creatorId": "creator-6", "score": 91, "reason": "구매기반"},
-      {"creatorId": "creator-5", "score": 80, "reason": "카테고리유사"}
+      {"creatorId": "creator-2", "score": 94, "reason": "성과유사", "categoryMatch": true, "brandSimilarity": true, "coPurchaseStatus": true, "engagementScore": 56.4, "salesScore": 37.6, "avgComments": 1230, "avgViews": 82000, "ontnerCampaignCount": 2, "cumulativeSales": 25000000},
+      {"creatorId": "creator-6", "score": 91, "reason": "구매기반", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 54.6, "salesScore": 36.4, "avgComments": 820, "avgViews": 22000, "ontnerCampaignCount": 2, "cumulativeSales": 15600000},
+      {"creatorId": "creator-10", "score": 88, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 52.8, "salesScore": 35.2, "avgComments": 1420, "avgViews": 62000, "ontnerCampaignCount": 2, "cumulativeSales": 17800000},
+      {"creatorId": "creator-16", "score": 84, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 50.4, "salesScore": 33.6, "avgComments": 750, "avgViews": 35000, "ontnerCampaignCount": 1, "cumulativeSales": 4200000},
+      {"creatorId": "creator-17", "score": 80, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 48, "salesScore": 32, "avgComments": 920, "avgViews": 15000, "ontnerCampaignCount": 1, "cumulativeSales": 3100000},
+      {"creatorId": "creator-5", "score": 78, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 46.8, "salesScore": 31.2, "avgComments": 540, "avgViews": 18000, "ontnerCampaignCount": 1, "cumulativeSales": 3200000},
+      {"creatorId": "creator-1", "score": 75, "reason": "구매기반", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 45, "salesScore": 30, "avgComments": 890, "avgViews": 45000, "ontnerCampaignCount": 3, "cumulativeSales": 29400000},
+      {"creatorId": "creator-19", "score": 72, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 43.2, "salesScore": 28.8, "avgComments": 820, "avgViews": 14000, "ontnerCampaignCount": 1, "cumulativeSales": 1800000},
+      {"creatorId": "creator-9", "score": 69, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 41.4, "salesScore": 27.6, "avgComments": 1050, "avgViews": 38000, "ontnerCampaignCount": 1, "cumulativeSales": 5400000},
+      {"creatorId": "creator-14", "score": 65, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 39, "salesScore": 26, "avgComments": 680, "avgViews": 22000, "ontnerCampaignCount": 1, "cumulativeSales": 2900000}
     ],
-    "updatedAt": "2026-03-10T06:00:00Z"
+    "updatedAt": "2026-03-23T03:00:00Z"
   },
   {
     "campaignId": "campaign-6",
     "creators": [
-      {"creatorId": "creator-4", "score": 98, "reason": "성과유사"},
-      {"creatorId": "creator-5", "score": 72, "reason": "카테고리유사"}
+      {"creatorId": "creator-4", "score": 98, "reason": "성과유사", "categoryMatch": true, "brandSimilarity": true, "coPurchaseStatus": false, "engagementScore": 98, "salesScore": null, "avgComments": 3400, "avgViews": 280000, "ontnerCampaignCount": 0, "cumulativeSales": null},
+      {"creatorId": "creator-15", "score": 94, "reason": "카테고리유사", "categoryMatch": true, "brandSimilarity": true, "coPurchaseStatus": false, "engagementScore": 94, "salesScore": null, "avgComments": 2200, "avgViews": 220000, "ontnerCampaignCount": 0, "cumulativeSales": null},
+      {"creatorId": "creator-5", "score": 72, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 43.2, "salesScore": 28.8, "avgComments": 540, "avgViews": 18000, "ontnerCampaignCount": 1, "cumulativeSales": 3200000},
+      {"creatorId": "creator-20", "score": 70, "reason": "카테고리유사", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": false, "engagementScore": 70, "salesScore": null, "avgComments": 580, "avgViews": 48000, "ontnerCampaignCount": 0, "cumulativeSales": null},
+      {"creatorId": "creator-1", "score": 65, "reason": "구매기반", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 39, "salesScore": 26, "avgComments": 890, "avgViews": 45000, "ontnerCampaignCount": 3, "cumulativeSales": 29400000},
+      {"creatorId": "creator-12", "score": 62, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 37.2, "salesScore": 24.8, "avgComments": 1580, "avgViews": 42000, "ontnerCampaignCount": 1, "cumulativeSales": 4500000},
+      {"creatorId": "creator-14", "score": 58, "reason": "공구진행", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 34.8, "salesScore": 23.2, "avgComments": 680, "avgViews": 22000, "ontnerCampaignCount": 1, "cumulativeSales": 2900000},
+      {"creatorId": "creator-9", "score": 55, "reason": "구매기반", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 33, "salesScore": 22, "avgComments": 1050, "avgViews": 38000, "ontnerCampaignCount": 1, "cumulativeSales": 5400000},
+      {"creatorId": "creator-3", "score": 52, "reason": "구매기반", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": true, "engagementScore": 31.2, "salesScore": 20.8, "avgComments": 670, "avgViews": 28000, "ontnerCampaignCount": 2, "cumulativeSales": 12400000},
+      {"creatorId": "creator-11", "score": 48, "reason": "구매기반", "categoryMatch": false, "brandSimilarity": false, "coPurchaseStatus": false, "engagementScore": 28.8, "salesScore": 19.2, "avgComments": 620, "avgViews": 25000, "ontnerCampaignCount": 1, "cumulativeSales": 2800000}
     ],
-    "updatedAt": "2026-03-10T06:00:00Z"
+    "updatedAt": "2026-03-23T03:00:00Z"
   }
 ]

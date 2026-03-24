@@ -2,6 +2,7 @@
   {
     "campaignId": "campaign-1",
     "creatorId": "creator-1",
+    "creatorName": "tomato422",
     "summary": {
       "totalRevenue": 44800000,
       "confirmedRevenue": 41200000,
@@ -15,8 +16,8 @@
       { "hour": "11:00", "orders": 112, "revenue": 3920000 },
       { "hour": "12:00", "orders": 156, "revenue": 5460000 },
       { "hour": "13:00", "orders": 134, "revenue": 4690000 },
-      { "hour": "14:00", "orders": 98, "revenue": 3430000 },
-      { "hour": "15:00", "orders": 87, "revenue": 3045000 },
+      { "hour": "14:00", "orders": 98, "revenue": 3430000, "interpolated": true },
+      { "hour": "15:00", "orders": 87, "revenue": 3045000, "interpolated": true },
       { "hour": "16:00", "orders": 76, "revenue": 2660000 },
       { "hour": "17:00", "orders": 65, "revenue": 2275000 },
       { "hour": "18:00", "orders": 89, "revenue": 3115000 },
@@ -25,6 +26,7 @@
       { "hour": "21:00", "orders": 132, "revenue": 4620000 },
       { "hour": "22:00", "orders": 43, "revenue": 1505000 }
     ],
+    "interpolatedHours": ["14:00", "15:00"],
     "customerSegment": {
       "ageGroups": [
         { "range": "10대", "count": 52 },
@@ -55,8 +57,111 @@
     ]
   },
   {
+    "campaignId": "campaign-1",
+    "creatorId": "creator-2",
+    "creatorName": "beauty_jin",
+    "summary": {
+      "totalRevenue": 28500000,
+      "confirmedRevenue": 26100000,
+      "totalOrders": 815,
+      "contentCount": 3,
+      "conversionRate": 3.6
+    },
+    "hourlyOrders": [
+      { "hour": "09:00", "orders": 28, "revenue": 980000 },
+      { "hour": "10:00", "orders": 52, "revenue": 1820000 },
+      { "hour": "11:00", "orders": 78, "revenue": 2730000 },
+      { "hour": "12:00", "orders": 105, "revenue": 3675000 },
+      { "hour": "13:00", "orders": 92, "revenue": 3220000 },
+      { "hour": "14:00", "orders": 67, "revenue": 2345000 },
+      { "hour": "15:00", "orders": 58, "revenue": 2030000 },
+      { "hour": "16:00", "orders": 49, "revenue": 1715000, "interpolated": true },
+      { "hour": "17:00", "orders": 43, "revenue": 1505000 },
+      { "hour": "18:00", "orders": 61, "revenue": 2135000 },
+      { "hour": "19:00", "orders": 82, "revenue": 2870000 },
+      { "hour": "20:00", "orders": 98, "revenue": 3430000 },
+      { "hour": "21:00", "orders": 67, "revenue": 2345000 }
+    ],
+    "interpolatedHours": ["16:00"],
+    "customerSegment": {
+      "ageGroups": [
+        { "range": "10대", "count": 35 },
+        { "range": "20대", "count": 312 },
+        { "range": "30대", "count": 298 },
+        { "range": "40대", "count": 125 },
+        { "range": "50대+", "count": 45 }
+      ],
+      "gender": { "male": 130, "female": 685 }
+    },
+    "topProducts": [
+      { "productId": "prod-1", "name": "그린티 시드 세럼 80ml", "orders": 215 },
+      { "productId": "prod-2", "name": "비타C 토너패드 70매", "orders": 178 },
+      { "productId": "prod-3", "name": "히알루론 크림 50ml", "orders": 142 },
+      { "productId": "prod-5", "name": "선스크린 SPF50 60ml", "orders": 118 },
+      { "productId": "prod-4", "name": "클렌징 오일 200ml", "orders": 95 },
+      { "productId": "prod-6", "name": "토닝 앰플 30ml", "orders": 67 }
+    ],
+    "cancelReturnRate": 7.5,
+    "cancelReasons": [
+      { "reason": "단순 변심", "count": 38 },
+      { "reason": "배송 지연", "count": 15 },
+      { "reason": "상품 불량", "count": 8 },
+      { "reason": "기타", "count": 3 }
+    ]
+  },
+  {
+    "campaignId": "campaign-1",
+    "creatorId": "creator-3",
+    "creatorName": "skincare_hana",
+    "summary": {
+      "totalRevenue": 18200000,
+      "confirmedRevenue": 16800000,
+      "totalOrders": 520,
+      "contentCount": 2,
+      "conversionRate": 4.1
+    },
+    "hourlyOrders": [
+      { "hour": "10:00", "orders": 32, "revenue": 1120000 },
+      { "hour": "11:00", "orders": 48, "revenue": 1680000 },
+      { "hour": "12:00", "orders": 72, "revenue": 2520000 },
+      { "hour": "13:00", "orders": 65, "revenue": 2275000 },
+      { "hour": "14:00", "orders": 54, "revenue": 1890000 },
+      { "hour": "15:00", "orders": 42, "revenue": 1470000 },
+      { "hour": "16:00", "orders": 38, "revenue": 1330000 },
+      { "hour": "17:00", "orders": 35, "revenue": 1225000 },
+      { "hour": "18:00", "orders": 45, "revenue": 1575000 },
+      { "hour": "19:00", "orders": 52, "revenue": 1820000 },
+      { "hour": "20:00", "orders": 37, "revenue": 1295000 }
+    ],
+    "interpolatedHours": [],
+    "customerSegment": {
+      "ageGroups": [
+        { "range": "10대", "count": 22 },
+        { "range": "20대", "count": 198 },
+        { "range": "30대", "count": 187 },
+        { "range": "40대", "count": 82 },
+        { "range": "50대+", "count": 31 }
+      ],
+      "gender": { "male": 78, "female": 442 }
+    },
+    "topProducts": [
+      { "productId": "prod-1", "name": "그린티 시드 세럼 80ml", "orders": 145 },
+      { "productId": "prod-3", "name": "히알루론 크림 50ml", "orders": 112 },
+      { "productId": "prod-2", "name": "비타C 토너패드 70매", "orders": 98 },
+      { "productId": "prod-5", "name": "선스크린 SPF50 60ml", "orders": 87 },
+      { "productId": "prod-7", "name": "리페어 마스크팩 10매", "orders": 78 }
+    ],
+    "cancelReturnRate": 6.1,
+    "cancelReasons": [
+      { "reason": "단순 변심", "count": 20 },
+      { "reason": "배송 지연", "count": 8 },
+      { "reason": "상품 불량", "count": 4 }
+    ]
+  },
+  {
     "campaignId": "campaign-2",
     "creatorId": "creator-1",
+    "creatorName": "tomato422",
     "summary": {
       "totalRevenue": 33250000,
       "confirmedRevenue": 30800000,
@@ -79,6 +184,7 @@
       { "hour": "20:00", "orders": 112, "revenue": 3920000 },
       { "hour": "21:00", "orders": 38, "revenue": 1330000 }
     ],
+    "interpolatedHours": [],
     "customerSegment": {
       "ageGroups": [
         { "range": "10대", "count": 28 },
@@ -106,8 +212,59 @@
     ]
   },
   {
+    "campaignId": "campaign-2",
+    "creatorId": "creator-2",
+    "creatorName": "beauty_jin",
+    "summary": {
+      "totalRevenue": 21500000,
+      "confirmedRevenue": 19800000,
+      "totalOrders": 612,
+      "contentCount": 2,
+      "conversionRate": 3.2
+    },
+    "hourlyOrders": [
+      { "hour": "09:00", "orders": 22, "revenue": 770000 },
+      { "hour": "10:00", "orders": 38, "revenue": 1330000 },
+      { "hour": "11:00", "orders": 62, "revenue": 2170000 },
+      { "hour": "12:00", "orders": 85, "revenue": 2975000 },
+      { "hour": "13:00", "orders": 72, "revenue": 2520000 },
+      { "hour": "14:00", "orders": 48, "revenue": 1680000, "interpolated": true },
+      { "hour": "15:00", "orders": 38, "revenue": 1330000, "interpolated": true },
+      { "hour": "16:00", "orders": 35, "revenue": 1225000 },
+      { "hour": "17:00", "orders": 42, "revenue": 1470000 },
+      { "hour": "18:00", "orders": 56, "revenue": 1960000 },
+      { "hour": "19:00", "orders": 68, "revenue": 2380000 },
+      { "hour": "20:00", "orders": 46, "revenue": 1610000 }
+    ],
+    "interpolatedHours": ["14:00", "15:00"],
+    "customerSegment": {
+      "ageGroups": [
+        { "range": "10대", "count": 18 },
+        { "range": "20대", "count": 128 },
+        { "range": "30대", "count": 245 },
+        { "range": "40대", "count": 162 },
+        { "range": "50대+", "count": 59 }
+      ],
+      "gender": { "male": 214, "female": 398 }
+    },
+    "topProducts": [
+      { "productId": "prod-10", "name": "비비고 왕교자 1kg", "orders": 198 },
+      { "productId": "prod-11", "name": "비비고 갈비탕 500g", "orders": 145 },
+      { "productId": "prod-12", "name": "비비고 김치찌개 450g", "orders": 112 },
+      { "productId": "prod-13", "name": "비비고 불고기 300g", "orders": 98 },
+      { "productId": "prod-14", "name": "비비고 죽 세트", "orders": 59 }
+    ],
+    "cancelReturnRate": 6.2,
+    "cancelReasons": [
+      { "reason": "단순 변심", "count": 24 },
+      { "reason": "배송 지연", "count": 10 },
+      { "reason": "상품 불량", "count": 4 }
+    ]
+  },
+  {
     "campaignId": "campaign-4",
     "creatorId": "creator-1",
+    "creatorName": "tomato422",
     "summary": {
       "totalRevenue": 53200000,
       "confirmedRevenue": 53200000,
@@ -130,6 +287,7 @@
       { "hour": "20:00", "orders": 134, "revenue": 4690000 },
       { "hour": "21:00", "orders": 79, "revenue": 2765000 }
     ],
+    "interpolatedHours": [],
     "customerSegment": {
       "ageGroups": [
         { "range": "10대", "count": 76 },
@@ -160,6 +318,7 @@
   {
     "campaignId": "campaign-3",
     "creatorId": "creator-5",
+    "creatorName": "fashion_minho",
     "summary": {
       "totalRevenue": 28900000,
       "confirmedRevenue": null,
@@ -180,6 +339,7 @@
       { "hour": "19:00", "orders": 89, "revenue": 3115000 },
       { "hour": "20:00", "orders": 47, "revenue": 1645000 }
     ],
+    "interpolatedHours": [],
     "customerSegment": {
       "ageGroups": [
         { "range": "10대", "count": 98 },
