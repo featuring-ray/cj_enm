@@ -209,7 +209,7 @@ function InterpolatedDot(props: Record<string, unknown>) {
     payload: { interpolated?: boolean };
     stroke: string;
   };
-  if (!payload?.interpolated) return null;
+  if (!payload?.interpolated) return <g />;
   return (
     <circle
       cx={cx}
