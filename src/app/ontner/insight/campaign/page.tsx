@@ -44,6 +44,7 @@ import {
   Cell,
   LineChart,
   Line,
+  Legend,
 } from "recharts";
 
 const CAMPAIGNS = [
@@ -176,6 +177,7 @@ export default function CampaignInsightPage() {
       <PageHeader
         title="인사이트 리포트 - 캠페인"
         description="캠페인 매출/콘텐츠 성과를 기반으로 구매 고객 행동 패턴과 인사이트를 제공합니다"
+        actions={<Badge variant="outline" className="text-xs">O-D-02</Badge>}
       />
 
       <main className="flex-1 p-4 md:p-6 space-y-6">
@@ -538,6 +540,7 @@ export default function CampaignInsightPage() {
                   <XAxis dataKey="date" fontSize={12} />
                   <YAxis fontSize={12} />
                   <Tooltip />
+                  <Legend />
                   <Line type="monotone" dataKey="engagement" stroke="#6366f1" strokeWidth={2} name="참여도" />
                   <Line type="monotone" dataKey="clicks" stroke="#f43f5e" strokeWidth={2} name="클릭" />
                   <Line type="monotone" dataKey="conversions" stroke="#10b981" strokeWidth={2} name="전환" />

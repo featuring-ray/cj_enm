@@ -17,6 +17,9 @@ import {
   Award,
   Calendar,
   ShoppingCart,
+  Sparkles,
+  Lightbulb,
+  ArrowRight,
 } from "lucide-react";
 import {
   BarChart,
@@ -55,6 +58,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
 import { featuringApi } from "@/lib/featuring-api";
 import type { Campaign } from "@/types/campaign";
 
@@ -176,6 +180,36 @@ const MOCK_CREATOR_REPORT = {
     { product: "클렌징 세트", clicks: 11000, orders: 600, revenue: 18000000, conversion: 5.5 },
   ],
 };
+
+/* ─── Mock: 크리에이터 고객 리텐션 분석 ─── */
+const mockCreatorRetention = {
+  campaignRetention: [
+    { from: "올리브영 봄 신상", to: "뷰티 시크릿 박스", rate: 22.4 },
+    { from: "뷰티 시크릿 박스", to: "비비고 봄 캠페인", rate: 15.8 },
+    { from: "올리브영 봄 신상", to: "비비고 봄 캠페인", rate: 12.3 },
+  ],
+  topRepurchaseBrands: [
+    { brand: "올리브영", rate: 34.2 },
+    { brand: "CJ제일제당", rate: 24.8 },
+    { brand: "이니스프리", rate: 18.5 },
+    { brand: "무신사", rate: 12.1 },
+  ],
+  rewardLinkProducts: [
+    { product: "올리브영 A.H.A 세럼", purchases: 342, purchaseRate: 18.5 },
+    { product: "비비고 왕교자 1kg", purchases: 256, purchaseRate: 14.2 },
+    { product: "비타C 토너패드 70매", purchases: 198, purchaseRate: 11.0 },
+    { product: "히알루론 크림 50ml", purchases: 167, purchaseRate: 9.3 },
+    { product: "선스크린 SPF50", purchases: 143, purchaseRate: 7.9 },
+  ],
+};
+
+/* ─── Mock: 크리에이터 반복구매 주기 ─── */
+const mockCreatorRepurchaseCycle = [
+  { category: "스킨케어", avgDays: 42 },
+  { category: "식품/간편식", avgDays: 28 },
+  { category: "메이크업", avgDays: 56 },
+  { category: "헤어케어", avgDays: 48 },
+];
 
 /* ─── Mock: 브랜드 기준 리포트 데이터 ─── */
 const mockBrandTopCampaigns = [
@@ -339,9 +373,9 @@ export default function InsightPage() {
             </div>
             <p className="text-xs text-muted-foreground">집계 대상: 설정 기간 내 &lsquo;진행 완료&rsquo;된 캠페인 기준 (진행 중 캠페인 제외) · 최대 조회 기간: 12개월</p>
             <div className="flex justify-end">
-              <button onClick={() => setStep(2)} className="px-4 py-1.5 text-xs bg-[#7c3aed] text-white border-0">
-                다음 <ChevronRight className="h-3 w-3 inline" />
-              </button>
+              <Button size="sm" onClick={() => setStep(2)} className="bg-[#7c3aed] hover:bg-[#6d28d9] text-xs">
+                다음 <ChevronRight className="h-3 w-3 ml-1" />
+              </Button>
             </div>
           </div>
         )}
@@ -351,36 +385,39 @@ export default function InsightPage() {
           <div className="otr-search-panel space-y-4">
             <Label className="text-sm font-medium">조회 유형을 선택하세요</Label>
             <div className="grid grid-cols-2 gap-4 max-w-lg">
-              <button
+              <Button
+                variant="outline"
                 onClick={() => setViewType("creator")}
-                className={`p-4 border text-left ${viewType === "creator" ? "border-[#7c3aed] bg-[#f3f0ff]" : "border-gray-300"}`}
+                className={`p-4 h-auto border text-left flex flex-col items-start whitespace-normal ${viewType === "creator" ? "border-[#7c3aed] bg-[#f3f0ff]" : "border-gray-300"}`}
               >
                 <Users className="h-5 w-5 mb-2 text-[#7c3aed]" />
                 <p className="text-sm font-bold">크리에이터 기준</p>
                 <p className="text-xs text-muted-foreground mt-1">특정 크리에이터의 전반적 활동 성과 분석</p>
                 <p className="text-[10px] text-muted-foreground mt-1">캠페인 탭 + 리워드 링크 탭 제공</p>
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="outline"
                 onClick={() => setViewType("brand")}
-                className={`p-4 border text-left ${viewType === "brand" ? "border-[#7c3aed] bg-[#f3f0ff]" : "border-gray-300"}`}
+                className={`p-4 h-auto border text-left flex flex-col items-start whitespace-normal ${viewType === "brand" ? "border-[#7c3aed] bg-[#f3f0ff]" : "border-gray-300"}`}
               >
                 <Package className="h-5 w-5 mb-2 text-[#7c3aed]" />
                 <p className="text-sm font-bold">브랜드 기준</p>
                 <p className="text-xs text-muted-foreground mt-1">특정 브랜드의 캠페인 종합 성과 분석</p>
                 <p className="text-[10px] text-muted-foreground mt-1">캠페인 리포트만 제공</p>
-              </button>
+              </Button>
             </div>
             <div className="flex justify-between">
-              <button onClick={() => setStep(1)} className="px-4 py-1.5 text-xs bg-white text-gray-600 border border-gray-300">
-                <ChevronLeft className="h-3 w-3 inline" /> 이전
-              </button>
-              <button
+              <Button variant="outline" size="sm" onClick={() => setStep(1)} className="text-xs">
+                <ChevronLeft className="h-3 w-3 mr-1" /> 이전
+              </Button>
+              <Button
+                size="sm"
                 onClick={() => viewType && setStep(3)}
                 disabled={!viewType}
-                className={`px-4 py-1.5 text-xs border-0 ${viewType ? "bg-[#7c3aed] text-white" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+                className="bg-[#7c3aed] hover:bg-[#6d28d9] text-xs disabled:bg-gray-200 disabled:text-gray-400"
               >
-                다음 <ChevronRight className="h-3 w-3 inline" />
-              </button>
+                다음 <ChevronRight className="h-3 w-3 ml-1" />
+              </Button>
             </div>
           </div>
         )}
@@ -404,13 +441,15 @@ export default function InsightPage() {
             {/* 크리에이터 선택 */}
             <div className="flex gap-2 flex-wrap">
               {filteredCreators.map(c => (
-                <button
+                <Button
                   key={c.id}
+                  variant="outline"
+                  size="sm"
                   onClick={() => { setSelectedCreatorId(c.id); setSelectedCampaignIds([]); }}
-                  className={`px-3 py-1.5 text-xs border ${selectedCreatorId === c.id ? "bg-[#7c3aed] text-white border-[#7c3aed]" : "bg-white text-gray-600 border-gray-300"}`}
+                  className={`text-xs ${selectedCreatorId === c.id ? "bg-[#7c3aed] text-white border-[#7c3aed] hover:bg-[#6d28d9]" : "bg-white text-gray-600 border-gray-300"}`}
                 >
-                  {c.name} <span className="text-[10px] opacity-70">{c.handle}</span>
-                </button>
+                  {c.name} <span className="text-[10px] opacity-70 ml-1">{c.handle}</span>
+                </Button>
               ))}
             </div>
 
@@ -438,16 +477,17 @@ export default function InsightPage() {
             )}
 
             <div className="flex justify-between">
-              <button onClick={() => setStep(2)} className="px-4 py-1.5 text-xs bg-white text-gray-600 border border-gray-300">
-                <ChevronLeft className="h-3 w-3 inline" /> 이전
-              </button>
-              <button
+              <Button variant="outline" size="sm" onClick={() => setStep(2)} className="text-xs">
+                <ChevronLeft className="h-3 w-3 mr-1" /> 이전
+              </Button>
+              <Button
+                size="sm"
                 onClick={() => selectedCampaignIds.length > 0 && setStep("report")}
                 disabled={selectedCampaignIds.length === 0}
-                className={`px-4 py-1.5 text-xs border-0 ${selectedCampaignIds.length > 0 ? "bg-[#7c3aed] text-white" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+                className="bg-[#7c3aed] hover:bg-[#6d28d9] text-xs disabled:bg-gray-200 disabled:text-gray-400"
               >
                 리포트 조회
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -492,16 +532,17 @@ export default function InsightPage() {
             )}
 
             <div className="flex justify-between">
-              <button onClick={() => setStep(2)} className="px-4 py-1.5 text-xs bg-white text-gray-600 border border-gray-300">
-                <ChevronLeft className="h-3 w-3 inline" /> 이전
-              </button>
-              <button
+              <Button variant="outline" size="sm" onClick={() => setStep(2)} className="text-xs">
+                <ChevronLeft className="h-3 w-3 mr-1" /> 이전
+              </Button>
+              <Button
+                size="sm"
                 onClick={() => selectedCampaignIds.length > 0 && setStep("report")}
                 disabled={selectedCampaignIds.length === 0}
-                className={`px-4 py-1.5 text-xs border-0 ${selectedCampaignIds.length > 0 ? "bg-[#7c3aed] text-white" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
+                className="bg-[#7c3aed] hover:bg-[#6d28d9] text-xs disabled:bg-gray-200 disabled:text-gray-400"
               >
                 리포트 조회
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -515,23 +556,27 @@ export default function InsightPage() {
                 <span className="font-medium">{MOCK_CREATORS.find(c => c.id === selectedCreatorId)?.name}</span>
                 <span className="text-muted-foreground">· {selectedCampaignIds.length}개 캠페인 · {startDate} ~ {endDate}</span>
               </div>
-              <button onClick={resetFlow} className="px-3 py-1 text-xs bg-white text-gray-600 border border-gray-300">새 조회</button>
+              <Button variant="outline" size="sm" onClick={resetFlow} className="text-xs">새 조회</Button>
             </div>
 
             {/* 탭: 캠페인 인사이트 | 리워드 링크 인사이트 */}
             <div className="flex gap-0 border-b">
-              <button
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => setReportTab("campaign")}
-                className={`px-4 py-2 text-xs font-medium border-b-2 ${reportTab === "campaign" ? "border-[#7c3aed] text-[#7c3aed]" : "border-transparent text-gray-500"}`}
+                className={`rounded-none px-4 py-2 text-xs font-medium border-b-2 ${reportTab === "campaign" ? "border-[#7c3aed] text-[#7c3aed]" : "border-transparent text-gray-500"}`}
               >
                 캠페인 인사이트
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => setReportTab("reward-link")}
-                className={`px-4 py-2 text-xs font-medium border-b-2 ${reportTab === "reward-link" ? "border-[#7c3aed] text-[#7c3aed]" : "border-transparent text-gray-500"}`}
+                className={`rounded-none px-4 py-2 text-xs font-medium border-b-2 ${reportTab === "reward-link" ? "border-[#7c3aed] text-[#7c3aed]" : "border-transparent text-gray-500"}`}
               >
                 리워드 링크 인사이트
-              </button>
+              </Button>
             </div>
 
             {reportTab === "campaign" && (
@@ -544,33 +589,58 @@ export default function InsightPage() {
                   <StatsCard title="총 콘텐츠" value={`${MOCK_CREATOR_REPORT.summary.contentCount}건`} icon={Package} />
                 </div>
 
+                {/* 인사이트 요약 */}
+                <Card className="rounded-none">
+                  <CardHeader>
+                    <CardTitle className="text-base flex items-center gap-2">
+                      <Sparkles className="h-4 w-4 text-amber-500" />
+                      인사이트 요약
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p className="text-sm">
+                      <strong>{MOCK_CREATORS.find(c => c.id === selectedCreatorId)?.name}</strong>의 캠페인에서 가장 높은 참여도를 기록한 콘텐츠는
+                      <strong> &ldquo;{MOCK_CREATOR_REPORT.engagementTop5[0].name}&rdquo;</strong> (참여 점수 <strong>{MOCK_CREATOR_REPORT.engagementTop5[0].engagement.toLocaleString()}</strong>)입니다.
+                    </p>
+                    <p className="text-sm">
+                      총 매출 <strong>{formatKRW(MOCK_CREATOR_REPORT.summary.totalRevenue)}</strong>, 평균 전환율 <strong>{MOCK_CREATOR_REPORT.summary.avgConversion}%</strong>를 달성했습니다.
+                    </p>
+                  </CardContent>
+                </Card>
+
                 {/* 전체 캠페인 리스트 (MD 전용) */}
                 <Card className="rounded-none">
                   <CardHeader>
                     <CardTitle className="text-base otr-section-marker">◆ 전체 캠페인 내역</CardTitle>
                     <CardDescription>MD는 해당 크리에이터의 전체 캠페인을 열람할 수 있습니다</CardDescription>
                   </CardHeader>
-                  <CardContent className="p-0">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>캠페인명</TableHead>
-                          <TableHead className="text-right">매출</TableHead>
-                          <TableHead className="text-right">주문수</TableHead>
-                          <TableHead className="text-right">전환율</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {MOCK_CREATOR_REPORT.topCampaigns.map((c, i) => (
-                          <TableRow key={i}>
-                            <TableCell className="text-sm font-medium">{c.name}</TableCell>
-                            <TableCell className="text-right text-sm">{formatKRW(c.revenue)}</TableCell>
-                            <TableCell className="text-right text-sm">{c.orders.toLocaleString()}</TableCell>
-                            <TableCell className="text-right text-sm">{c.conversion}%</TableCell>
+                  <CardContent className="space-y-4 p-4">
+                    <div className="overflow-x-auto -mx-4 px-4">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>캠페인명</TableHead>
+                            <TableHead className="text-right">매출</TableHead>
+                            <TableHead className="text-right">주문수</TableHead>
+                            <TableHead className="text-right">전환율</TableHead>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
+                        </TableHeader>
+                        <TableBody>
+                          {MOCK_CREATOR_REPORT.topCampaigns.map((c, i) => (
+                            <TableRow key={i}>
+                              <TableCell className="text-sm font-medium">{c.name}</TableCell>
+                              <TableCell className="text-right text-sm">{formatKRW(c.revenue)}</TableCell>
+                              <TableCell className="text-right text-sm">{c.orders.toLocaleString()}</TableCell>
+                              <TableCell className="text-right text-sm">{c.conversion}%</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                    <div className="rounded-md border p-3 bg-violet-50/50 text-sm text-violet-800 flex items-start gap-2">
+                      <Lightbulb className="h-4 w-4 mt-0.5 shrink-0" />
+                      <span>[활용 TIP] 매출이 높았던 캠페인의 공통점을 파악해 보세요</span>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -579,7 +649,7 @@ export default function InsightPage() {
                   <CardHeader>
                     <CardTitle className="text-base otr-section-marker">◆ 콘텐츠 인게이지먼트 Top 5</CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="space-y-4">
                     <ResponsiveContainer width="100%" height={260}>
                       <BarChart data={MOCK_CREATOR_REPORT.engagementTop5} layout="vertical">
                         <CartesianGrid strokeDasharray="3 3" />
@@ -589,6 +659,30 @@ export default function InsightPage() {
                         <Bar dataKey="engagement" fill="#7c3aed" name="참여점수" radius={[0, 0, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
+
+                    {/* 상세 지표 테이블 */}
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>콘텐츠명</TableHead>
+                          <TableHead className="text-right">조회수</TableHead>
+                          <TableHead className="text-right">좋아요</TableHead>
+                          <TableHead className="text-right">댓글</TableHead>
+                          <TableHead className="text-right">저장</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {MOCK_CREATOR_REPORT.engagementTop5.map((e, i) => (
+                          <TableRow key={i}>
+                            <TableCell className="text-sm font-medium">{e.name}</TableCell>
+                            <TableCell className="text-right text-sm">{e.views.toLocaleString()}</TableCell>
+                            <TableCell className="text-right text-sm">{e.likes.toLocaleString()}</TableCell>
+                            <TableCell className="text-right text-sm">{e.comments.toLocaleString()}</TableCell>
+                            <TableCell className="text-right text-sm">{e.saves.toLocaleString()}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
                   </CardContent>
                 </Card>
 
@@ -625,6 +719,7 @@ export default function InsightPage() {
                           <XAxis dataKey="month" tick={{ fontSize: 11 }} />
                           <YAxis tick={{ fontSize: 11 }} />
                           <Tooltip />
+                          <Legend />
                           <Line type="monotone" dataKey="engagement" stroke="#7c3aed" name="참여수" strokeWidth={2} />
                           <Line type="monotone" dataKey="conversions" stroke="#f43f5e" name="전환수" strokeWidth={2} />
                         </LineChart>
@@ -632,6 +727,117 @@ export default function InsightPage() {
                     </CardContent>
                   </Card>
                 </div>
+
+                {/* 고객 리텐션 (핵심 인사이트) */}
+                <Card className="rounded-none">
+                  <CardHeader>
+                    <CardTitle className="text-base otr-section-marker flex items-center gap-2">
+                      <RefreshCcw className="h-4 w-4" /> ◆ 고객 리텐션 (핵심 인사이트)
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    {/* 캠페인 간 리텐션율 */}
+                    <div>
+                      <h4 className="text-sm font-semibold mb-3">캠페인 간 리텐션율</h4>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>출발 캠페인</TableHead>
+                            <TableHead className="text-center w-10"><ArrowRight className="h-3 w-3 inline" /></TableHead>
+                            <TableHead>도착 캠페인</TableHead>
+                            <TableHead className="text-right">리텐션율</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {mockCreatorRetention.campaignRetention.map((r, i) => (
+                            <TableRow key={i}>
+                              <TableCell className="text-sm">{r.from}</TableCell>
+                              <TableCell className="text-center"><ArrowRight className="h-3 w-3 text-muted-foreground inline" /></TableCell>
+                              <TableCell className="text-sm">{r.to}</TableCell>
+                              <TableCell className="text-right text-sm font-medium text-[#7c3aed]">{r.rate}%</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+
+                    {/* 재구매 상위 브랜드 */}
+                    <div>
+                      <h4 className="text-sm font-semibold mb-3">재구매 상위 브랜드</h4>
+                      <div className="space-y-3">
+                        {mockCreatorRetention.topRepurchaseBrands.map((b, i) => (
+                          <div key={i} className="flex items-center gap-3">
+                            <span className="text-sm w-24 shrink-0">{b.brand}</span>
+                            <Progress value={b.rate} className="h-2 flex-1" />
+                            <span className="text-sm font-medium w-14 text-right">{b.rate}%</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 리워드 링크 구매 상위 상품 */}
+                    <div>
+                      <h4 className="text-sm font-semibold mb-3">리워드 링크 구매 상위 상품</h4>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>상품명</TableHead>
+                            <TableHead className="text-right">구매건수</TableHead>
+                            <TableHead className="text-right">구매율</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {mockCreatorRetention.rewardLinkProducts.map((p, i) => (
+                            <TableRow key={i}>
+                              <TableCell className="text-sm font-medium">{p.product}</TableCell>
+                              <TableCell className="text-right text-sm">{p.purchases.toLocaleString()}</TableCell>
+                              <TableCell className="text-right text-sm">{p.purchaseRate}%</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+
+                    <div className="rounded-md border p-3 bg-violet-50/50 text-sm text-violet-800 flex items-start gap-2">
+                      <Lightbulb className="h-4 w-4 mt-0.5 shrink-0" />
+                      <span>[활용 TIP] 리텐션이 높은 캠페인 간 연계 프로모션을 기획하면 전환율을 높일 수 있습니다</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* 반복구매 주기 분석 */}
+                <Card className="rounded-none">
+                  <CardHeader>
+                    <CardTitle className="text-base otr-section-marker flex items-center gap-2">
+                      <RefreshCcw className="h-4 w-4" /> ◆ 반복구매 주기 분석
+                    </CardTitle>
+                    <CardDescription>카테고리별 평균 재구매 주기</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>카테고리</TableHead>
+                          <TableHead className="text-right">평균 재구매 주기</TableHead>
+                          <TableHead className="w-48">비율</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {mockCreatorRepurchaseCycle.map((r, i) => (
+                          <TableRow key={i}>
+                            <TableCell className="text-sm">{r.category}</TableCell>
+                            <TableCell className="text-right text-sm font-medium">{r.avgDays}일</TableCell>
+                            <TableCell><Progress value={(1 - r.avgDays / 90) * 100} className="h-2" /></TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                    <div className="rounded-md border p-3 bg-violet-50/50 text-sm text-violet-800 flex items-start gap-2">
+                      <Lightbulb className="h-4 w-4 mt-0.5 shrink-0" />
+                      <span>[활용 TIP] 재구매 주기가 짧은 카테고리 위주로 캠페인을 기획하면 반복구매 유도에 효과적입니다</span>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             )}
 
@@ -707,7 +913,7 @@ export default function InsightPage() {
                 <span className="font-medium">{MOCK_BRANDS.find(b => b.id === selectedBrand)?.name}</span>
                 <span className="text-muted-foreground">· {selectedCampaignIds.length}개 캠페인 · {startDate} ~ {endDate}</span>
               </div>
-              <button onClick={resetFlow} className="px-3 py-1 text-xs bg-white text-gray-600 border border-gray-300">새 조회</button>
+              <Button variant="outline" size="sm" onClick={resetFlow} className="text-xs">새 조회</Button>
             </div>
 
             {/* 섹션 1: 성과 상위 캠페인 TOP 5 */}
@@ -783,9 +989,9 @@ export default function InsightPage() {
                           <span>{cr.totalCollabCount}회</span>
                         </div>
                       </div>
-                      <button className="w-full text-[10px] text-[#7c3aed] border border-[#7c3aed] py-1 flex items-center justify-center gap-1">
-                        프로필 보기 <ExternalLink className="h-2.5 w-2.5" />
-                      </button>
+                      <Button variant="outline" size="sm" className="w-full text-[10px] text-[#7c3aed] border-[#7c3aed] h-6">
+                        프로필 보기 <ExternalLink className="h-2.5 w-2.5 ml-1" />
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}
@@ -1004,7 +1210,7 @@ export default function InsightPage() {
                         <p><span className="text-muted-foreground">ER:</span> {cr.engagementRate}%</p>
                       </div>
                       <p className="text-[10px] text-[#7c3aed] bg-[#f3f0ff] p-1">{cr.reason}</p>
-                      <button className="w-full text-[10px] text-white bg-[#7c3aed] py-1">제안하기</button>
+                      <Button size="sm" className="w-full text-[10px] bg-[#7c3aed] hover:bg-[#6d28d9] h-6">제안하기</Button>
                     </div>
                   ))}
                 </div>

@@ -42,6 +42,7 @@ import {
   Cell,
   LineChart,
   Line,
+  Legend,
 } from "recharts";
 
 const PRODUCTS = [
@@ -195,6 +196,7 @@ export default function AffiliateInsightPage() {
       <PageHeader
         title="인사이트 리포트 - 제휴/리워드"
         description="리워드 링크 상품별 성과 분석 및 구매 고객 리텐션 인사이트"
+        actions={<Badge variant="outline" className="text-xs">O-D-03</Badge>}
       />
 
       <main className="flex-1 p-4 md:p-6 space-y-6">
@@ -443,6 +445,7 @@ export default function AffiliateInsightPage() {
                 <XAxis dataKey="date" fontSize={12} />
                 <YAxis fontSize={12} />
                 <Tooltip />
+                <Legend />
                 <Line
                   type="monotone"
                   dataKey="clicks"

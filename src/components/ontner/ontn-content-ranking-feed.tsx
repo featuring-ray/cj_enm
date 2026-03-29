@@ -223,7 +223,6 @@ function ContentRankRow({
 
   return (
     <div className="ontn-content-card">
-      {/* Main Row */}
       <div className="flex items-stretch">
         {/* Rank */}
         <div className="flex items-center justify-center w-12 flex-shrink-0 border-r border-gray-100">
@@ -300,40 +299,43 @@ function ContentRankRow({
             </span>
           </div>
         </div>
-      </div>
 
-      {/* Mapped Campaigns */}
-      {content.mappedCampaigns.length > 0 && (
-        <div className="border-t border-gray-100 px-3 py-2 flex flex-wrap gap-2">
-          <span className="text-[10px] text-gray-400 self-center mr-1">
-            연관 캠페인
-          </span>
-          {content.mappedCampaigns.slice(0, 2).map((mc) => {
-            const detail = campaignMap.get(mc.id);
-            return (
-              <Link
-                key={mc.id}
-                href={`/ontner/campaign/${mc.id}`}
-                className="ontn-mapped-campaign group flex-1 min-w-[200px] max-w-[320px]"
-              >
-                {detail?.imageUrl && (
-                  <div className="w-10 h-10 flex-shrink-0 bg-gray-100 overflow-hidden">
-                    <img src={detail.imageUrl} alt="" className="w-full h-full object-cover" />
-                  </div>
-                )}
-                <div className="flex-1 min-w-0">
-                  <p className="text-[11px] font-medium text-gray-800 truncate">{mc.name}</p>
-                  <div className="flex items-center gap-1 text-[10px] text-gray-400">
-                    <Calendar className="w-2.5 h-2.5" />
-                    <span>마감 {detail?.recruitEndDate?.replace(/-/g, ".") || "-"}</span>
-                  </div>
-                </div>
-                <ChevronRight className="w-3 h-3 text-gray-300 group-hover:text-purple-500 flex-shrink-0" />
-              </Link>
-            );
-          })}
-        </div>
-      )}
+        {/* Mapped Campaigns (inline, right side) */}
+        {content.mappedCampaigns.length > 0 && (
+          <div className="hidden sm:flex items-center gap-1.5 px-3 flex-shrink-0 border-l border-gray-100 max-w-[240px]">
+            <span className="text-[9px] text-gray-400 flex-shrink-0 writing-vertical-lr rotate-180 self-center hidden lg:block">
+              연관
+            </span>
+            <div className="flex flex-col gap-1">
+              {content.mappedCampaigns.slice(0, 2).map((mc) => {
+                const detail = campaignMap.get(mc.id);
+                return (
+                  <Link
+                    key={mc.id}
+                    href={`/ontner/campaign/${mc.id}`}
+                    className="group flex items-center gap-1.5 px-1.5 py-1 rounded hover:bg-purple-50 transition-colors"
+                  >
+                    {detail?.imageUrl && (
+                      <div className="w-7 h-7 flex-shrink-0 rounded bg-gray-100 overflow-hidden">
+                        <img src={detail.imageUrl} alt="" className="w-full h-full object-cover" />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[10px] font-medium text-gray-700 truncate max-w-[140px] group-hover:text-purple-600">
+                        {mc.name}
+                      </p>
+                      <span className="text-[9px] text-gray-400">
+                        ~{detail?.recruitEndDate?.slice(5).replace(/-/g, ".") || "-"}
+                      </span>
+                    </div>
+                    <ChevronRight className="w-2.5 h-2.5 text-gray-300 group-hover:text-purple-500 flex-shrink-0" />
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -563,7 +565,7 @@ export function OntnContentRankingFeed({ className }: OntnContentRankingFeedProp
           />
         </div>
         <span className="text-sm font-semibold text-gray-900">
-          TOP {visibleContents.length} 인기 콘텐츠
+          총 {visibleContents.length}건
         </span>
         <span className="ml-auto text-[11px] text-gray-400 hidden sm:block">
           헤더 클릭으로 정렬 변경
@@ -609,6 +611,7 @@ export function OntnContentRankingFeed({ className }: OntnContentRankingFeedProp
             className="min-w-[48px] text-[11px]"
           />
         </div>
+        <span className="px-3 text-gray-500 flex-shrink-0 max-w-[240px] border-l border-gray-200">연관 캠페인</span>
       </div>
 
       {/* ── Content List ── */}

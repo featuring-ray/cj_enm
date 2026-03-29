@@ -10,6 +10,9 @@ import {
   Star,
   RefreshCcw,
   ChevronRight,
+  Sparkles,
+  Lightbulb,
+  AlertCircle,
 } from "lucide-react";
 import {
   BarChart,
@@ -34,6 +37,8 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -137,6 +142,24 @@ const repurchaseCycle = [
   { category: "헤어케어", avgDays: 35, rate: 18 },
 ];
 
+const mockContentEngagement = [
+  { name: "봄 스킨케어 루틴 릴스", score: 94.2, type: "릴스", likes: 15200, comments: 2100, views: 120000, saves: 3400 },
+  { name: "라네즈 세일 하울", score: 91.8, type: "피드", likes: 12400, comments: 890, views: 45000, saves: 2100 },
+  { name: "신상 마스크팩 리뷰", score: 88.5, type: "릴스", likes: 10800, comments: 1120, views: 52000, saves: 2400 },
+  { name: "봄 메이크업 룩", score: 85.3, type: "숏폼", likes: 9800, comments: 780, views: 38000, saves: 1800 },
+  { name: "뷰티 아이템 추천", score: 82.1, type: "피드", likes: 8200, comments: 620, views: 32000, saves: 1400 },
+];
+
+const mockRetentionSummary = {
+  overallRetention: 28.5,
+  repurchaseCustomers: 1940,
+  singlePurchaseCustomers: 4860,
+  topRetentionPairs: [
+    { from: "봄맞이 스킨케어", to: "프리미엄 푸드 체험단", rate: 18.2 },
+    { from: "신상 패션 룩북", to: "봄맞이 스킨케어", rate: 14.5 },
+  ],
+};
+
 function formatRevenue(n: number) {
   if (n >= 100000000) return `${(n / 100000000).toFixed(1)}억`;
   if (n >= 10000) return `${(n / 10000).toFixed(0)}만`;
@@ -146,6 +169,8 @@ function formatRevenue(n: number) {
 // ─── 컴포넌트 ─────────────────────────────────────────────
 export default function PartnerInsightPage() {
   const [selectedCampaign, setSelectedCampaign] = useState(CAMPAIGNS[0].id);
+  const [startDate, setStartDate] = useState("2025-10-01");
+  const [endDate, setEndDate] = useState("2026-03-15");
 
   const campaign = CAMPAIGNS.find((c) => c.id === selectedCampaign) || CAMPAIGNS[0];
 
@@ -162,26 +187,76 @@ export default function PartnerInsightPage() {
       />
 
       <main className="flex-1 p-6 space-y-6">
-        {/* 캠페인 선택 */}
+        {/* 온트너 회원 제한 안내 배너 */}
+        <Card className="border-dashed border-amber-200 bg-amber-50/30">
+          <CardContent className="pt-4 pb-4 flex items-center gap-3">
+            <AlertCircle className="h-4 w-4 text-amber-600 shrink-0" />
+            <p className="text-xs text-amber-700">
+              파트너 인사이트 리포트는 <strong>온트너 회원 크리에이터</strong>의 데이터만 포함합니다.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* 캠페인 선택 + 날짜 범위 */}
         <Card>
-          <CardContent className="py-4 px-4">
-            <div className="flex items-center gap-3 flex-wrap">
-              <Label className="text-sm font-medium whitespace-nowrap">캠페인 선택</Label>
-              <Select value={selectedCampaign} onValueChange={setSelectedCampaign}>
-                <SelectTrigger className="w-[280px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {CAMPAIGNS.map((c) => (
-                    <SelectItem key={c.id} value={c.id}>
-                      {c.name} ({c.brand})
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Badge variant="outline">{campaign.category}</Badge>
-              <Badge variant="secondary">{campaign.brand}</Badge>
+          <CardContent className="pt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+              <div className="space-y-2">
+                <Label>시작일</Label>
+                <Input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>종료일</Label>
+                <Input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>캠페인</Label>
+                <Select value={selectedCampaign} onValueChange={setSelectedCampaign}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {CAMPAIGNS.map((c) => (
+                      <SelectItem key={c.id} value={c.id}>
+                        {c.name} ({c.brand})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex items-end">
+                <Badge variant="outline" className="text-[10px] h-fit">
+                  데이터 기준: {startDate} ~ {endDate}
+                </Badge>
+              </div>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* 인사이트 요약 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-amber-500" />
+              인사이트 요약
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <p className="text-sm">
+              <strong>{campaign.name}</strong> 캠페인의 총 매출은 <strong>{formatRevenue(mockSummary.totalRevenue)}원</strong>이며,
+              전환율 <strong>{mockSummary.conversionRate}%</strong>를 달성했습니다.
+            </p>
+            <p className="text-sm">
+              가장 높은 성과를 기록한 크리에이터는 <strong>{topCreators[0].name}</strong> (매출 <strong>{formatRevenue(topCreators[0].revenue)}원</strong>)입니다.
+            </p>
           </CardContent>
         </Card>
 
@@ -272,6 +347,62 @@ export default function PartnerInsightPage() {
                 />
               </LineChart>
             </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        {/* 콘텐츠 인게이지먼트 TOP 5 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">콘텐츠 인게이지먼트 TOP 5</CardTitle>
+            <CardDescription>캠페인 연관 콘텐츠 중 인게이지먼트 상위</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <ResponsiveContainer width="100%" height={220}>
+              <BarChart data={mockContentEngagement} layout="vertical">
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis type="number" domain={[0, 100]} fontSize={12} />
+                <YAxis type="category" dataKey="name" width={150} fontSize={11} />
+                <Tooltip />
+                <Bar dataKey="score" fill="#7c3aed" radius={[0, 4, 4, 0]} name="참여 점수" />
+              </BarChart>
+            </ResponsiveContainer>
+
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>콘텐츠명</TableHead>
+                  <TableHead>유형</TableHead>
+                  <TableHead className="text-right">조회수</TableHead>
+                  <TableHead className="text-right">좋아요</TableHead>
+                  <TableHead className="text-right">댓글</TableHead>
+                  <TableHead className="text-right">저장</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {mockContentEngagement.map((content) => (
+                  <TableRow key={content.name}>
+                    <TableCell className="text-sm font-medium">{content.name}</TableCell>
+                    <TableCell>
+                      <Badge variant="outline" className="text-[10px]">
+                        {content.type}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right text-sm">
+                      {content.views.toLocaleString()}
+                    </TableCell>
+                    <TableCell className="text-right text-sm">
+                      {content.likes.toLocaleString()}
+                    </TableCell>
+                    <TableCell className="text-right text-sm">
+                      {content.comments.toLocaleString()}
+                    </TableCell>
+                    <TableCell className="text-right text-sm">
+                      {content.saves.toLocaleString()}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </CardContent>
         </Card>
 
@@ -388,8 +519,40 @@ export default function PartnerInsightPage() {
             </div>
             <div className="mt-3 p-3 rounded-lg bg-blue-50 border border-blue-100">
               <p className="text-xs text-blue-700">
-                💡 <strong>활용 TIP:</strong> 반복구매 주기에 맞춰 리마인드 캠페인을 진행하면 전환율을 높일 수 있습니다
+                <Lightbulb className="inline h-3 w-3 mr-1" />
+                <strong>활용 TIP:</strong> 반복구매 주기에 맞춰 리마인드 캠페인을 진행하면 전환율을 높일 수 있습니다
               </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 고객 리텐션 요약 */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2">
+              <RefreshCcw className="h-4 w-4 text-blue-500" />
+              고객 리텐션 요약
+            </CardTitle>
+            <CardDescription>캠페인 간 교차 재구매 분석</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="text-center py-3">
+              <p className="text-3xl font-bold text-primary">{mockRetentionSummary.overallRetention}%</p>
+              <p className="text-xs text-muted-foreground mt-1">전체 캠페인 간 교차 재구매 비율</p>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-3 rounded-lg bg-primary/5 text-center">
+                <p className="text-lg font-bold">{mockRetentionSummary.repurchaseCustomers.toLocaleString()}명</p>
+                <p className="text-xs text-muted-foreground">재구매 고객</p>
+              </div>
+              <div className="p-3 rounded-lg bg-muted/50 text-center">
+                <p className="text-lg font-bold">{mockRetentionSummary.singlePurchaseCustomers.toLocaleString()}명</p>
+                <p className="text-xs text-muted-foreground">단회 구매</p>
+              </div>
+            </div>
+            <div className="rounded-md border p-3 bg-blue-50/50 text-sm text-blue-800 flex items-start gap-2">
+              <Lightbulb className="h-4 w-4 mt-0.5 shrink-0" />
+              <span>[활용 TIP] 리텐션이 높은 캠페인 조합을 파악하여 교차 프로모션을 기획하세요</span>
             </div>
           </CardContent>
         </Card>
@@ -440,8 +603,4 @@ export default function PartnerInsightPage() {
       </main>
     </>
   );
-}
-
-function Label({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <label className={className}>{children}</label>;
 }
